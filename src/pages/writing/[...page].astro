@@ -1,0 +1,31 @@
+---
+import type { GetStaticPathsOptions, Page } from 'astro';
+import type { PrismicItem, BlogPost } from '../../data/site-config';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Pagination from '../../components/Pagination.astro';
+import PostPreview from '../../components/PostPreview.astro';
+import { getBlogPosts } from '../../prismic';
+
+
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+  const posts = await getBlogPosts(false);
+ return paginate(posts, { pageSize: 8 });
+}
+
+type Props = { page: Page<PrismicItem> };
+
+const { page } = Astro.props;
+const blog = page.data;
+---
+
+<BaseLayout
+  title="Blog"
+  description="Embark on a journey of personal insights and experiences through my blog"
+  image={{ src: '/dante-preview.jpg', alt: 'The preview of the site' }}
+  showHeader={false}
+>
+  <h1 class="mb-12 text-2xl leading-tight font-heading sm:mb-16 sm:text-4xl">Blog Archive</h1>
+  {blog.map((post) => <PostPreview post={post.data as BlogPost} slug={post.slugs} class="mb-10 sm:mb-12" />)}
+  <Pagination page={page} class="my-16 sm:my-24" />
+</BaseLayout>

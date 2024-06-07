@@ -3,7 +3,6 @@ import { getPage } from '../prismic';
 import type { PrismicData } from '../data/site-config';
 import * as prismic from '@prismicio/client';
 import Button from './Button.astro';
-import siteConfig from '../data/site-config';
 
 const doc = (await getPage('home')) as any as PrismicData;
 const content = doc.results[0].data;
@@ -12,7 +11,7 @@ const content = doc.results[0].data;
 {
     (
         <>
-            <section class="w-full flex flex-col gap-8 mb-16 sm:mb-24">
+            <section class="w-full flex flex-col gap-8 mb-16">
                 <h1 class="text-3xl leading-tight font-heading font-medium sm:text-5xl sm:leading-tight">{content.title}</h1>
                 {content.hero_image.url && (
                     <figure>
@@ -21,7 +20,7 @@ const content = doc.results[0].data;
                 )}
                 <div class="max-w-none prose prose-dante sm:prose-lg" set:html={prismic.asHTML(content.about)} />
             </section>
-            <div class="flex flex-wrap gap-4">
+            <div class="flex flex-wrap gap-4 mb-16">
                 <Button href={content.button_path}>{content.button_text}</Button>
             </div>
         </>
