@@ -6,30 +6,30 @@ import Header from '../components/Header.astro';
 import Nav from '../components/Nav.astro';
 import 'cal-sans';
 
-export type Props = HeadProps & { showHeader?: boolean };
+export type Props = HeadProps & { showHeader?: boolean; colorOverwrite?: boolean; primary?: string; secondary?: string };
 
-const { showHeader = true, ...head } = Astro.props;
+const { showHeader = true, colorOverwrite, primary, secondary, ...head } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en" class="antialiased break-words">
-    <head>
-        <BaseHead {...head} />
-        <script>
-            if (localStorage.theme === 'dark') {
-                document.documentElement.classList.add('dark');
-            }
-        </script>
-        <ViewTransitions />
-    </head>
-    <body class="bg-main text-main">
-        <div class="flex flex-col min-h-screen px-4 md:px-8">
-            <Nav />
-            {showHeader && <Header />}
-            <main class="grow w-full max-w-3xl mx-auto">
-                <slot />
-            </main>
-            <Footer />
-        </div>
-    </body>
+  <head>
+    <BaseHead {...head} />
+    <script>
+      if (localStorage.theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
+    </script>
+    <ViewTransitions />
+  </head>
+  <body class={!colorOverwrite && 'bg-main text-main'} style={{ color: primary, backgroundColor: secondary }}>
+    <div class="flex flex-col min-h-screen px-4 md:px-8">
+      <Nav colorOverwrite={colorOverwrite} primary={primary} secondary={secondary}/>
+      {showHeader && <Header />}
+      <main class="grow w-full max-w-3xl mx-auto">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+  </body>
 </html>

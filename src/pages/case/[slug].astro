@@ -1,0 +1,22 @@
+---
+import type { PrismicItem, CaseStudy } from '../../data/site-config';
+import * as prismic from '@prismicio/client';
+import { getSingleCase, getCases } from '../../prismic';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const cases = (await getCases()) as PrismicItem[];
+  return cases.map((item) => ({
+    params: { slug: item.uid }
+  }));
+}
+
+const { slug } = Astro.params;
+
+const caseFile = await getSingleCase(slug);
+console.log(caseFile);
+---
+
+<BaseLayout showHeader={false} pageType="article" colorOverwrite={true} primary={caseFile.data.primary} secondary={caseFile.data.secondary}>
+  <p>hello</p>
+</BaseLayout>

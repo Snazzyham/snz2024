@@ -4,6 +4,12 @@ import ThemeToggle from './ThemeToggle.astro';
 import siteConfig from '../data/site-config';
 
 const navLinks = siteConfig.headerNavLinks || [];
+
+export type Props = {
+  colorOverwrite?: boolean;
+  primary?: string;
+  secondary?: string;
+}
 ---
 
 <nav class="min-h-10 pt-4 pb-12 relative sm:min-h-14 sm:pb-24 md:pt-8">

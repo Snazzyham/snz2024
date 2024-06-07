@@ -1,5 +1,6 @@
 - case study item page
-- portfolio page 
 - remove extra links
 - contact page
 - analytics 
+- favicon
+- color overwrite for navbar links
