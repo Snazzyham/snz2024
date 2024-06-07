@@ -14,6 +14,8 @@
         "@astrojs/rss": "^4.0.6",
         "@astrojs/sitemap": "^3.1.5",
         "@astrojs/tailwind": "^5.1.0",
+        "@prismicio/client": "^7.5.0",
+        "@prismicio/helpers": "^2.3.9",
         "astro": "^4.9.1",
         "cal-sans": "^1.0.1",
         "marked": "^12.0.2",
