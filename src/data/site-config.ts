@@ -31,7 +31,7 @@ export type PrismicItem = {
   linked_documents: any;
   lang: string;
   alternate_languages: any;
-  data: HomepageData | BlogPost;
+  data: HomepageData | BlogPost | CaseStudy | PortfolioPageData;
 };
 
 export type HomepageData = {
@@ -55,6 +55,7 @@ export type CaseStudy = {
   listing_title: string;
   listing_blurb: string;
   client: string;
+  client_logo: ImageField;
   has_hero: Boolean;
   primary: string;
   secondary: string;
@@ -64,6 +65,20 @@ export type CaseStudy = {
   awards: AwardGroupItem[];
   videos: AssetGroupItem[];
   photos: AssetGroupItem[];
+};
+
+export type PortfolioPageData = {
+  title: RichTextField;
+  case_study_title: string;
+  portfolio_items_title: string;
+  portfolio_items: PortfolioItem[];
+};
+
+type PortfolioItem = {
+  key: string;
+  desc: string;
+  value: string;
+  internal: Boolean;
 };
 
 type AwardGroupItem = {

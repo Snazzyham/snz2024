@@ -1,11 +1,11 @@
 ---
-import type { PrismicItem, BlogPost } from '../data/site-config';
+import type { PrismicItem, BlogPost, CaseStudy } from '../data/site-config';
 import { getBlogPosts, getCases } from '../prismic';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/Button.astro';
 import Hero from '../components/Hero.astro';
 import PostPreview from '../components/PostPreview.astro';
-import ProjectPreview from '../components/ProjectPreview.astro';
+import CasePreview from '../components/CasePreview.astro';
 import siteConfig from '../data/site-config';
 
 // prismic stuff
@@ -13,24 +13,34 @@ const blogPosts = (await getBlogPosts(true)) as any as PrismicItem[];
 const caseStudies = (await getCases()) as PrismicItem[];
 const casesSliced = caseStudies.slice(0, 3);
 const postsSliced = blogPosts.slice(0, 3);
-console.log(casesSliced)
+console.log(casesSliced);
 ---
 
 <BaseLayout description={siteConfig.description} image={siteConfig.image}>
   <Hero />
   {
-        casesSliced?.length > 0 && (
-            <div class="mb-16 sm:mb-24">
-                <h2 class="mb-12 text-xl font-heading sm:mb-16 sm:text-3xl">Latest Case Studies</h2>
-                {casesSliced.map((project) => (
-                    <ProjectPreview project={project.data} slug={project.slugs || ["404"]} class="mb-10 sm:mb-12" headingLevel="h3" />
-                ))}
-                <div class="mt-12 sm:mt-16">
-                    <Button href="/projects">View All Projects</Button>
-                </div>
-            </div>
-        )
-    }
+    casesSliced?.length > 0 && (
+      <div class="mb-16 sm:mb-24">
+        <h2 class="mb-8 text-xl font-heading sm:text-3xl">Latest Case Studies</h2>
+        <div class="flex flex-col gap-2 sm:gap-4">
+          {casesSliced.map((item) => (
+            <CasePreview
+              slug={item.uid}
+              client={(item.data as CaseStudy).client}
+              clientLogo={(item.data as CaseStudy).client_logo.url || '-'}
+              title={(item.data as CaseStudy).listing_title}
+              blurb={(item.data as CaseStudy).listing_blurb}
+              primary={(item.data as CaseStudy).primary}
+              secondary={(item.data as CaseStudy).secondary}
+            />
+          ))}
+        </div>
+        <div class="mt-12 sm:mt-16">
+          <Button href="/portfolio">View All Case Sudies</Button>
+        </div>
+      </div>
+    )
+  }
   {
     postsSliced.length > 0 && (
       <div class="mb-16 sm:mb-24">

@@ -1,0 +1,26 @@
+---
+const { clientLogo, title, client, blurb, primary, secondary, slug } = Astro.props;
+
+type Props = {
+  client: string;
+  clientLogo: string;
+  title: string;
+  blurb: string;
+  primary: string;
+  secondary: string;
+  slug: string;
+};
+---
+
+<a href={`/case/${slug}`}>
+  <div class="flex p-4 rounded-xl transition-transform hover:scale-110 hover:shadow-lg cursor-pointer min-h-[150px]" style={{ color: primary, backgroundColor: secondary }}>
+    <div class="w-1/4 flex items-center justify-center">
+      <img src={clientLogo} alt={client} class="rounded-full w-full" />
+    </div>
+    <div class="w-3/4 flex flex-col items-start justify-center pl-4">
+      <h2 class="font-heading text-2xl">{title}</h2>
+      {blurb !== '-' && <h4 class="italic text-sm">{blurb}</h4>}
+      <h5 class="text-sm italic">For: <span class="font-heading">{client}</span></h5>
+    </div>
+  </div>
+</a>

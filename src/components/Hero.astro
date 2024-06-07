@@ -1,28 +1,28 @@
 ---
 import { getPage } from '../prismic';
-import type { PrismicData } from '../data/site-config';
+import type { PrismicData, HomepageData } from '../data/site-config';
 import * as prismic from '@prismicio/client';
 import Button from './Button.astro';
 
 const doc = (await getPage('home')) as any as PrismicData;
-const content = doc.results[0].data;
+const content = doc.results[0].data as HomepageData;
 ---
 
 {
-    (
-        <>
-            <section class="w-full flex flex-col gap-8 mb-16">
-                <h1 class="text-3xl leading-tight font-heading font-medium sm:text-5xl sm:leading-tight">{content.title}</h1>
-                {content.hero_image.url && (
-                    <figure>
-                        <img class="w-full" src={content.hero_image.url} loading="lazy" decoding="async" alt={content.hero_image.alt || ''} />
-                    </figure>
-                )}
-                <div class="max-w-none prose prose-dante sm:prose-lg" set:html={prismic.asHTML(content.about)} />
-            </section>
-            <div class="flex flex-wrap gap-4 mb-16">
-                <Button href={content.button_path}>{content.button_text}</Button>
-            </div>
-        </>
-    )
+  (
+    <>
+      <section class="w-full flex flex-col gap-8 mb-16">
+        <h1 class="text-3xl leading-tight font-heading font-medium sm:text-5xl sm:leading-tight">{content.title}</h1>
+        {content.hero_image.url && (
+          <figure>
+            <img class="w-full" src={content.hero_image.url} loading="lazy" decoding="async" alt={content.hero_image.alt || ''} />
+          </figure>
+        )}
+        <div class="max-w-none prose prose-dante sm:prose-lg" set:html={prismic.asHTML(content.about)} />
+      </section>
+      <div class="flex flex-wrap gap-4 mb-16">
+        <Button href={content.button_path}>{content.button_text}</Button>
+      </div>
+    </>
+  )
 }

@@ -1,0 +1,52 @@
+---
+import type { PrismicItem, CaseStudy, PrismicData, PortfolioPageData } from '../data/site-config';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CasePreview from '../components/CasePreview.astro';
+import { getCases, getPage } from '../prismic';
+import * as prismic from '@prismicio/client';
+
+const cases = (await getCases()) as PrismicItem[];
+const portfolioPageMain = (await getPage('portfolio_page')) as any as PrismicData;
+
+const portfolioContent = portfolioPageMain.results[0] as PrismicItem;
+const pd = portfolioContent.data as PortfolioPageData;
+---
+
+<BaseLayout title="Portfolio" description="Explore a diverse portfolio showcasing my passion and expertise" showHeader={false}>
+  <h1 class="mb-12 text-2xl leading-tight font-heading sm:mb-16 sm:text-4xl">{prismic.asText(pd.title)}</h1>
+
+  <div>
+    <h2 class="text-xl leading-tight font-heading mb-6">{pd.case_study_title}</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 mb-16">
+      {
+        cases.map((item: PrismicItem) => (
+          <CasePreview
+            slug={item.uid}
+            client={(item.data as CaseStudy).client}
+            clientLogo={(item.data as CaseStudy).client_logo.url || '-'}
+            title={(item.data as CaseStudy).listing_title}
+            blurb={(item.data as CaseStudy).listing_blurb}
+            primary={(item.data as CaseStudy).primary}
+            secondary={(item.data as CaseStudy).secondary}
+          />
+        ))
+      }
+    </div>
+  </div>
+
+  <div>
+    <h2 class="text-xl leading-tight font-heading mb-6">{pd.portfolio_items_title}</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-8">
+      {
+        pd.portfolio_items.map((item) => (
+          <div class="hover:opacity-70 transition-opacity">
+            <a href={item.value} target="_blank" rel="noreferrer">
+              <h3 class="font-heading text-xl">{item.key}</h3>
+              <p class="prose prose-dante font-light">{item.desc}</p>
+            </a>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>
