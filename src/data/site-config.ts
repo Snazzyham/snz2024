@@ -1,4 +1,4 @@
-import type { RichTextField, ImageField } from '@prismicio/client';
+import type { RichTextField, ImageField, LinkField } from '@prismicio/client';
 
 export type Image = {
   src: string;
@@ -48,6 +48,32 @@ export type BlogPost = {
   title: RichTextField;
   date: string;
   body: RichTextField;
+};
+
+export type CaseStudy = {
+  title: RichTextField;
+  listing_title: string;
+  listing_blurb: string;
+  client: string;
+  has_hero: Boolean;
+  primary: string;
+  secondary: string;
+  hero_image: ImageField;
+  body_content: RichTextField;
+  has_awards: Boolean;
+  awards: AwardGroupItem[];
+  videos: AssetGroupItem[];
+  photos: AssetGroupItem[];
+};
+
+type AwardGroupItem = {
+  a_title: string;
+  link: string;
+};
+
+type AssetGroupItem = {
+  content: LinkField;
+  name: string;
 };
 
 export type Link = {

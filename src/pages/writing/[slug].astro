@@ -25,8 +25,6 @@ type Props = { post: PrismicItem; prevPost: PrismicItem; nextPost: PrismicItem }
 const { href } = Astro.url;
 const { post, prevPost, nextPost } = Astro.props;
 
-console.log(nextPost)
-console.log(prevPost)
 const data = post.data as BlogPost;
 ---
 
