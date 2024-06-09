@@ -13,7 +13,6 @@ const blogPosts = (await getBlogPosts(true)) as any as PrismicItem[];
 const caseStudies = (await getCases()) as PrismicItem[];
 const casesSliced = caseStudies.slice(0, 3);
 const postsSliced = blogPosts.slice(0, 3);
-console.log(casesSliced);
 ---
 
 <BaseLayout description={siteConfig.description} image={siteConfig.image}>
@@ -46,7 +45,12 @@ console.log(casesSliced);
       <div class="mb-16 sm:mb-24">
         <h2 class="mb-12 text-xl font-heading sm:mb-16 sm:text-3xl">Latest Writing</h2>
         {postsSliced.map((post) => (
-          <PostPreview post={post.data as BlogPost} slug={post.slugs || ['404']} class="mb-10 sm:mb-12" headingLevel="h3" />
+          <PostPreview
+            post={post.data as BlogPost}
+            slug={post.slugs || ['404']}
+            class="mb-10 sm:mb-12"
+            headingLevel="h3"
+          />
         ))}
         <div class="mt-12 sm:mt-16">
           <Button href="/writing">View All Posts</Button>

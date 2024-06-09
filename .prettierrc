@@ -1,7 +1,8 @@
 {
-    "printWidth": 160,
+    "printWidth": 90,
     "singleQuote": true,
     "trailingComma": "none",
+    "jsxBracketSameLine": false,
     "plugins": ["prettier-plugin-astro"],
     "tabWidth": 2,
     "overrides": [

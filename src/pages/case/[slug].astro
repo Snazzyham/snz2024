@@ -13,10 +13,105 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params;
 
-const caseFile = await getSingleCase(slug);
-console.log(caseFile);
+const caseFile = await getSingleCase(slug || '404');
+const content = caseFile.data as CaseStudy;
 ---
 
-<BaseLayout showHeader={false} pageType="article" colorOverwrite={true} primary={caseFile.data.primary} secondary={caseFile.data.secondary}>
-  <p>hello</p>
+<BaseLayout
+  showHeader={false}
+  pageType="article"
+  colorOverwrite={true}
+  primary={caseFile.data.primary}
+  secondary={caseFile.data.secondary}
+>
+  <article class="mb-16 sm:mb-24">
+    <h1
+      class="font-heading text-7xl leading-tight tracking-tighter text-center uppercase font-black mb-16"
+    >
+      {prismic.asText(content.title)}
+    </h1>
+    <p class="mb-4 italic lowercase text-center">In collaboration with</p>
+    <div class="flex items-center justify-center">
+      <img src={content.client_logo.url} alt={content.client} class="w-16 rounded-full" />
+      <span class="mx-6 text-7xl font-bold">|</span>
+      <h4 class="font-heading font-extrabold text-4xl">{content.client}</h4>
+    </div>
+    {
+      content.hero_image.url && (
+        <img class="w-full my-8" src={content.hero_image.url} alt="Hero Image" />
+      )
+    }
+
+    <div
+      class="prose my-8 w-full"
+      set:html={prismic.asHTML(content.body_content)}
+      style={{ color: content.primary }}
+    />
+
+    {
+      content.has_awards && (
+        <>
+          <h3 class="font-heading text-3xl font-extrabold mb-4 mt-6">
+            Awards and Recongition
+          </h3>
+          <div class="flex flex-wrap gap-4">
+            {content.awards.map((award) => (
+              <a
+                href={award.link}
+                target="_blank"
+                class="font-heading font-bold text-xl hover:underline underline-offset-4"
+              >
+                {award.a_title}
+              </a>
+            ))}
+          </div>
+        </>
+      )
+    }
+
+    {
+      content.videos.length > 0 && (
+        <>
+          <h3 class="font-heading text-3xl font-extrabold mb-4 mt-6">Videos</h3>
+          <div class="grid grid-flow-row-dense grid-cols-2 gap-4">
+            {content.videos.map((vid) => (
+              <video src={vid.content.url} controls class="w-full h-full" />
+            ))}
+          </div>
+        </>
+      )
+    }
+
+    {
+      content.photos.length > 0 && (
+        <>
+          <h3 class="font-heading text-3xl font-extrabold mb-4 mt-6">Images</h3>
+          <div class="grid grid-flow-row-dense grid-cols-2 gap-4">
+            {content.photos.map((photo) => (
+              <img src={photo.content.url} alt="image" class="w-full h-full" />
+            ))}
+          </div>
+        </>
+      )
+    }
+
+    {
+      content.has_external_media && (
+        <>
+          <h3 class="font-heading text-3xl font-extrabold mb-4 mt-6">In The Media</h3>
+          <div class="flex flex-wrap gap-4">
+            {content.external_media.map((item) => (
+              <a
+                href={item.url}
+                target="_blank"
+                class="font-heading font-bold text-xl hover:underline underline-offset-4"
+              >
+                {item.publication}
+              </a>
+            ))}
+          </div>
+        </>
+      )
+    }
+  </article>
 </BaseLayout>

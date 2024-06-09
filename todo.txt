@@ -1,6 +1,5 @@
-- case study item page
-- remove extra links
-- analytics 
-- favicon
-- color overwrite for navbar links
+- favorites page 
 - add new tools I use post 
+- fix up seo content
+- fix prose heading 
+- case study - add carousel or make videos and photos nicer
