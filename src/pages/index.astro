@@ -21,7 +21,7 @@ const postsSliced = blogPosts.slice(0, 3);
     casesSliced?.length > 0 && (
       <div class="mb-16 sm:mb-24">
         <h2 class="mb-8 text-xl font-heading sm:text-3xl">Latest Case Studies</h2>
-        <div class="flex flex-col gap-2 sm:gap-4">
+        <div class="flex flex-col sm:flex-row gap-2 sm:gap-4">
           {casesSliced.map((item) => (
             <CasePreview
               slug={item.uid}
