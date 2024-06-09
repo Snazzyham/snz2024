@@ -1,14 +1,18 @@
 ---
-title: Get in touch
+title: Let's chat
 seo:
   title: Contact
-  description: Get in touch through email or social media! Let me know how I can help.
+  description: If you'd like help launching your product, get in touch.
 ---
 
-Thank you for reaching out! Whether you have a question, a suggestion, or just want to share your thoughts, I'm all ears. Feel free to get in touch through any of the methods below:
+At the moment, I'm not available for freelance work. However, if you'd like to get in touch to see how [Otterdev](https://otterdev.io) can help your company, you can drop me an email at [soham@otterdev.io](mailto:soham@otterdev.io), or book a call with me directly via [this link](https://timesync.novocall.co/soham/otterdev-discuss).
 
-_Email:_
-Feel free to drop me an email at [example@example.com](mailto:example@example.com), and I'll do my best to respond as soon as possible.
+At Otterdev, we primarily focus on companies in two stages - Launch or Growth - with well thought out and eye popping designs, well structured processes and efficient and scalable development.  
 
-_Social Media:_
-Connect with me on social media as well. Find me on [Twitter](https://twitter.com) or [LinkedIn](https://www.linkedin.com/).
+<h3 class="font-heading">launch</h3>
+
+The launch phase encompasses a variety of things, mainly focused around the most efficient way of getting a new thing out. Under this, we've helped companies build new version of their SaaS products, redesign new user flows, create new brand identities and much more. 
+
+<h3 class="font-heading">Growth</h3>
+
+On the growth side of things, we work with companies that have products that are established, but are struggling to take it to the next level. 

@@ -1,6 +1,6 @@
 - case study item page
 - remove extra links
-- contact page
 - analytics 
 - favicon
 - color overwrite for navbar links
+- add new tools I use post 
