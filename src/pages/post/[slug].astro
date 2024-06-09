@@ -1,0 +1,17 @@
+---
+import type { PrismicItem } from '../../data/site-config';
+import { getBlogPosts } from '../../prismic';
+
+export async function getStaticPaths() {
+  const posts = (await getBlogPosts(false)) as PrismicItem[];
+  const postCount = posts.length;
+  return posts.map((post, index) => ({
+    params: { slug: post?.slugs ? post.slugs[0] : '404' },
+    props: {
+      post,
+      prevPost: index + 1 !== postCount ? posts[index + 1] : null,
+      nextPost: index !== 0 ? posts[index - 1] : null
+    }
+  }));
+}
+---
