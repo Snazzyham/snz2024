@@ -31,7 +31,7 @@ export type PrismicItem = {
 	linked_documents: any;
 	lang: string;
 	alternate_languages: any;
-	data: HomepageData | BlogPost | CaseStudy | PortfolioPageData;
+	data: HomepageData | BlogPost | CaseStudy | PortfolioPageData | FavData;
 };
 
 export type HomepageData = {
@@ -83,6 +83,24 @@ type PortfolioItem = {
 	internal: Boolean;
 };
 
+export type FavData = {
+	title: RichTextField;
+	page_description: RichTextField;
+	category_1_title: string;
+	category_2_title: string;
+	category_3_title: string;
+	category_1_items: FavItem[];
+	category_2_items: FavItem[];
+	category_3_items: FavItem[];
+};
+
+export type FavItem = {
+	item_title: string;
+	item_description: RichTextField;
+	since: string;
+	item_image: ImageField;
+};
+
 type AwardGroupItem = {
 	a_title: string;
 	link: string;
@@ -119,7 +137,7 @@ export type SiteConfig = {
 };
 
 const siteConfig: SiteConfig = {
-	title: "Soham Adwani",
+	title: "Soham Adwani - Product Consultant",
 	subtitle: "Product Consultant, Web Developer, Operations Specialist",
 	description:
 		"I'm a Product Consultant focusing on helping my clients scale and get to market in the most efficient way possible",
@@ -139,6 +157,10 @@ const siteConfig: SiteConfig = {
 		{
 			text: "Writing",
 			href: "/writing",
+		},
+		{
+			text: "Favourites",
+			href: "/favourites",
 		},
 	],
 	footerNavLinks: [
@@ -161,11 +183,6 @@ const siteConfig: SiteConfig = {
 			href: "https://timesync.novocall.co/soham/otterdev-discuss",
 		},
 	],
-	subscribe: {
-		title: "Subscribe to Dante Newsletter",
-		text: "One update per week. All the latest posts directly in your inbox.",
-		formUrl: "#",
-	},
 	postsPerPage: 8,
 	projectsPerPage: 8,
 };

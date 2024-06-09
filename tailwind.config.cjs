@@ -46,6 +46,7 @@ module.exports = {
 						},
 						h3: {
 							fontFamily: theme("fontFamily.heading"),
+							fontSize: "500px",
 						},
 						h4: {
 							fontFamily: theme("fontFamily.heading"),

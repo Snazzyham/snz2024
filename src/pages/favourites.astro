@@ -1,0 +1,30 @@
+---
+import type { PrismicItem, PrismicData, FavData } from '../data/site-config';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FavouritePreview from '../components/FavouritePreview.astro';
+import { getPage } from '../prismic';
+import * as prismic from '@prismicio/client';
+
+const favsPage = (await getPage('favorites')) as any as PrismicData;
+
+const favContent = favsPage.results[0] as PrismicItem;
+const favData = favContent.data as FavData;
+---
+
+<BaseLayout
+  title="Portfolio"
+  description="Explore a diverse portfolio showcasing my passion and expertise"
+  showHeader={false}
+>
+  <h1 class="mb-6 text-2xl leading-tight font-heading sm:text-4xl">
+    {prismic.asText(favData.title)}
+  </h1>
+  <p
+    set:html={prismic.asText(favData.page_description)}
+    class="prose prose-dante mb-12 sm:mb-16"
+  />
+
+  <FavouritePreview title={favData.category_1_title} items={favData.category_1_items} />
+  <FavouritePreview title={favData.category_2_title} items={favData.category_2_items} />
+  <FavouritePreview title={favData.category_3_title} items={favData.category_3_items} />
+</BaseLayout>

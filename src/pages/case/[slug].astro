@@ -26,7 +26,7 @@ const content = caseFile.data as CaseStudy;
 >
   <article class="mb-16 sm:mb-24">
     <h1
-      class="font-heading text-7xl leading-tight tracking-tighter text-center uppercase font-black mb-16"
+      class="font-heading text-7xl leading-tight tracking-loose text-center uppercase font-black mb-16"
     >
       {prismic.asText(content.title)}
     </h1>
@@ -43,9 +43,9 @@ const content = caseFile.data as CaseStudy;
     }
 
     <div
-      class="prose my-8 w-full"
+      class="prose prose-dante my-8 w-full"
       set:html={prismic.asHTML(content.body_content)}
-      style={{ color: content.primary }}
+      style={{ color: `${content.primary} !important` }}
     />
 
     {
@@ -73,9 +73,9 @@ const content = caseFile.data as CaseStudy;
       content.videos.length > 0 && (
         <>
           <h3 class="font-heading text-3xl font-extrabold mb-4 mt-6">Videos</h3>
-          <div class="grid grid-flow-row-dense grid-cols-2 gap-4">
+          <div class=`grid grid-flow-row-dense ${content.videos.length == 1 ? 'grid-cols-1' : 'grid-cols-2'} gap-4`>
             {content.videos.map((vid) => (
-              <video src={vid.content.url} controls class="w-full h-full" />
+              <video src={vid.content.url} controls class="w-full h-full shadow-md rounded-xl" style={{ border: `2px solid ${content.primary}`}} />
             ))}
           </div>
         </>
@@ -88,7 +88,7 @@ const content = caseFile.data as CaseStudy;
           <h3 class="font-heading text-3xl font-extrabold mb-4 mt-6">Images</h3>
           <div class="grid grid-flow-row-dense grid-cols-2 gap-4">
             {content.photos.map((photo) => (
-              <img src={photo.content.url} alt="image" class="w-full h-full" />
+              <img src={photo.content.url} alt="image" class="w-full h-full shadow-md rounded-xl" style={{ border: `2px solid ${content.primary}`}} />
             ))}
           </div>
         </>

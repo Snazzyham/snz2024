@@ -1,0 +1,32 @@
+---
+import type { FavItem } from '../data/site-config';
+type Props = {
+  title: string;
+  items: FavItem[];
+};
+
+const { title, items } = Astro.props;
+---
+
+<div class="my-12">
+  <h3 class="font-heading text-2xl my-6">{title}</h3>
+  <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+    {
+      items.map((item) => (
+        <div class="flex flex-col w-[200px]">
+          <img
+            src={item.item_image.url}
+            alt={item.item_title}
+            class="w-[200px] object-cover rounded-lg"
+          />
+          <h3 class="my-2 text-lg">{item.item_title}</h3>
+          {item.since && (
+            <p class="text-sm italic font-extralight">
+              Listening since {item.since.slice(0, 4)}
+            </p>
+          )}
+        </div>
+      ))
+    }
+  </div>
+</div>

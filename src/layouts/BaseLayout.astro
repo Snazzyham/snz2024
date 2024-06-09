@@ -6,7 +6,12 @@ import Header from '../components/Header.astro';
 import Nav from '../components/Nav.astro';
 import 'cal-sans';
 
-export type Props = HeadProps & { showHeader?: boolean; colorOverwrite?: boolean; primary?: string; secondary?: string };
+export type Props = HeadProps & {
+  showHeader?: boolean;
+  colorOverwrite?: boolean;
+  primary?: string;
+  secondary?: string;
+};
 
 const { showHeader = true, colorOverwrite, primary, secondary, ...head } = Astro.props;
 ---
@@ -22,9 +27,12 @@ const { showHeader = true, colorOverwrite, primary, secondary, ...head } = Astro
     </script>
     <ViewTransitions />
   </head>
-  <body class={!colorOverwrite && 'bg-main text-main'} style={{ color: primary, backgroundColor: secondary }}>
+  <body
+    class={!colorOverwrite && 'bg-main text-main'}
+    style={{ color: primary, backgroundColor: secondary }}
+  >
     <div class="flex flex-col min-h-screen px-4 md:px-8">
-      <Nav colorOverwrite={colorOverwrite} primary={primary} secondary={secondary}/>
+      <Nav colorOverwrite={colorOverwrite} primary={primary} secondary={secondary} />
       {showHeader && <Header />}
       <main class="grow w-full max-w-3xl mx-auto">
         <slot />
