@@ -9,7 +9,7 @@ const client = prismic.createClient(repo_name, {
 export async function getBlogPosts(latest: boolean) {
   return await client.getAllByType('blog_post', {
     orderings: {
-      field: latest === true ? 'document.last_publication_date' : 'document.first_publication_date',
+      field: 'my.blog_post.date',
       direction: 'desc'
     }
   });
