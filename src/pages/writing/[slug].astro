@@ -29,7 +29,7 @@ const data = post.data as BlogPost;
 ---
 
 <BaseLayout
-  title={prismic.asText(data.title) + " | Soham Adwani's Blog"}
+  title={prismic.asText(data.title)}
   description={prismic.asText(data.body).slice(0, 160)}
   image={{
     src: `https://dynamic-og-image-generator.vercel.app/api/generate?title=${encodeURIComponent(prismic.asText(data.title))}&author=Soham%20Adwani&websiteUrl=snazzyham.com%2Fwriting&theme=dracula`,
@@ -40,7 +40,11 @@ const data = post.data as BlogPost;
 >
   <article class="mb-16 sm:mb-24">
     <header class="mb-8">
-      <h1 class="text-3xl leading-tight font-heading font-medium sm:text-5xl sm:leading-tight">{prismic.asText(data.title)}</h1>
+      <h1
+        class="text-3xl leading-tight font-heading font-medium sm:text-5xl sm:leading-tight"
+      >
+        {prismic.asText(data.title)}
+      </h1>
       <div class="mt-4 text-sm">
         {data.date}
         {
@@ -55,18 +59,43 @@ const data = post.data as BlogPost;
         }
       </div>
     </header>
-    <div class="max-w-none prose prose-dante sm:prose-lg" set:html={prismic.asHTML(data.body)} />
+    <div
+      class="max-w-none prose prose-dante sm:prose-lg"
+      set:html={prismic.asHTML(data.body)}
+    />
 
-    <div class="mt-8 flex flex-wrap items-center gap-6 text-sm justify-between sm:mt-12 sm:text-base">
-      <Button class="copy-url-button" aria-label="Copy link" data-url={href} data-tooltip-default="Copy link" data-tooltip-success="Copied">Share</Button>
+    <div
+      class="mt-8 flex flex-wrap items-center gap-6 text-sm justify-between sm:mt-12 sm:text-base"
+    >
+      <Button
+        class="copy-url-button"
+        aria-label="Copy link"
+        data-url={href}
+        data-tooltip-default="Copy link"
+        data-tooltip-success="Copied">Share</Button
+      >
     </div>
   </article>
   {
     (prevPost || nextPost) && (
       <div class="my-16 sm:my-24">
         <h2 class="mb-12 text-xl font-heading  sm:mb-16 sm:text-2xl">Read Next</h2>
-        {nextPost && <PostPreview post={nextPost.data as BlogPost} slug={nextPost.slugs} class="mb-10 sm:mb-12" headingLevel="h3" />}
-        {prevPost && <PostPreview post={prevPost.data as BlogPost} slug={prevPost.slugs} class="mb-10 sm:mb-12" headingLevel="h3" />}
+        {nextPost && (
+          <PostPreview
+            post={nextPost.data as BlogPost}
+            slug={nextPost.slugs}
+            class="mb-10 sm:mb-12"
+            headingLevel="h3"
+          />
+        )}
+        {prevPost && (
+          <PostPreview
+            post={prevPost.data as BlogPost}
+            slug={prevPost.slugs}
+            class="mb-10 sm:mb-12"
+            headingLevel="h3"
+          />
+        )}
       </div>
     )
   }
