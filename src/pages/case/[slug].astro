@@ -23,6 +23,11 @@ const content = caseFile.data as CaseStudy;
   colorOverwrite={true}
   primary={caseFile.data.primary}
   secondary={caseFile.data.secondary}
+  title={prismic.asText(content.title)}
+  description={prismic.asText(content.body_content).slice(0, 160)}
+  image={{
+    src: content.hero_image.url ?? `https://dynamic-og-image-generator.vercel.app/api/generate?title=${encodeURIComponent(prismic.asText(content.title))}&author=Soham%20Adwani&websiteUrl=snazzyham.com%2Fportfolio&theme=github`
+  }}
 >
   <article class="mb-16 sm:mb-24">
     <h1

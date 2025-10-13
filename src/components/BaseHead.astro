@@ -10,7 +10,12 @@ export type Props = {
 };
 
 const { description = '', image = siteConfig.image, pageType = 'website' } = Astro.props;
-const title = [Astro.props.title, siteConfig.title].filter(Boolean).join(' | ');
+let title;
+if (pageType === 'article') {
+  title = [Astro.props.title, "SnazzyHam's Blog"].filter(Boolean).join(' | ');
+} else {
+  title = [Astro.props.title, 'Soham Adwani'].filter(Boolean).join(' | ');
+}
 const resolvedImage = image?.src
   ? {
       src: new URL(image.src, Astro.site).toString(),

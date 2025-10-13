@@ -48,6 +48,9 @@ export type BlogPost = {
   title: RichTextField;
   date: string;
   body: RichTextField;
+  seo_title?: string;
+  seo_description?: string;
+  seo_image?: ImageField;
 };
 
 export type CaseStudy = {
