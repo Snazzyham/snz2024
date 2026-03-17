@@ -8,21 +8,38 @@ const doc = (await getPage('home')) as any as PrismicData;
 const content = doc.results[0].data as HomepageData;
 ---
 
-{
-  (
-    <>
-      <section class="w-full flex flex-col gap-8 mb-16">
-        <h1 class="text-3xl leading-tight font-heading font-medium sm:text-5xl sm:leading-tight">{content.title}</h1>
-        {content.hero_image.url && (
-          <figure>
-            <img class="w-full" src={content.hero_image.url} loading="lazy" decoding="async" alt={content.hero_image.alt || ''} />
-          </figure>
-        )}
-        <div class="max-w-none prose prose-dante sm:prose-lg" set:html={prismic.asHTML(content.about)} />
-      </section>
-      <div class="flex flex-wrap gap-4 mb-16">
-        <Button href={content.button_path}>{content.button_text}</Button>
-      </div>
-    </>
-  )
-}
+<section class="w-full flex flex-col gap-12 mb-24 sm:mb-32">
+  <div class="text-center max-w-2xl mx-auto">
+    <h1 class="text-4xl leading-[1.05] font-black tracking-tight sm:text-7xl mb-8">
+      {content.title}
+    </h1>
+    <div class="h-px w-16 bg-main mx-auto mb-10 opacity-20"></div>
+    <div 
+      class="prose prose-dante text-center mx-auto opacity-80 leading-relaxed font-light" 
+      set:html={prismic.asHTML(content.about)} 
+    />
+  </div>
+
+  {content.hero_image.url && (
+    <figure class="mt-8">
+      <img 
+        class="w-full rounded-sm grayscale-[0.2] contrast-[1.1] brightness-[0.95]" 
+        src={content.hero_image.url} 
+        loading="lazy" 
+        decoding="async" 
+        alt={content.hero_image.alt || ''} 
+      />
+      {content.hero_image.alt && (
+        <figcaption class="text-[10px] uppercase tracking-widest mt-3 opacity-40 text-center">
+          {content.hero_image.alt}
+        </figcaption>
+      )}
+    </figure>
+  )}
+
+  <div class="flex justify-center mt-4">
+    <Button href={content.button_path} class="px-10 py-4 uppercase tracking-[0.2em] text-[10px] font-bold">
+      {content.button_text}
+    </Button>
+  </div>
+</section>

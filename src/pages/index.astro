@@ -21,17 +21,16 @@ const postsSliced = blogPosts.slice(0, 3);
   title="Soham Adwani | Product & Operations Consultant"
 >
   <Hero />
+
   {
     casesSliced?.length > 0 && (
-      <div class="mb-16 sm:mb-24">
-        <h2 class="mb-4 text-xl font-heading sm:text-3xl">Latest Case Studies</h2>
-        <p class="mb-8">
-          For more recent work related case studies, check out the{' '}
-          <a href="https://otterdev.io/posts/" target="_blank" class="italic underline">
-            Otterdev blog
-          </a>
-        </p>
-        <div class="flex flex-col sm:flex-row gap-2 sm:gap-4">
+      <div class="mb-32 sm:mb-48">
+        <div class="text-center mb-16 sm:mb-24">
+          <h2 class="text-sm uppercase tracking-[0.3em] font-bold opacity-30 mb-4">Selected Case Studies</h2>
+          <div class="h-px w-8 bg-main mx-auto opacity-20"></div>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-12 sm:gap-8">
           {casesSliced.map((item) => (
             <CasePreview
               slug={item.uid}
@@ -44,26 +43,35 @@ const postsSliced = blogPosts.slice(0, 3);
             />
           ))}
         </div>
-        <div class="mt-12 sm:mt-16">
-          <Button href="/portfolio">View All Case Sudies</Button>
+        
+        <div class="mt-20 flex justify-center">
+          <Button href="/portfolio">View All Work</Button>
         </div>
       </div>
     )
   }
+
   {
     postsSliced.length > 0 && (
-      <div class="mb-16 sm:mb-24">
-        <h2 class="mb-12 text-xl font-heading sm:mb-16 sm:text-3xl">Latest Writing</h2>
-        {postsSliced.map((post) => (
-          <PostPreview
-            post={post.data as BlogPost}
-            slug={post.slugs || ['404']}
-            class="mb-10 sm:mb-12"
-            headingLevel="h3"
-          />
-        ))}
-        <div class="mt-12 sm:mt-16">
-          <Button href="/writing">View All Posts</Button>
+      <div class="mb-32 sm:mb-48">
+        <div class="text-center mb-16 sm:mb-24">
+          <h2 class="text-sm uppercase tracking-[0.3em] font-bold opacity-30 mb-4">Latest Journal Entries</h2>
+          <div class="h-px w-8 bg-main mx-auto opacity-20"></div>
+        </div>
+
+        <div class="max-w-3xl mx-auto">
+          {postsSliced.map((post) => (
+            <PostPreview
+              post={post.data as BlogPost}
+              slug={post.slugs || ['404']}
+              class="mb-16"
+              headingLevel="h3"
+            />
+          ))}
+        </div>
+
+        <div class="mt-8 flex justify-center">
+          <Button href="/writing">Open Journal</Button>
         </div>
       </div>
     )

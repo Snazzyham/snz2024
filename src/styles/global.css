@@ -13,21 +13,24 @@
   --color-bg-main: rgb(var(--theme-bg-main) / var(--tw-bg-opacity, 1));
   --color-bg-muted: rgb(var(--theme-bg-muted) / var(--tw-bg-opacity, 1));
   --color-border-main: rgb(var(--theme-border-main) / var(--tw-border-opacity, 1));
+  --color-accent-main: rgb(var(--theme-accent-main) / var(--tw-text-opacity, 1));
 }
 
 @layer base {
   :root {
-    --theme-text-main: 23 23 23; /* #171717 */
-    --theme-bg-main: 242 241 236; /* #F2F1EC */
-    --theme-bg-muted: 234 233 225; /* #EAE9E1 */
-    --theme-border-main: 23 23 23; /* #171717 */
+    --theme-text-main: 45 41 38; /* Soft Espresso */
+    --theme-bg-main: 249 247 242; /* Warm Paper */
+    --theme-bg-muted: 242 238 227; /* Soft Cream */
+    --theme-border-main: 45 41 38;
+    --theme-accent-main: 96 108 56; /* Moss Green */
   }
 
   html.dark {
-    --theme-text-main: 242 241 236; /* #F2F1EC */
-    --theme-bg-main: 23 23 23; /* #171717 */
-    --theme-bg-muted: 36 36 36; /* #242424 */
-    --theme-border-main: 242 241 236; /* #F2F1EC */
+    --theme-text-main: 242 238 227; /* Soft Cream */
+    --theme-bg-main: 27 36 27; /* Deep Forest Green */
+    --theme-bg-muted: 42 52 42; /* Dark Moss */
+    --theme-border-main: 242 238 227;
+    --theme-accent-main: 221 161 94; /* Earthy Gold */
   }
 
   /* Border color compatibility for Tailwind v4 */
@@ -47,6 +50,8 @@
       sans-serif;
     color: rgb(var(--theme-text-main) / 1);
     background-color: rgb(var(--theme-bg-main) / 1);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1,
@@ -57,6 +62,8 @@
     font-family: var(--font-roslindale-display), var(--font-roslindale-text), serif;
     font-weight: 900;
     color: rgb(var(--theme-text-main) / 1);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
   }
 
   p,
@@ -64,6 +71,12 @@
   a,
   li {
     color: rgb(var(--theme-text-main) / 1);
+    line-height: 1.6;
+  }
+
+  ::selection {
+    background-color: rgb(var(--theme-accent-main) / 0.2);
+    color: inherit;
   }
 }
 
@@ -84,6 +97,23 @@
   .border-main {
     border-color: rgb(var(--theme-border-main) / var(--tw-border-opacity, 1));
   }
+
+  .accent-main {
+    color: rgb(var(--theme-accent-main) / 1);
+  }
+}
+
+/* Subtle Film Grain Overlay */
+.grain-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
 /* Prose custom theme - Dante */
@@ -91,20 +121,21 @@
   --tw-prose-body: rgb(var(--theme-text-main) / 1);
   --tw-prose-headings: rgb(var(--theme-text-main) / 1);
   --tw-prose-lead: rgb(var(--theme-text-main) / 1);
-  --tw-prose-links: rgb(var(--theme-text-main) / 1);
+  --tw-prose-links: rgb(var(--theme-accent-main) / 1);
   --tw-prose-bold: rgb(var(--theme-text-main) / 1);
-  --tw-prose-counters: rgb(var(--theme-text-main) / 1);
-  --tw-prose-bullets: rgb(var(--theme-border-main) / 1);
-  --tw-prose-hr: rgb(var(--theme-border-main) / 1);
+  --tw-prose-counters: rgb(var(--theme-accent-main) / 1);
+  --tw-prose-bullets: rgb(var(--theme-accent-main) / 1);
+  --tw-prose-hr: rgb(var(--theme-border-main) / 0.2);
   --tw-prose-quotes: rgb(var(--theme-text-main) / 1);
-  --tw-prose-quote-borders: rgb(var(--theme-border-main) / 1);
-  --tw-prose-captions: rgb(var(--theme-text-main) / 1);
+  --tw-prose-quote-borders: rgb(var(--theme-accent-main) / 1);
+  --tw-prose-captions: rgb(var(--theme-text-main) / 0.7);
   --tw-prose-code: rgb(var(--theme-text-main) / 1);
   --tw-prose-pre-code: var(--color-bg-muted);
   --tw-prose-pre-bg: rgb(var(--theme-text-main) / 0.9);
-  --tw-prose-th-borders: rgb(var(--theme-border-main) / 1);
-  --tw-prose-td-borders: rgb(var(--theme-border-main) / 1);
+  --tw-prose-th-borders: rgb(var(--theme-border-main) / 0.2);
+  --tw-prose-td-borders: rgb(var(--theme-border-main) / 0.1);
   color: rgb(var(--theme-text-main) / 1);
+  font-size: 1.125rem;
 }
 
 .prose-dante
@@ -113,36 +144,31 @@
   ) {
   font-family: var(--font-roslindale-display), var(--font-roslindale-text), serif;
   color: rgb(var(--theme-text-main) / 1);
+  letter-spacing: -0.01em;
 }
 
 .prose-dante :where(a):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
   font-weight: normal;
   text-decoration: underline;
-  text-decoration-style: dashed;
+  text-decoration-style: solid;
   text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
-  color: rgb(var(--theme-text-main) / 1);
+  text-underline-offset: 3px;
+  color: inherit;
+  transition: opacity 0.2s ease;
 }
 
 .prose-dante :where(a):not(:where([class~='not-prose'], [class~='not-prose'] *)):hover {
-  text-decoration-style: solid;
+  opacity: 0.7;
 }
 
 .prose-dante
   :where(blockquote):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
-  border: 0;
-  font-family: var(--font-roslindale-display), var(--font-roslindale-text), serif;
-  font-size: 1.3125em;
+  border-left: 2px solid rgb(var(--theme-accent-main) / 1);
+  font-family: var(--font-roslindale-text), serif;
+  font-size: 1.25em;
   font-weight: normal;
-  line-height: 1.4;
-  padding-left: 0;
-  color: rgb(var(--theme-text-main) / 1);
-}
-
-@media (min-width: 640px) {
-  .prose-dante
-    :where(blockquote):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
-    font-size: 1.66667em;
-    line-height: 1.3;
-  }
+  line-height: 1.5;
+  padding-left: 1.5rem;
+  font-style: italic;
+  color: rgb(var(--theme-text-main) / 0.9);
 }

@@ -12,15 +12,21 @@ type Props = {
 };
 ---
 
-<a href={`/case/${slug}`}>
-  <div class="flex p-4 rounded-xl transition-transform hover:scale-110 hover:shadow-lg cursor-pointer min-h-[150px]" style={{ color: primary, backgroundColor: secondary }}>
-    <div class="w-1/4 flex items-center justify-center">
-      <img src={clientLogo} alt={client} class="rounded-full w-full" />
+<a href={`/case/${slug}`} class="group block w-full">
+  <div class="relative aspect-[4/5] overflow-hidden rounded-sm bg-muted transition-all duration-500 group-hover:shadow-xl" style={{ backgroundColor: secondary }}>
+    <div class="absolute inset-0 flex items-center justify-center p-12 transition-transform duration-700 group-hover:scale-110">
+      <img src={clientLogo} alt={client} class="w-24 h-24 object-contain rounded-full sm:w-32 sm:h-32 shadow-lg" />
     </div>
-    <div class="w-3/4 flex flex-col items-start justify-center pl-4">
-      <h2 class="font-heading text-2xl">{title}</h2>
-      {blurb !== '-' && <h4 class="italic text-sm">{blurb}</h4>}
-      <h5 class="text-sm italic">For: <span class="font-heading">{client}</span></h5>
-    </div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100"></div>
+  </div>
+  
+  <div class="mt-6 text-center">
+    <p class="text-[10px] uppercase tracking-[0.25em] font-bold opacity-40 mb-2">
+      {client}
+    </p>
+    <h3 class="font-heading text-2xl tracking-tight leading-tight group-hover:opacity-70 transition-opacity">
+      {title}
+    </h3>
+    {blurb !== '-' && <p class="text-xs italic mt-2 opacity-60 font-light">{blurb}</p>}
   </div>
 </a>

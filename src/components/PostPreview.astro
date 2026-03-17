@@ -9,19 +9,26 @@ const { post, class: className, headingLevel = 'h2', slug } = Astro.props;
 const TitleTag = headingLevel;
 ---
 
-<a class:list={['flex justify-between items-start gap-8 group', className]} href={`/writing/${slug[0]}/`}>
-  <div class="grow">
-    <TitleTag
-      class="text-xl leading-tight font-heading font-medium group-hover:underline group-hover:decoration-dashed group-hover:underline-offset-4 group-hover:decoration-1 sm:text-2xl"
-    >
-      {prismic.asText(post.title)}
-    </TitleTag>
-    <div class="mt-1 text-sm leading-normal">
+<a class:list={['block group border-b border-main/10 pb-12 mb-12 last:border-0', className]} href={`/writing/${slug[0]}/`}>
+  <div class="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-12">
+    <div class="text-[10px] uppercase tracking-[0.2em] font-bold opacity-40 shrink-0 md:w-32">
       {post.date}
     </div>
-    <div class="mt-3 text-sm leading-normal">{prismic.asText(post.body).slice(0, 160) + "..."}</div>
-  </div>
-  <div class="hidden font-heading opacity-0 transition group-hover:opacity-100 sm:inline-flex sm:gap-1 sm:items-center sm:shrink-0">
-    Read Post <ArrowRight class="fill-current w-4 h-4" />
+    
+    <div class="grow">
+      <TitleTag
+        class="text-2xl leading-[1.1] font-heading tracking-tight group-hover:opacity-60 transition-all duration-300 sm:text-4xl"
+      >
+        {prismic.asText(post.title)}
+      </TitleTag>
+      
+      <div class="mt-6 text-sm leading-relaxed font-light opacity-70 max-w-xl">
+        {prismic.asText(post.body).slice(0, 180) + "..."}
+      </div>
+      
+      <div class="mt-8 flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-bold opacity-0 -translate-x-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-0">
+        Read Entry <ArrowRight class="fill-current w-3 h-3" />
+      </div>
+    </div>
   </div>
 </a>

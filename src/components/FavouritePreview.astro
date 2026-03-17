@@ -8,21 +8,32 @@ type Props = {
 const { title, items } = Astro.props;
 ---
 
-<div class="my-12">
-  <h3 class="font-heading text-2xl my-6">{title}</h3>
-  <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+<div class="my-24 first:mt-12">
+  <div class="flex items-center gap-4 mb-12">
+    <h2 class="font-heading text-sm uppercase tracking-[0.3em] font-bold opacity-30 whitespace-nowrap">{title}</h2>
+    <div class="h-px w-full bg-main opacity-10"></div>
+  </div>
+  
+  <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-16">
     {
       items.map((item) => (
-        <div class="flex flex-col w-[150px] sm:w-[200px] xl:w-[225px]">
-          <img
-            src={item.item_image.url}
-            alt={item.item_title}
-            class="w-full object-cover rounded-lg"
-          />
-          <h3 class="my-2 text-lg">{item.item_title}</h3>
+        <div class="group flex flex-col w-[150px] sm:w-[200px] xl:w-[225px]">
+          <div class="relative overflow-hidden rounded-lg bg-muted mb-6 transition-all duration-700 group-hover:shadow-md">
+            <img
+              src={item.item_image.url}
+              alt={item.item_title}
+              class="w-full object-cover transition-all duration-1000 ease-out group-hover:scale-105 vintage-filter group-hover:vintage-filter-none"
+            />
+            <div class="absolute inset-0 bg-accent-main/5 pointer-events-none transition-opacity duration-1000 group-hover:opacity-0"></div>
+          </div>
+          
+          <h3 class="font-heading text-xl tracking-tight leading-tight mb-1 group-hover:opacity-70 transition-opacity">
+            {item.item_title}
+          </h3>
+          
           {item.since && (
-            <p class="text-sm italic font-extralight">
-              Listening since {item.since.slice(0, 4)}
+            <p class="text-[10px] uppercase tracking-[0.15em] font-bold opacity-30">
+              Since {item.since.slice(0, 4)}
             </p>
           )}
         </div>
@@ -30,3 +41,13 @@ const { title, items } = Astro.props;
     }
   </div>
 </div>
+
+<style>
+  .vintage-filter {
+    filter: sepia(0.5) grayscale(0.3) brightness(0.9) contrast(0.85);
+  }
+  
+  .vintage-filter-none {
+    filter: sepia(0) grayscale(0) brightness(1) contrast(1);
+  }
+</style>
