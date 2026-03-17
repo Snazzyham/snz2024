@@ -20,103 +20,123 @@ const content = caseFile.data as CaseStudy;
 <BaseLayout
   showHeader={false}
   pageType="article"
-  colorOverwrite={true}
-  primary={caseFile.data.primary}
-  secondary={caseFile.data.secondary}
   title={prismic.asText(content.title)}
   description={prismic.asText(content.body_content).slice(0, 160)}
   image={{
     src: content.hero_image.url ?? `https://dynamic-og-image-generator.vercel.app/api/generate?title=${encodeURIComponent(prismic.asText(content.title))}&author=Soham%20Adwani&websiteUrl=snazzyham.com%2Fportfolio&theme=github`
   }}
 >
-  <article class="mb-16 sm:mb-24">
-    <h1
-      class="font-heading text-7xl leading-tight tracking-loose text-center uppercase font-black mb-16"
-    >
-      {prismic.asText(content.title)}
-    </h1>
-    <p class="mb-4 italic lowercase text-center">In collaboration with</p>
-    <div class="flex items-center justify-center">
-      <img src={content.client_logo.url} alt={content.client} class="w-16 rounded-full" />
-      <span class="mx-6 text-7xl font-bold">|</span>
-      <h4 class="font-heading font-extrabold text-4xl">{content.client}</h4>
+  <article class="mb-32 sm:mb-48">
+    <div class="text-center mb-24">
+      <h1 class="font-heading text-5xl leading-[1.05] tracking-tight sm:text-8xl font-black mb-12">
+        {prismic.asText(content.title)}
+      </h1>
+      
+      <div class="flex flex-col items-center gap-6">
+        <p class="text-[10px] uppercase tracking-[0.3em] font-bold opacity-30">In collaboration with</p>
+        <div class="flex items-center gap-6">
+          <img src={content.client_logo.url} alt={content.client} class="w-12 h-12 rounded-full shadow-sm" />
+          <div class="h-8 w-px bg-main opacity-20"></div>
+          <h4 class="font-heading font-bold text-2xl tracking-tight">{content.client}</h4>
+        </div>
+      </div>
     </div>
+
     {
       content.hero_image.url && (
-        <img class="w-full my-8" src={content.hero_image.url} alt="Hero Image" />
+        <figure class="mb-24">
+          <img 
+            class="w-full rounded-sm grayscale-[0.1] contrast-[1.05] brightness-[0.98]" 
+            src={content.hero_image.url} 
+            alt="Hero Image" 
+          />
+        </figure>
       )
     }
 
-    <div
-      class="prose prose-dante my-8 w-full"
-      set:html={prismic.asHTML(content.body_content)}
-      style={{ color: `${content.primary} !important` }}
-    />
+    <div class="max-w-2xl mx-auto">
+      <div
+        class="prose prose-dante w-full mb-24"
+        set:html={prismic.asHTML(content.body_content)}
+      />
 
-    {
-      content.has_awards && (
-        <>
-          <h3 class="font-heading text-3xl font-extrabold mb-4 mt-6">
-            Awards and Recongition
-          </h3>
-          <div class="flex flex-wrap gap-4">
-            {content.awards.map((award) => (
-              <a
-                href={award.link}
-                target="_blank"
-                class="font-heading font-bold text-xl hover:underline underline-offset-4"
-              >
-                {award.a_title}
-              </a>
-            ))}
-          </div>
-        </>
-      )
-    }
+      {
+        content.has_awards && (
+          <section class="mb-24 pt-16 border-t border-main/10">
+            <h3 class="text-xs uppercase tracking-[0.3em] font-bold opacity-30 mb-8">
+              Awards and Recognition
+            </h3>
+            <div class="flex flex-col gap-6">
+              {content.awards.map((award) => (
+                <a
+                  href={award.link}
+                  target="_blank"
+                  class="font-heading font-bold text-2xl sm:text-3xl hover:opacity-60 transition-opacity flex items-baseline gap-4"
+                >
+                  <span class="text-xs opacity-20">/</span>
+                  {award.a_title}
+                </a>
+              ))}
+            </div>
+          </section>
+        )
+      }
 
-    {
-      content.videos.length > 0 && (
-        <>
-          <h3 class="font-heading text-3xl font-extrabold mb-4 mt-6">Videos</h3>
-          <div class=`grid grid-flow-row-dense ${content.videos.length == 1 ? 'grid-cols-1' : 'grid-cols-2'} gap-4`>
-            {content.videos.map((vid) => (
-              <video src={vid.content.url} controls class="w-full h-full shadow-md rounded-xl" style={{ border: `2px solid ${content.primary}`}} />
-            ))}
-          </div>
-        </>
-      )
-    }
+      {
+        content.videos.length > 0 && (
+          <section class="mb-24 pt-16 border-t border-main/10">
+            <h3 class="text-xs uppercase tracking-[0.3em] font-bold opacity-30 mb-8 text-center">Motion</h3>
+            <div class={`grid gap-8 ${content.videos.length === 1 ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2'}`}>
+              {content.videos.map((vid) => (
+                <video 
+                  src={vid.content.url} 
+                  controls 
+                  class="w-full rounded-lg shadow-xl bg-black aspect-video object-cover" 
+                />
+              ))}
+            </div>
+          </section>
+        )
+      }
 
-    {
-      content.photos.length > 0 && (
-        <>
-          <h3 class="font-heading text-3xl font-extrabold mb-4 mt-6">Images</h3>
-          <div class="grid grid-flow-row-dense grid-cols-2 gap-4">
-            {content.photos.map((photo) => (
-              <img src={photo.content.url} alt="image" class="w-full h-full shadow-md rounded-xl" style={{ border: `2px solid ${content.primary}`}} />
-            ))}
-          </div>
-        </>
-      )
-    }
+      {
+        content.photos.length > 0 && (
+          <section class="mb-24 pt-16 border-t border-main/10">
+            <h3 class="text-xs uppercase tracking-[0.3em] font-bold opacity-30 mb-8 text-center">Documentation</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+              {content.photos.map((photo) => (
+                <img 
+                  src={photo.content.url} 
+                  alt="documentation" 
+                  class="w-full rounded-lg shadow-lg aspect-square object-cover vintage-filter hover:vintage-filter-none transition-all duration-1000" 
+                />
+              ))}
+            </div>
+          </section>
+        )
+      }
 
-    {
-      content.has_external_media && (
-        <>
-          <h3 class="font-heading text-3xl font-extrabold mb-4 mt-6">In The Media</h3>
-          <div class="flex flex-wrap gap-4">
-            {content.external_media.map((item) => (
-              <a
-                href={item.url}
-                target="_blank"
-                class="font-heading font-bold text-xl hover:underline underline-offset-4"
-              >
-                {item.publication}
-              </a>
-            ))}
-          </div>
-        </>
-      )
-    }
+      {
+        content.has_external_media && (
+          <section class="mb-24 pt-16 border-t border-main/10">
+            <h3 class="text-xs uppercase tracking-[0.3em] font-bold opacity-30 mb-8">
+              In The Media
+            </h3>
+            <div class="flex flex-col gap-6">
+              {content.external_media.map((item) => (
+                <a
+                  href={item.url}
+                  target="_blank"
+                  class="font-heading font-bold text-2xl sm:text-3xl hover:opacity-60 transition-opacity flex items-baseline gap-4"
+                >
+                  <span class="text-xs opacity-20">/</span>
+                  {item.publication}
+                </a>
+              ))}
+            </div>
+          </section>
+        )
+      }
+    </div>
   </article>
 </BaseLayout>

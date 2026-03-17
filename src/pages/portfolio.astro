@@ -13,11 +13,15 @@ const pd = portfolioContent.data as PortfolioPageData;
 ---
 
 <BaseLayout title="Portfolio" description="Explore a diverse portfolio showcasing my passion and expertise" showHeader={false}>
-  <h1 class="mb-12 text-2xl leading-tight font-heading sm:mb-16 sm:text-4xl">{prismic.asText(pd.title)}</h1>
+  <h1 class="mb-16 text-4xl leading-tight font-heading sm:mb-24 sm:text-6xl tracking-tight font-black">{prismic.asText(pd.title)}</h1>
 
-  <div>
-    <h2 class="text-xl leading-tight font-heading mb-6">{pd.case_study_title}</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 mb-16">
+  <div class="mb-32">
+    <div class="flex items-center gap-4 mb-12">
+      <h2 class="font-heading text-sm uppercase tracking-[0.3em] font-bold opacity-30 whitespace-nowrap">{pd.case_study_title}</h2>
+      <div class="h-px w-full bg-main opacity-10"></div>
+    </div>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
       {
         cases.map((item: PrismicItem) => (
           <CasePreview
@@ -34,15 +38,19 @@ const pd = portfolioContent.data as PortfolioPageData;
     </div>
   </div>
 
-  <div>
-    <h2 class="text-xl leading-tight font-heading mb-6">{pd.portfolio_items_title}</h2>
-    <div class="grid grid-cols-2 sm:grid-cols-3 gap-8">
+  <div class="mb-32">
+    <div class="flex items-center gap-4 mb-12">
+      <h2 class="font-heading text-sm uppercase tracking-[0.3em] font-bold opacity-30 whitespace-nowrap">{pd.portfolio_items_title}</h2>
+      <div class="h-px w-full bg-main opacity-10"></div>
+    </div>
+    
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-16">
       {
         pd.portfolio_items.map((item) => (
-          <div class="hover:opacity-70 transition-opacity">
+          <div class="group hover:opacity-70 transition-all">
             <a href={item.value} target="_blank" rel="noreferrer">
-              <h3 class="font-heading text-xl">{item.key}</h3>
-              <p class="prose prose-dante font-light">{item.desc}</p>
+              <h3 class="font-heading text-xl tracking-tight mb-2 group-hover:italic transition-all">{item.key}</h3>
+              <p class="prose prose-dante font-light text-sm opacity-60 leading-relaxed">{item.desc}</p>
             </a>
           </div>
         ))

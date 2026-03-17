@@ -30,10 +30,7 @@ const { showHeader = true, colorOverwrite, primary, secondary, ...head } = Astro
     </script>
     <ClientRouter />
   </head>
-  <body
-    class={!colorOverwrite && 'bg-main text-main relative overflow-x-hidden'}
-    style={{ color: primary, backgroundColor: secondary }}
-  >
+  <body class="bg-main text-main relative overflow-x-hidden">
     <div class="grain-overlay"></div>
     <div class="flex flex-col min-h-screen px-4 md:px-8 relative z-10">
       <Nav colorOverwrite={colorOverwrite} primary={primary} secondary={secondary} />

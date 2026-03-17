@@ -18,11 +18,11 @@
 
 @layer base {
   :root {
-    --theme-text-main: 45 41 38; /* Soft Espresso */
-    --theme-bg-main: 249 247 242; /* Warm Paper */
-    --theme-bg-muted: 242 238 227; /* Soft Cream */
-    --theme-border-main: 45 41 38;
-    --theme-accent-main: 96 108 56; /* Moss Green */
+    --theme-text-main: 54 49 45; /* Warm Roasted Coffee */
+    --theme-bg-main: 242 238 224; /* Sun-bleached Paper */
+    --theme-bg-muted: 228 222 204; /* Aged Linen */
+    --theme-border-main: 54 49 45;
+    --theme-accent-main: 103 115 71; /* Rich Moss Green */
   }
 
   html.dark {
@@ -33,14 +33,7 @@
     --theme-accent-main: 221 161 94; /* Earthy Gold */
   }
 
-  /* Border color compatibility for Tailwind v4 */
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
-  }
+  /* Removed broad border color compatibility to avoid unwanted outlines in dark mode */
 }
 
 @layer base {
@@ -72,6 +65,10 @@
   li {
     color: rgb(var(--theme-text-main) / 1);
     line-height: 1.6;
+  }
+
+  a {
+    transition: all 0.3s ease;
   }
 
   ::selection {
@@ -112,7 +109,7 @@
   height: 100%;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.04;
+  opacity: 0.05; /* Slightly increased for more character */
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
@@ -171,4 +168,12 @@
   padding-left: 1.5rem;
   font-style: italic;
   color: rgb(var(--theme-text-main) / 0.9);
+}
+
+.vintage-filter {
+  filter: sepia(0.5) grayscale(0.3) brightness(0.9) contrast(0.85);
+}
+
+.vintage-filter-none {
+  filter: sepia(0) grayscale(0) brightness(1) contrast(1);
 }

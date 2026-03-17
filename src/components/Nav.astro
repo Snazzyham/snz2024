@@ -4,14 +4,6 @@ import ThemeToggle from './ThemeToggle.astro';
 import siteConfig from '../data/site-config';
 
 const navLinks = siteConfig.headerNavLinks || [];
-
-const { colorOverwrite } = Astro.props;
-
-export type Props = {
-  colorOverwrite?: boolean;
-  primary?: string;
-  secondary?: string;
-};
 ---
 
 <nav class="min-h-10 pt-6 pb-12 relative sm:min-h-14 sm:pb-20 md:pt-10">
@@ -34,7 +26,7 @@ export type Props = {
           {navLinks.map((link) => (
             <li class="py-1">
               <NavLink
-                class={`text-xl font-heading tracking-tight ${!colorOverwrite && 'text-main'} hover:opacity-60 transition-opacity md:text-sm md:uppercase md:tracking-widest`}
+                class="text-xl font-heading tracking-tight text-main hover:opacity-60 transition-opacity md:text-sm md:uppercase md:tracking-widest"
                 href={link.href}
               >
                 {link.text}
