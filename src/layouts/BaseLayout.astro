@@ -1,10 +1,10 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
+import { Font } from 'astro:assets';
 import BaseHead, { type Props as HeadProps } from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import Nav from '../components/Nav.astro';
-import 'cal-sans';
 
 export type Props = HeadProps & {
   showHeader?: boolean;
@@ -17,15 +17,18 @@ const { showHeader = true, colorOverwrite, primary, secondary, ...head } = Astro
 ---
 
 <!doctype html>
-<html lang="en" class="antialiased break-words">
+<html lang="en" class="antialiased wrap-break-word">
   <head>
     <BaseHead {...head} />
+    <Font cssVariable="--font-roslindale-text" preload />
+    <Font cssVariable="--font-roslindale-display" preload />
+    <Font cssVariable="--font-public-sans" preload />
     <script>
       if (localStorage.theme === 'dark') {
         document.documentElement.classList.add('dark');
       }
     </script>
-    <ViewTransitions />
+    <ClientRouter />
   </head>
   <body
     class={!colorOverwrite && 'bg-main text-main'}
