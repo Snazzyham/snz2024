@@ -118,6 +118,7 @@ This is the personal website of **Soham Adwani**, a Product Consultant. It's a h
 - **IconButton.astro** - Icon-only button for pagination
 - **Pagination.astro** - Blog pagination controls
 - **ThemeToggle.astro** - Dark/light mode toggle
+- **Lightbox.astro** - Image lightbox for case study photos (vanilla JS, keyboard navigation)
 
 ### Content Preview Components
 
@@ -381,6 +382,7 @@ Every content page has a corresponding Markdown version by appending `.md` to th
 5. **Mobile Menu**: Custom implementation in Nav.astro with accessibility features
 6. **Pagination**: Uses Astro's built-in pagination for blog archive
 7. **Catch-All Routes**: `/[...slug].astro` handles local markdown pages
+8. **Lightbox**: Case study photos use a lightweight vanilla JS lightbox (click to open, arrow keys/Escape, click outside to close)
 
 ## External Links
 

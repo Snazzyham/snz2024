@@ -1,0 +1,99 @@
+---
+interface Props {
+  photos: { content: { url: string } }[];
+}
+
+const { photos } = Astro.props;
+---
+
+<div id="lightbox" class="fixed inset-0 z-[9998] hidden items-center justify-center" aria-hidden="true">
+  <div id="lightbox-backdrop" class="absolute inset-0 bg-black/90 backdrop-blur-sm"></div>
+  
+  <button id="lightbox-close" class="absolute top-6 right-6 z-10 w-10 h-10 flex items-center justify-center text-white/70 hover:text-white transition-colors" aria-label="Close lightbox">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
+
+  <button id="lightbox-prev" class="absolute left-4 sm:left-8 z-10 w-12 h-12 flex items-center justify-center text-white/70 hover:text-white transition-colors" aria-label="Previous image">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="15 18 9 12 15 6"></polyline>
+    </svg>
+  </button>
+
+  <button id="lightbox-next" class="absolute right-4 sm:right-8 z-10 w-12 h-12 flex items-center justify-center text-white/70 hover:text-white transition-colors" aria-label="Next image">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </button>
+
+  <div class="relative z-[1] max-w-[90vw] max-h-[85vh] flex flex-col items-center">
+    <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[80vh] object-contain rounded-sm shadow-2xl" />
+    <div id="lightbox-counter" class="mt-4 text-white/50 text-xs uppercase tracking-[0.3em] font-bold"></div>
+  </div>
+</div>
+
+<script define:vars={{ photos }}>
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCounter = document.getElementById('lightbox-counter');
+  const lightboxClose = document.getElementById('lightbox-close');
+  const lightboxPrev = document.getElementById('lightbox-prev');
+  const lightboxNext = document.getElementById('lightbox-next');
+  const lightboxBackdrop = document.getElementById('lightbox-backdrop');
+  
+  const urls = photos.map(p => p.content.url);
+  let currentIndex = 0;
+
+  function openLightbox(index) {
+    currentIndex = index;
+    updateImage();
+    lightbox.classList.remove('hidden');
+    lightbox.classList.add('flex');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.add('hidden');
+    lightbox.classList.remove('flex');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  function updateImage() {
+    lightboxImg.src = urls[currentIndex];
+    lightboxCounter.textContent = `${currentIndex + 1} / ${urls.length}`;
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + urls.length) % urls.length;
+    updateImage();
+  }
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % urls.length;
+    updateImage();
+  }
+
+  document.querySelectorAll('[data-lightbox-index]').forEach((img) => {
+    img.style.cursor = 'pointer';
+    img.addEventListener('click', () => {
+      const index = parseInt(img.getAttribute('data-lightbox-index'));
+      openLightbox(index);
+    });
+  });
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightboxBackdrop.addEventListener('click', closeLightbox);
+  lightboxPrev.addEventListener('click', prevImage);
+  lightboxNext.addEventListener('click', nextImage);
+
+  document.addEventListener('keydown', (e) => {
+    if (lightbox.classList.contains('hidden')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') prevImage();
+    if (e.key === 'ArrowRight') nextImage();
+  });
+</script>

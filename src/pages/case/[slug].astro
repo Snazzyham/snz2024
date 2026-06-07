@@ -3,6 +3,7 @@ import type { PrismicItem, CaseStudy } from '../../data/site-config';
 import * as prismic from '@prismicio/client';
 import { getSingleCase, getCases } from '../../prismic';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Lightbox from '../../components/Lightbox.astro';
 
 export async function getStaticPaths() {
   const cases = (await getCases()) as PrismicItem[];
@@ -104,10 +105,11 @@ const content = caseFile.data as CaseStudy;
           <section class="mb-24 pt-16 border-t border-main/10">
             <h3 class="text-xs uppercase tracking-[0.3em] font-bold opacity-30 mb-8 text-center">Documentation</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-              {content.photos.map((photo) => (
+              {content.photos.map((photo, index) => (
                 <img 
                   src={photo.content.url} 
                   alt="documentation" 
+                  data-lightbox-index={index}
                   class="w-full rounded-lg shadow-lg aspect-square object-cover vintage-filter hover:vintage-filter-none transition-all duration-1000" 
                 />
               ))}
@@ -139,4 +141,6 @@ const content = caseFile.data as CaseStudy;
       }
     </div>
   </article>
+
+  {content.photos.length > 0 && <Lightbox photos={content.photos} />}
 </BaseLayout>
