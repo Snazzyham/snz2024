@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://snazzyham.com/sitemap-index.xml
+
+# AI/LLM agents: see https://snazzyham.com/llms.txt for machine-readable content
