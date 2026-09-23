@@ -9,7 +9,9 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap({
-      filter: (page) => !page.includes('/post/')
+      filter: (page) => !page.includes('/post/'),
+      // public/bench/index.html is a static file, so Astro does not list it on its own.
+      customPages: ['https://snazzyham.com/bench/']
     })
   ],
   vite: {
