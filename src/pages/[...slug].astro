@@ -32,11 +32,11 @@ const links = Array.isArray(data.links) ? (data.links as { text: string; href: s
     breadcrumbs([{ name: title, path: `/${page.id}/` }])
   ]}
 >
-  <article class="container-ad pt-16 sm:pt-24">
-    <div class="grid-ad gap-y-10">
+  <article class="container-main pt-16 sm:pt-24">
+    <div class="grid-main gap-y-10">
       <div class="[grid-column:1/9]">
         <h1 class="headline mb-12">{title}</h1>
-        <div class="prose-ad">
+        <div class="prose-main">
           <Content />
         </div>
       </div>

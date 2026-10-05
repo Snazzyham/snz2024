@@ -44,14 +44,14 @@ const excerpt = (p: CollectionEntry<'writing'>) =>
     breadcrumbs([{ name: 'Writing', path: '/writing/' }])
   ]}
 >
-  <div class="container-ad pt-12 pb-24 sm:pt-20">
+  <div class="container-main pt-12 pb-24 sm:pt-20">
     <header class="mb-16 sm:mb-24">
       <h1 class="headline reveal">Writing</h1>
     </header>
 
     {
       groups.map((g) => (
-        <section class="rule grid-ad py-8">
+        <section class="rule grid-main py-8">
           <p class="year-col font-display text-4xl font-semibold tracking-tighter text-ink-2 sm:text-6xl">
             {g.year}
           </p>

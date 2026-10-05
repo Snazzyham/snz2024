@@ -53,7 +53,7 @@ const schema = [
   image={data.hero ? { src: data.hero.src, alt: data.title } : undefined}
   schema={schema}
 >
-  <article class="container-ad pt-12 pb-24 sm:pt-20">
+  <article class="container-main pt-12 pb-24 sm:pt-20">
     <header class="mb-10 sm:mb-14">
       <p class="eyebrow reveal mb-5">
         {data.client} <span class="text-accent">·</span> {data.listingTitle}
@@ -73,7 +73,7 @@ const schema = [
           />
         </div>
       ) : data.logo ? (
-        <div class="grid-ad mb-14 sm:mb-20">
+        <div class="grid-main mb-14 sm:mb-20">
           <div class="photo reveal logo-col aspect-square" style="--i:2">
             <Image
               src={data.logo}
@@ -87,8 +87,8 @@ const schema = [
       ) : null
     }
 
-    <div class="grid-ad items-start">
-      <div class="prose-ad body-col reveal">
+    <div class="grid-main items-start">
+      <div class="prose-main body-col reveal">
         <Content />
       </div>
 

@@ -49,9 +49,9 @@ const blurbFor = (p: (typeof posts)[number]) => {
     })
   ]}
 >
-  <div class="container-ad">
+  <div class="container-main">
     <!-- a. Typographic spread -->
-    <section class="grid-ad gap-y-8 pt-16 pb-16 sm:pt-28 sm:pb-24">
+    <section class="grid-main gap-y-8 pt-16 pb-16 sm:pt-28 sm:pb-24">
       <div class="[grid-column:1/10]">
         <h1 class="headline">
           {
@@ -71,8 +71,8 @@ const blurbFor = (p: (typeof posts)[number]) => {
     </section>
 
     <!-- b. About -->
-    <section class="rule grid-ad gap-y-8 pt-10 pb-20 sm:pb-28">
-      <div class="[grid-column:1/8] prose-ad reveal">
+    <section class="rule grid-main gap-y-8 pt-10 pb-20 sm:pb-28">
+      <div class="[grid-column:1/8] prose-main reveal">
         <Content />
       </div>
       <div class="[grid-column:9/13] reveal" style="--i:1">
@@ -85,7 +85,7 @@ const blurbFor = (p: (typeof posts)[number]) => {
       <p class="eyebrow mb-6 reveal">Selected work &nbsp;·&nbsp; 01 — {pad(work.length)}</p>
       {
         work.map((item, i) => (
-          <a href={`/work/${item.id}`} class="work-row rule grid-ad gap-y-5 py-8 reveal block" style={`--i:${i + 1}`}>
+          <a href={`/work/${item.id}`} class="work-row rule grid-main gap-y-5 py-8 reveal block" style={`--i:${i + 1}`}>
             <p class="eyebrow [grid-column:1/3]">No. {pad(i + 1)}</p>
             <div class="[grid-column:3/9]">
               <h3 class="headline-sm mb-3">
@@ -118,7 +118,7 @@ const blurbFor = (p: (typeof posts)[number]) => {
       <p class="eyebrow mb-6 reveal">Writing</p>
       {
         posts.map((p, i) => (
-          <a href={`/writing/${p.id}`} class="post-row rule grid-ad gap-y-2 py-5 reveal block" style={`--i:${i + 1}`}>
+          <a href={`/writing/${p.id}`} class="post-row rule grid-main gap-y-2 py-5 reveal block" style={`--i:${i + 1}`}>
             <p class="eyebrow [grid-column:1/3] pt-2">{fmtDate(p.data.date)}</p>
             <h3
               class="font-display font-medium text-[24px] leading-tight tracking-tight [grid-column:3/10]"

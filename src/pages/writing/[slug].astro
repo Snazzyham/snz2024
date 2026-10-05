@@ -58,7 +58,7 @@ const schema = [
   pageType="article"
   schema={schema}
 >
-  <article class="container-ad pt-12 pb-24 sm:pt-20">
+  <article class="container-main pt-12 pb-24 sm:pt-20">
     <header class="mb-12 sm:mb-16">
       <p class="eyebrow reveal mb-5">
         {dateStr} <span class="text-accent">·</span>
@@ -93,8 +93,8 @@ const schema = [
       )
     }
 
-    <div class="grid-ad items-start">
-      <div class="prose-ad body-col">
+    <div class="grid-main items-start">
+      <div class="prose-main body-col">
         <Content />
       </div>
       <aside
@@ -118,7 +118,7 @@ const schema = [
       </aside>
     </div>
 
-    <nav class="rule mt-24 grid-ad pt-6 font-display font-medium text-xs tracking-[0.08em] uppercase">
+    <nav class="rule mt-24 grid-main pt-6 font-display font-medium text-xs tracking-[0.08em] uppercase">
       <div class="pn-newer">
         {
           newer && (
