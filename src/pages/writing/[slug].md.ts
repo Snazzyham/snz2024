@@ -1,36 +1,25 @@
 import type { APIRoute } from 'astro';
-import type { PrismicItem, BlogPost } from '../../data/site-config';
-import * as prismic from '@prismicio/client';
-import { getBlogPosts } from '../../prismic';
-import { richTextToMarkdown } from '../../utils/prismic-to-markdown';
+import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
-  const posts = (await getBlogPosts(false)) as PrismicItem[];
-  return posts.map((post) => ({
-    params: { slug: post?.slugs ? post.slugs[0] : '404' },
-    props: { post }
-  }));
+  const posts = await getCollection('writing');
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
 }
 
 export const GET: APIRoute = ({ props }) => {
-  const { post } = props as { post: PrismicItem };
-  const data = post.data as BlogPost;
-  const title = prismic.asText(data.title);
-  const body = richTextToMarkdown(data.body);
+  const { post } = props as { post: Awaited<ReturnType<typeof getCollection<'writing'>>>[number] };
+  const { title, date, description } = post.data;
 
   const markdown = `# ${title}
 
-**Published:** ${data.date}
-${post.first_publication_date !== post.last_publication_date ? `  \n**Updated:** ${post.last_publication_date}` : ''}
-${data.seo_description ? `\n> ${data.seo_description}\n` : ''}
+**Published:** ${date.toISOString().slice(0, 10)}
+${description ? `\n> ${description}\n` : ''}
 ---
 
-${body}
+${post.body ?? ''}
 `;
 
   return new Response(markdown, {
-    headers: {
-      'Content-Type': 'text/markdown; charset=utf-8'
-    }
+    headers: { 'Content-Type': 'text/markdown; charset=utf-8' }
   });
 };

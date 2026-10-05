@@ -1,79 +1,148 @@
 ---
-import type { PrismicItem, BlogPost, CaseStudy } from '../data/site-config';
-import { getBlogPosts, getCases } from '../prismic';
+import { getEntry, getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Button from '../components/Button.astro';
-import Hero from '../components/Hero.astro';
-import PostPreview from '../components/PostPreview.astro';
-import CasePreview from '../components/CasePreview.astro';
 import siteConfig from '../data/site-config';
+import { PERSON_ID, webPage } from '../utils/schema';
 
-// prismic stuff
-const blogPosts = (await getBlogPosts(true)) as any as PrismicItem[];
-const caseStudies = (await getCases()) as PrismicItem[];
-const casesSliced = caseStudies.slice(0, 3);
-const postsSliced = blogPosts.slice(0, 3);
+const home = await getEntry('site', 'home');
+if (!home) throw new Error('Missing site/home content');
+const h = home.data as any;
+const { Content } = await render(home);
+
+const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order).slice(0, 3);
+const posts = (await getCollection('writing'))
+  .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf())
+  .slice(0, 5);
+
+const words: string[] = String(h.title).split(/\s+/);
+const specLines: string[] = String(h.subhead)
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean);
+
+const pad = (n: number) => String(n).padStart(2, '0');
+const fmtDate = (d: string | Date) => {
+  const x = new Date(d);
+  return `${x.getUTCFullYear()}.${pad(x.getUTCMonth() + 1)}.${pad(x.getUTCDate())}`;
+};
+const blurbFor = (p: (typeof posts)[number]) => {
+  const d = (p.data as any).description as string | undefined;
+  if (d) return d;
+  const text = (p.body ?? '')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/!?\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/[#*_>`]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  return text.length > 140 ? text.slice(0, 140).trimEnd() + '…' : text;
+};
 ---
 
 <BaseLayout
   description={siteConfig.description}
   image={siteConfig.image}
-  title="Soham Adwani | Product & Operations Consultant"
+  title="Product & Operations Consultant"
+  schema={[
+    webPage('ProfilePage', '/', 'Soham Adwani', siteConfig.description, {
+      mainEntity: { '@id': PERSON_ID }
+    })
+  ]}
 >
-  <Hero />
-
-  {
-    casesSliced?.length > 0 && (
-      <div class="mb-32 sm:mb-48">
-        <div class="text-center mb-16 sm:mb-24">
-          <h2 class="text-sm uppercase tracking-[0.3em] font-bold opacity-30 mb-4">Selected Case Studies</h2>
-          <div class="h-px w-8 bg-main mx-auto opacity-20"></div>
-        </div>
-        
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-12 sm:gap-8">
-          {casesSliced.map((item) => (
-            <CasePreview
-              slug={item.uid}
-              client={(item.data as CaseStudy).client}
-              clientLogo={(item.data as CaseStudy).client_logo.url || '-'}
-              title={(item.data as CaseStudy).listing_title}
-              blurb={(item.data as CaseStudy).listing_blurb}
-              primary={(item.data as CaseStudy).primary}
-              secondary={(item.data as CaseStudy).secondary}
-            />
-          ))}
-        </div>
-        
-        <div class="mt-20 flex justify-center">
-          <Button href="/portfolio">View All Work</Button>
-        </div>
+  <div class="container-ad">
+    <!-- a. Typographic spread -->
+    <section class="grid-ad gap-y-8 pt-16 pb-16 sm:pt-28 sm:pb-24">
+      <div class="[grid-column:1/10]">
+        <h1 class="headline">
+          {
+            words.map((w, i) => (
+              <span class="reveal inline-block mr-[0.25em]" style={`--i:${i}`}>
+                {w}
+              </span>
+            ))
+          }
+        </h1>
+        <p class="standfirst mt-8 max-w-xl reveal" style={`--i:${words.length}`}>{h.subhead}</p>
       </div>
-    )
-  }
-
-  {
-    postsSliced.length > 0 && (
-      <div class="mb-32 sm:mb-48">
-        <div class="text-center mb-16 sm:mb-24">
-          <h2 class="text-sm uppercase tracking-[0.3em] font-bold opacity-30 mb-4">Latest Journal Entries</h2>
-          <div class="h-px w-8 bg-main mx-auto opacity-20"></div>
-        </div>
-
-        <div class="max-w-3xl mx-auto">
-          {postsSliced.map((post) => (
-            <PostPreview
-              post={post.data as BlogPost}
-              slug={post.slugs || ['404']}
-              class="mb-16"
-              headingLevel="h3"
-            />
-          ))}
-        </div>
-
-        <div class="mt-8 flex justify-center">
-          <Button href="/writing">Open Journal</Button>
-        </div>
+      <div class="[grid-column:10/13] self-end font-display font-medium text-[11px] uppercase tracking-[0.08em] leading-relaxed reveal" style={`--i:${words.length + 1}`}>
+        <p class="text-ink">{h.name}</p>
+        {specLines.map((l) => <p class="text-ink-2">{l}</p>)}
       </div>
-    )
-  }
+    </section>
+
+    <!-- b. About -->
+    <section class="rule grid-ad gap-y-8 pt-10 pb-20 sm:pb-28">
+      <div class="[grid-column:1/8] prose-ad reveal">
+        <Content />
+      </div>
+      <div class="[grid-column:9/13] reveal" style="--i:1">
+        <a class="link font-display font-medium text-[11px] uppercase tracking-[0.08em]" href={h.buttonPath}>{h.buttonText} →</a>
+      </div>
+    </section>
+
+    <!-- c. Selected work -->
+    <section class="pb-20 sm:pb-28">
+      <p class="eyebrow mb-6 reveal">Selected work &nbsp;·&nbsp; 01 — {pad(work.length)}</p>
+      {
+        work.map((item, i) => (
+          <a href={`/work/${item.id}`} class="work-row rule grid-ad gap-y-5 py-8 reveal block" style={`--i:${i + 1}`}>
+            <p class="eyebrow [grid-column:1/3]">No. {pad(i + 1)}</p>
+            <div class="[grid-column:3/9]">
+              <h3 class="headline-sm mb-3">
+                {item.data.listingTitle} <span class="arrow inline-block transition-transform duration-300">→</span>
+              </h3>
+              <p class="text-ink-2 max-w-md">{item.data.blurb}</p>
+            </div>
+            <div class="[grid-column:9/13]">
+              {item.data.logo && (
+                <div class="photo aspect-square" transition:name={`work-${item.id}`}>
+                  <Image
+                    src={item.data.logo}
+                    alt={item.data.client}
+                    width={600}
+                    class="vintage develop !object-contain p-6"
+                  />
+                </div>
+              )}
+            </div>
+          </a>
+        ))
+      }
+      <div class="rule pt-6">
+        <a class="link font-display font-medium text-[11px] uppercase tracking-[0.08em]" href="/work">All work →</a>
+      </div>
+    </section>
+
+    <!-- d. Writing -->
+    <section class="pb-8">
+      <p class="eyebrow mb-6 reveal">Writing</p>
+      {
+        posts.map((p, i) => (
+          <a href={`/writing/${p.id}`} class="post-row rule grid-ad gap-y-2 py-5 reveal block" style={`--i:${i + 1}`}>
+            <p class="eyebrow [grid-column:1/3] pt-2">{fmtDate(p.data.date)}</p>
+            <h3
+              class="font-display font-medium text-[24px] leading-tight tracking-tight [grid-column:3/10]"
+              transition:name={`post-${p.id}`}
+            >
+              {p.data.title}
+            </h3>
+            <p class="hidden md:block text-ink-2 text-[15px] leading-snug [grid-column:10/13]">{blurbFor(p)}</p>
+          </a>
+        ))
+      }
+      <div class="rule pt-6">
+        <a class="link font-display font-medium text-[11px] uppercase tracking-[0.08em]" href="/writing">All writing →</a>
+      </div>
+    </section>
+  </div>
 </BaseLayout>
+
+<style>
+  .work-row:hover .arrow {
+    transform: translateX(6px);
+  }
+  .work-row:hover h3,
+  .post-row:hover h3 {
+    color: var(--accent);
+  }
+</style>

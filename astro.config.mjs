@@ -17,121 +17,29 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
+  // Animated GIFs in old posts exceed sharp's default pixel limit (it counts every frame).
+  image: {
+    service: { entrypoint: 'astro/assets/services/sharp', config: { limitInputPixels: false } }
+  },
   redirects: {
-    '/post/[slug]': '/writing/[slug]'
+    '/post/[slug]': '/writing/[slug]',
+    '/portfolio': '/work',
+    '/case/[slug]': '/work/[slug]'
   },
   fonts: [
     {
-      provider: fontProviders.local(),
-      name: 'Roslindale Text',
-      cssVariable: '--font-roslindale-text',
-      options: {
-        variants: [
-          {
-            src: ['./src/fonts/roslindale/text-regular.woff2'],
-            weight: '400',
-            style: 'normal'
-          },
-          {
-            src: ['./src/fonts/roslindale/text-italic.woff2'],
-            weight: '400',
-            style: 'italic'
-          },
-          {
-            src: ['./src/fonts/roslindale/text-medium.woff2'],
-            weight: '500',
-            style: 'normal'
-          },
-          {
-            src: ['./src/fonts/roslindale/text-medium-italic.woff2'],
-            weight: '500',
-            style: 'italic'
-          },
-          {
-            src: ['./src/fonts/roslindale/text-semibold.woff2'],
-            weight: '600',
-            style: 'normal'
-          },
-          {
-            src: ['./src/fonts/roslindale/text-semibold-italic.woff2'],
-            weight: '600',
-            style: 'italic'
-          },
-          {
-            src: ['./src/fonts/roslindale/text-bold.woff2'],
-            weight: '700',
-            style: 'normal'
-          },
-          {
-            src: ['./src/fonts/roslindale/text-bold-italic.woff2'],
-            weight: '700',
-            style: 'italic'
-          }
-        ]
-      }
+      provider: fontProviders.fontsource(),
+      name: 'Inter Tight',
+      cssVariable: '--astro-font-display',
+      weights: [500, 600, 700],
+      styles: ['normal']
     },
     {
-      provider: fontProviders.local(),
-      name: 'Roslindale Display',
-      cssVariable: '--font-roslindale-display',
-      options: {
-        variants: [
-          {
-            src: ['./src/fonts/roslindale/display-black.woff2'],
-            weight: '900',
-            style: 'normal'
-          }
-        ]
-      }
-    },
-    {
-      provider: fontProviders.local(),
-      name: 'Public Sans',
-      cssVariable: '--font-public-sans',
-      options: {
-        variants: [
-          {
-            src: ['./src/fonts/public-sans/public-sans-400-normal.woff2'],
-            weight: '400',
-            style: 'normal'
-          },
-          {
-            src: ['./src/fonts/public-sans/public-sans-400-italic.woff2'],
-            weight: '400',
-            style: 'italic'
-          },
-          {
-            src: ['./src/fonts/public-sans/public-sans-500-normal.woff2'],
-            weight: '500',
-            style: 'normal'
-          },
-          {
-            src: ['./src/fonts/public-sans/public-sans-500-italic.woff2'],
-            weight: '500',
-            style: 'italic'
-          },
-          {
-            src: ['./src/fonts/public-sans/public-sans-600-normal.woff2'],
-            weight: '600',
-            style: 'normal'
-          },
-          {
-            src: ['./src/fonts/public-sans/public-sans-600-italic.woff2'],
-            weight: '600',
-            style: 'italic'
-          },
-          {
-            src: ['./src/fonts/public-sans/public-sans-700-normal.woff2'],
-            weight: '700',
-            style: 'normal'
-          },
-          {
-            src: ['./src/fonts/public-sans/public-sans-700-italic.woff2'],
-            weight: '700',
-            style: 'italic'
-          }
-        ]
-      }
+      provider: fontProviders.fontsource(),
+      name: 'Newsreader',
+      cssVariable: '--astro-font-serif',
+      weights: [400, 500, 600],
+      styles: ['normal', 'italic']
     }
   ]
 });

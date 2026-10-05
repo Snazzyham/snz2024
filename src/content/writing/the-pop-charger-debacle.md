@@ -1,0 +1,11 @@
+---
+title: "The POP Charger Debacle"
+date: "2013-01-18"
+---
+You guys remember POP right? The kickstarter funded portable charger that got canned by Apple, and then was mysteriously allowed back on the market? Well if you don’t we have a post for you \[here\](https://web.archive.org/web/20121225062126/http://www.linkedgeek.com/2012/12/pop/). So I was just sitting down the other day and thinking about this, when I realised, why was Apple so panicky about it? Well in my opinion, Apple found out about the project later than they had hoped, so they panicked. Why, you ask? Isn’t it obvious? They wanted to produce it! Think about it, a design language so close to Apple’s, along with the amount of people interested in it, Apple must be kicking themselves wondering why they didn’t come up with it in the first place!
+
+Look at it in this perspective, the POP charger wouldn’t have even seen the light of day if Apple heard about it before hand, as they would have purchased everyone involved in the project, taken the pop charger, slapped an Apple sticker on it and broadened their product portfolio. Of course they would have changed something, such as maybe making the plugged in version of the POP aluminium based, or maybe even called it the iPOP. But alas, before any of that would or could happen, the project was funded on kickstarter, much to Apple’s dismay. Thus they panicked and thought that maybe if they got the product banned, perhaps by suing POP or something of the sort, they could get the product of the market and still get their hands on it. Sadly that didn’t work out, firstly because I’m not sure how that would’ve held up in court given that there are so many other third party 30pin cables and because of all the contributions they had gotten from numerous different donors would have been quite arduous to return. Worst of all, if Apple had decided to go forward with creating a similar product, the controversy surrounding that would have been tough even for the cupertino giants to evade.
+
+Of course the real story could be completely different and this is just my opinion, but it would be interesting to see how this plays out and also come to think about it, which of Apple’s current products do you think were actually designed by someone else? Sound off in the comments below!
+
+catch ya later folks

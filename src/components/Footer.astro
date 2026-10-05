@@ -1,53 +1,21 @@
 ---
-import siteConfig from '../data/site-config';
-
-const socialLinks = siteConfig.socialLinks || [];
-const navLinks = siteConfig.footerNavLinks || [];
+import Dial from './Dial.astro';
 ---
 
-<footer class="w-full max-w-3xl mx-auto pt-24 pb-16 sm:pt-48 sm:pb-24 text-center">
-  <div class="h-px w-12 bg-main mx-auto mb-16 opacity-20"></div>
-  
-  {
-    navLinks.length > 0 && (
-      <div class="mb-12 flex flex-wrap justify-center gap-x-10 gap-y-4">
-        {navLinks.map((link) => (
-          <a
-            class="font-heading text-sm uppercase tracking-widest opacity-60 hover:opacity-100 transition-opacity"
-            href={link.href}
-          >
-            {link.text}
-          </a>
-        ))}
+<footer class="container-ad w-full mt-24 sm:mt-40 pb-12">
+  <div class="rule pt-8 grid-ad gap-y-6">
+    <p class="font-serif italic text-ink-2 [grid-column:1/7]">Thanks for reading.</p>
+    <div class="[grid-column:7/13] flex flex-col gap-6">
+      <div class="flex flex-wrap gap-x-6 gap-y-2 font-display font-medium text-[11px] uppercase tracking-[0.08em]">
+        <a class="link" href="https://github.com/Snazzyham" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a class="link" href="https://calendar.app.google/W5EZnqFQEZhZ99zU9" target="_blank" rel="noopener noreferrer">Book a call</a>
+        <a class="link" href="/rss.xml" data-astro-reload>RSS</a>
+        <a class="link" href="/llms.txt" data-astro-reload>llms.txt</a>
       </div>
-    )
-  }
-
-  <div class="flex flex-col gap-12 items-center">
-    {
-      socialLinks.length > 0 && (
-        <div class="flex flex-wrap justify-center gap-x-8 gap-y-2">
-          {socialLinks.map((link) => (
-            <a
-              class="text-[10px] uppercase tracking-[0.2em] font-bold opacity-40 hover:opacity-100 transition-opacity"
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferer"
-            >
-              {link.text}
-            </a>
-          ))}
-        </div>
-      )
-    }
-    
-    <div class="space-y-4">
-      <p class="text-[10px] uppercase tracking-[0.25em] opacity-30 font-bold">
-        &copy; {new Date().getFullYear()} Soham Adwani
-      </p>
-      <p class="text-[9px] uppercase tracking-[0.1em] opacity-20 max-w-xs mx-auto leading-relaxed">
-        Personal workspace — A modified version of the <a href="https://github.com/JustGoodUI/dante-astro-theme" target="_blank" class="underline hover:opacity-100 transition-opacity">Dante</a> Astro template.
-      </p>
+      <div class="flex items-center gap-3 font-display font-medium text-[11px] uppercase tracking-[0.08em] text-ink-2">
+        <Dial />
+        <span>&copy; {new Date().getFullYear()}</span>
+      </div>
     </div>
   </div>
 </footer>

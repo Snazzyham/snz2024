@@ -1,0 +1,31 @@
+---
+const ticks = Array.from({ length: 12 }, (_, i) => i * 30);
+---
+
+<svg
+  width="28"
+  height="28"
+  viewBox="0 0 28 28"
+  role="img"
+  aria-label="Watch dial"
+  class="text-ink shrink-0"
+>
+  <circle cx="14" cy="14" r="13" fill="none" stroke="currentColor" stroke-width="1" opacity="0.6"></circle>
+  {
+    ticks.map((a) => (
+      <line
+        x1="14"
+        y1="2.5"
+        x2="14"
+        y2={a % 90 === 0 ? '5.5' : '4.5'}
+        stroke="currentColor"
+        stroke-width="1"
+        transform={`rotate(${a} 14 14)`}
+      />
+    ))
+  }
+  <g class="dial-hand" style="transform-origin: 14px 14px; animation: sweep 60s linear infinite;">
+    <line x1="14" y1="16" x2="14" y2="4" stroke="var(--accent)" stroke-width="0.75"></line>
+  </g>
+  <circle cx="14" cy="14" r="1" fill="var(--accent)"></circle>
+</svg>

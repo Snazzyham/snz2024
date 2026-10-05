@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { PERSON_ID, breadcrumbs, webPage } from '../utils/schema';
 
 export async function getStaticPaths() {
   const pages = await getCollection('pages');
@@ -15,15 +16,38 @@ export async function getStaticPaths() {
 const { page } = Astro.props;
 const { title, seo } = page.data;
 const { Content } = await render(page);
+const data = page.data as Record<string, unknown>;
+const email = typeof data.email === 'string' ? data.email : undefined;
+const links = Array.isArray(data.links) ? (data.links as { text: string; href: string }[]) : [];
 ---
 
-<BaseLayout title={seo?.title ?? title} description={seo?.description} image={seo?.image} showHeader={false}>
-  <article class="mb-16 sm:mb-24">
-    <header class="mb-8">
-      <h1 class="text-3xl leading-tight font-heading font-medium sm:text-5xl sm:leading-tight">{title}</h1>
-    </header>
-    <div class="max-w-none prose prose-dante sm:prose-lg">
-      <Content />
+<BaseLayout
+  title={seo?.title ?? title}
+  description={seo?.description}
+  image={seo?.image}
+  schema={[
+    webPage(page.id === 'contact' ? 'ContactPage' : 'WebPage', `/${page.id}/`, title, seo?.description, {
+      about: { '@id': PERSON_ID }
+    }),
+    breadcrumbs([{ name: title, path: `/${page.id}/` }])
+  ]}
+>
+  <article class="container-ad pt-16 sm:pt-24">
+    <div class="grid-ad gap-y-10">
+      <div class="[grid-column:1/9]">
+        <h1 class="headline mb-12">{title}</h1>
+        <div class="prose-ad">
+          <Content />
+        </div>
+      </div>
+      {
+        (email || links.length > 0) && (
+          <aside class="[grid-column:10/13] font-display font-medium text-[11px] uppercase tracking-[0.08em] flex flex-col gap-2">
+            {email && <a class="link" href={`mailto:${email}`}>{email}</a>}
+            {links.map((l) => <a class="link" href={l.href}>{l.text}</a>)}
+          </aside>
+        )
+      }
     </div>
   </article>
 </BaseLayout>

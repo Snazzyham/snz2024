@@ -1,31 +1,109 @@
 ---
 import type { GetStaticPathsOptions, Page } from 'astro';
-import type { PrismicItem, BlogPost } from '../../data/site-config';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Pagination from '../../components/Pagination.astro';
-import PostPreview from '../../components/PostPreview.astro';
-import { getBlogPosts } from '../../prismic';
-
-
+import { author, breadcrumbs, itemList, webPage } from '../../utils/schema';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-  const posts = await getBlogPosts(false);
- return paginate(posts, { pageSize: 8 });
+  const posts = (await getCollection('writing')).sort(
+    (a, b) => b.data.date.getTime() - a.data.date.getTime()
+  );
+  return paginate(posts, { pageSize: 12 });
 }
 
-type Props = { page: Page<PrismicItem> };
-
+type Props = { page: Page<CollectionEntry<'writing'>> };
 const { page } = Astro.props;
-const blog = page.data;
+
+const groups: { year: number; posts: CollectionEntry<'writing'>[] }[] = [];
+for (const post of page.data) {
+  const year = post.data.date.getUTCFullYear();
+  const last = groups[groups.length - 1];
+  if (last && last.year === year) last.posts.push(post);
+  else groups.push({ year, posts: [post] });
+}
+
+const md = (d: Date) =>
+  `${String(d.getUTCMonth() + 1).padStart(2, '0')}.${String(d.getUTCDate()).padStart(2, '0')}`;
+const excerpt = (p: CollectionEntry<'writing'>) =>
+  p.data.description ??
+  (p.body ?? '')
+    .replace(/<[^>]*>|!?\[([^\]]*)\]\([^)]*\)|[#*_>`]/g, '$1')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 140);
 ---
 
 <BaseLayout
-  title="Blog"
-  description="Embark on a journey of personal insights and experiences through my blog"
-  image={{ src: '/dante-preview.jpg', alt: 'The preview of the site' }}
-  showHeader={false}
+  title="Writing"
+  description="Personal essays on technology, design, watches, productivity and culture."
+  schema={[
+    webPage('CollectionPage', page.url.current + '/', 'Writing', 'Personal essays on technology, design, watches, productivity and culture.', {
+      author,
+      mainEntity: itemList(page.data.map((p) => ({ name: p.data.title, path: `/writing/${p.id}/` })))
+    }),
+    breadcrumbs([{ name: 'Writing', path: '/writing/' }])
+  ]}
 >
-  <h1 class="mb-12 text-2xl leading-tight font-heading sm:mb-16 sm:text-4xl">Blog Archive</h1>
-  {blog.map((post) => <PostPreview post={post.data as BlogPost} slug={post.slugs} class="mb-10 sm:mb-12" />)}
-  <Pagination page={page} class="my-16 sm:my-24" />
+  <div class="container-ad pt-12 pb-24 sm:pt-20">
+    <header class="mb-16 sm:mb-24">
+      <h1 class="headline reveal">Writing</h1>
+    </header>
+
+    {
+      groups.map((g) => (
+        <section class="rule grid-ad py-8">
+          <p class="year-col font-display text-4xl font-semibold tracking-tighter text-ink-2 sm:text-6xl">
+            {g.year}
+          </p>
+          <ul class="posts-col">
+            {g.posts.map((p) => (
+              <li class="reveal pb-7">
+                <a href={`/writing/${p.id}`} class="group block">
+                  <span class="eyebrow block">{md(p.data.date)}</span>
+                  <span
+                    class="font-display mt-1 block text-2xl font-medium tracking-tight group-hover:text-accent sm:text-[26px]"
+                    transition:name={`post-${p.id}`}
+                  >
+                    {p.data.title}
+                  </span>
+                  <span class="mt-1 block max-w-2xl text-ink-2">{excerpt(p)}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+
+    <nav
+      class="rule flex justify-between pt-6 font-display font-medium text-xs tracking-[0.08em] uppercase"
+      aria-label="Pagination"
+    >
+      {
+        page.url.prev ? (
+          <a href={page.url.prev} class="link">
+            ← Newer
+          </a>
+        ) : (
+          <span />
+        )
+      }
+      {
+        page.url.next ? (
+          <a href={page.url.next} class="link">
+            Older →
+          </a>
+        ) : (
+          <span />
+        )
+      }
+    </nav>
+  </div>
 </BaseLayout>
+
+<style>
+  @media (min-width: 768px) {
+    .year-col { grid-column: 1 / span 2; position: sticky; top: 6rem; align-self: start; }
+    .posts-col { grid-column: 3 / span 10; }
+  }
+</style>

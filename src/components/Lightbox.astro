@@ -1,99 +1,172 @@
 ---
 interface Props {
-  photos: { content: { url: string } }[];
+  photos: { src: string; caption?: string }[];
 }
 
 const { photos } = Astro.props;
 ---
 
-<div id="lightbox" class="fixed inset-0 z-[9998] hidden items-center justify-center" aria-hidden="true">
-  <div id="lightbox-backdrop" class="absolute inset-0 bg-black/90 backdrop-blur-sm"></div>
-  
-  <button id="lightbox-close" class="absolute top-6 right-6 z-10 w-10 h-10 flex items-center justify-center text-white/70 hover:text-white transition-colors" aria-label="Close lightbox">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="18" y1="6" x2="6" y2="18"></line>
-      <line x1="6" y1="6" x2="18" y2="18"></line>
-    </svg>
+<div
+  id="lightbox"
+  class="lightbox"
+  aria-hidden="true"
+  role="dialog"
+  aria-modal="true"
+  data-photos={JSON.stringify(photos)}
+>
+  <button id="lightbox-close" type="button" class="lb-btn lb-close" aria-label="Close">
+    Close ×
   </button>
-
-  <button id="lightbox-prev" class="absolute left-4 sm:left-8 z-10 w-12 h-12 flex items-center justify-center text-white/70 hover:text-white transition-colors" aria-label="Previous image">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="15 18 9 12 15 6"></polyline>
-    </svg>
+  <button id="lightbox-prev" type="button" class="lb-btn lb-prev" aria-label="Previous">
+    ← Prev
   </button>
-
-  <button id="lightbox-next" class="absolute right-4 sm:right-8 z-10 w-12 h-12 flex items-center justify-center text-white/70 hover:text-white transition-colors" aria-label="Next image">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="9 18 15 12 9 6"></polyline>
-    </svg>
+  <button id="lightbox-next" type="button" class="lb-btn lb-next" aria-label="Next">
+    Next →
   </button>
-
-  <div class="relative z-[1] max-w-[90vw] max-h-[85vh] flex flex-col items-center">
-    <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[80vh] object-contain rounded-sm shadow-2xl" />
-    <div id="lightbox-counter" class="mt-4 text-white/50 text-xs uppercase tracking-[0.3em] font-bold"></div>
-  </div>
+  <figure class="lb-figure">
+    <img id="lightbox-img" src="" alt="" class="vintage" />
+    <figcaption class="lb-caption">
+      <span id="lightbox-caption"></span>
+      <span id="lightbox-counter"></span>
+    </figcaption>
+  </figure>
 </div>
 
-<script define:vars={{ photos }}>
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightbox-img');
-  const lightboxCounter = document.getElementById('lightbox-counter');
-  const lightboxClose = document.getElementById('lightbox-close');
-  const lightboxPrev = document.getElementById('lightbox-prev');
-  const lightboxNext = document.getElementById('lightbox-next');
-  const lightboxBackdrop = document.getElementById('lightbox-backdrop');
-  
-  const urls = photos.map(p => p.content.url);
-  let currentIndex = 0;
+<style is:global>
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: clamp(1.25rem, 4vw, 3rem);
+    background: color-mix(in srgb, var(--paper) 96%, transparent);
+    color: var(--ink);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.3s ease,
+      visibility 0s linear 0.3s;
+  }
+  .lightbox.is-open {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease;
+  }
+  .lb-figure {
+    margin: 0;
+    max-width: 100%;
+  }
+  .lb-figure img {
+    display: block;
+    max-width: 100%;
+    max-height: 78vh;
+    object-fit: contain;
+  }
+  .lb-caption {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.75rem;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .lb-btn {
+    position: absolute;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.5rem 0;
+    background: none;
+    border: 0;
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .lb-btn:hover {
+    color: var(--accent);
+  }
+  .lb-close { top: clamp(1rem, 3vw, 2rem); right: clamp(1.25rem, 4vw, 3rem); }
+  .lb-prev { bottom: clamp(1rem, 3vw, 2rem); right: calc(clamp(1.25rem, 4vw, 3rem) + 5rem); }
+  .lb-next { bottom: clamp(1rem, 3vw, 2rem); right: clamp(1.25rem, 4vw, 3rem); }
+  @media (prefers-reduced-motion: reduce) {
+    .lightbox, .lightbox.is-open { transition: none; }
+  }
+</style>
 
-  function openLightbox(index) {
-    currentIndex = index;
-    updateImage();
-    lightbox.classList.remove('hidden');
-    lightbox.classList.add('flex');
-    lightbox.setAttribute('aria-hidden', 'false');
+<script>
+  type Photo = { src: string; caption?: string };
+  let index = 0;
+
+  const root = () => document.getElementById('lightbox');
+  const photos = (): Photo[] => {
+    try {
+      return JSON.parse(root()?.dataset.photos ?? '[]');
+    } catch {
+      return [];
+    }
+  };
+  const isOpen = () => root()?.classList.contains('is-open') ?? false;
+
+  function render() {
+    const list = photos();
+    const p = list[index];
+    if (!p) return;
+    (document.getElementById('lightbox-img') as HTMLImageElement).src = p.src;
+    document.getElementById('lightbox-caption')!.textContent = p.caption ?? '';
+    document.getElementById('lightbox-counter')!.textContent =
+      `${String(index + 1).padStart(2, '0')} / ${String(list.length).padStart(2, '0')}`;
+  }
+  function open(i: number) {
+    index = i;
+    render();
+    const el = root()!;
+    el.classList.add('is-open');
+    el.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
   }
-
-  function closeLightbox() {
-    lightbox.classList.add('hidden');
-    lightbox.classList.remove('flex');
-    lightbox.setAttribute('aria-hidden', 'true');
+  function close() {
+    const el = root();
+    if (!el) return;
+    el.classList.remove('is-open');
+    el.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
   }
-
-  function updateImage() {
-    lightboxImg.src = urls[currentIndex];
-    lightboxCounter.textContent = `${currentIndex + 1} / ${urls.length}`;
+  function step(d: number) {
+    const n = photos().length;
+    if (!n) return;
+    index = (index + d + n) % n;
+    render();
   }
 
-  function prevImage() {
-    currentIndex = (currentIndex - 1 + urls.length) % urls.length;
-    updateImage();
-  }
+  // Document-level handler registered once; survives ClientRouter swaps.
+  document.addEventListener('keydown', (e) => {
+    if (!isOpen()) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') step(-1);
+    if (e.key === 'ArrowRight') step(1);
+  });
 
-  function nextImage() {
-    currentIndex = (currentIndex + 1) % urls.length;
-    updateImage();
-  }
-
-  document.querySelectorAll('[data-lightbox-index]').forEach((img) => {
-    img.style.cursor = 'pointer';
-    img.addEventListener('click', () => {
-      const index = parseInt(img.getAttribute('data-lightbox-index'));
-      openLightbox(index);
+  document.addEventListener('astro:page-load', () => {
+    const el = root();
+    if (!el) return;
+    document.querySelectorAll<HTMLElement>('[data-lightbox-index]').forEach((t) => {
+      t.addEventListener('click', () => open(Number(t.dataset.lightboxIndex)));
+    });
+    document.getElementById('lightbox-close')!.addEventListener('click', close);
+    document.getElementById('lightbox-prev')!.addEventListener('click', () => step(-1));
+    document.getElementById('lightbox-next')!.addEventListener('click', () => step(1));
+    el.addEventListener('click', (e) => {
+      if (e.target === el) close();
     });
   });
 
-  lightboxClose.addEventListener('click', closeLightbox);
-  lightboxBackdrop.addEventListener('click', closeLightbox);
-  lightboxPrev.addEventListener('click', prevImage);
-  lightboxNext.addEventListener('click', nextImage);
-
-  document.addEventListener('keydown', (e) => {
-    if (lightbox.classList.contains('hidden')) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') prevImage();
-    if (e.key === 'ArrowRight') nextImage();
+  document.addEventListener('astro:before-swap', () => {
+    document.body.style.overflow = '';
   });
 </script>

@@ -1,13 +1,15 @@
 import type { APIRoute } from 'astro';
-import type { PrismicItem, BlogPost, CaseStudy } from '../data/site-config';
-import * as prismic from '@prismicio/client';
-import { getBlogPosts, getCases } from '../prismic';
+import { getCollection } from 'astro:content';
 
 const SITE_URL = 'https://snazzyham.com';
 
 export const GET: APIRoute = async () => {
-  const blogPosts = (await getBlogPosts(false)) as PrismicItem[];
-  const caseStudies = (await getCases()) as PrismicItem[];
+  const blogPosts = (await getCollection('writing')).sort(
+    (a, b) => b.data.date.getTime() - a.data.date.getTime()
+  );
+  const caseStudies = (await getCollection('work')).sort(
+    (a, b) => a.data.order - b.data.order
+  );
 
   const lines: string[] = [];
 
@@ -38,7 +40,7 @@ export const GET: APIRoute = async () => {
   lines.push('## About This Site');
   lines.push('');
   lines.push(
-    'A static site built with Astro 6.x and powered by Prismic CMS. The site is a heavily customized version of the "Dante" Astro theme, styled with Tailwind CSS v4, and uses locally hosted Roslindale and Public Sans fonts. It contains blog posts, portfolio case studies, and personal favourites. All content is available in both HTML and machine-readable Markdown formats.'
+    'A static site built with Astro 6.x, with content stored as Markdown files and styled with Tailwind CSS v4. It contains blog posts, portfolio case studies, and personal favourites. All content is available in both HTML and machine-readable Markdown formats.'
   );
   lines.push('');
   lines.push('## Accessing Markdown Versions');
@@ -58,7 +60,7 @@ export const GET: APIRoute = async () => {
     `- [Homepage](${SITE_URL}/) - Overview, featured case studies, and recent blog posts`
   );
   lines.push(
-    `- [Portfolio](${SITE_URL}/portfolio/) - Complete portfolio listing with case studies and projects`
+    `- [Work](${SITE_URL}/work/) - Complete portfolio listing with case studies and projects`
   );
   lines.push(`- [Writing](${SITE_URL}/writing/) - Blog archive with all journal entries`);
   lines.push(
@@ -73,12 +75,9 @@ export const GET: APIRoute = async () => {
     lines.push('Portfolio case studies showcasing client work and projects:');
     lines.push('');
     for (const item of caseStudies) {
-      const data = item.data as CaseStudy;
-      const title = prismic.asText(data.title);
-      const url = `${SITE_URL}/case/${item.uid}/`;
-      const mdUrl = `${SITE_URL}/case/${item.uid}.md`;
-      const blurb = data.listing_blurb || '';
-      lines.push(`- [${title}](${url}) ([markdown](${mdUrl})) - ${blurb}`);
+      const url = `${SITE_URL}/work/${item.id}/`;
+      const mdUrl = `${SITE_URL}/work/${item.id}.md`;
+      lines.push(`- [${item.data.title}](${url}) ([markdown](${mdUrl})) - ${item.data.blurb}`);
     }
     lines.push('');
   }
@@ -91,14 +90,13 @@ export const GET: APIRoute = async () => {
     );
     lines.push('');
     for (const post of blogPosts) {
-      const data = post.data as BlogPost;
-      const title = prismic.asText(data.title);
-      const slug = post.slugs?.[0] || '';
-      const url = `${SITE_URL}/writing/${slug}/`;
-      const mdUrl = `${SITE_URL}/writing/${slug}.md`;
-      const date = data.date || '';
-      const desc = data.seo_description || prismic.asText(data.body).slice(0, 120);
-      lines.push(`- [${title}](${url}) ([markdown](${mdUrl})) - ${date}: ${desc}`);
+      const url = `${SITE_URL}/writing/${post.id}/`;
+      const mdUrl = `${SITE_URL}/writing/${post.id}.md`;
+      const date = post.data.date.toISOString().slice(0, 10);
+      const desc =
+        post.data.description ??
+        (post.body ?? '').replace(/[#*_>`\[\]]|\([^)]*\)|<[^>]*>/g, '').replace(/\s+/g, ' ').trim().slice(0, 120);
+      lines.push(`- [${post.data.title}](${url}) ([markdown](${mdUrl})) - ${date}: ${desc}`);
     }
     lines.push('');
   }

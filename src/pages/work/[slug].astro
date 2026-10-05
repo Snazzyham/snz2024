@@ -1,0 +1,198 @@
+---
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { abs, author, breadcrumbs, webPage } from '../../utils/schema';
+import Lightbox from '../../components/Lightbox.astro';
+
+export async function getStaticPaths() {
+  const cases = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+  return cases.map((entry, i) => ({
+    params: { slug: entry.id },
+    props: { entry, next: cases[(i + 1) % cases.length], index: i + 1, count: cases.length }
+  }));
+}
+
+const { entry, next, index, count } = Astro.props;
+const { data } = entry;
+const { Content } = await render(entry);
+const pad = (n: number) => String(n).padStart(2, '0');
+const videos = data.videos ?? [];
+const photos = data.photos ?? [];
+const lightboxPhotos = photos.map((p, i) => ({
+  src: p.src,
+  caption: `${data.listingTitle} — FR. ${pad(i + 1)}`
+}));
+const path = `/work/${entry.id}/`;
+const schema = [
+  webPage('WebPage', path, data.title, data.blurb, { mainEntity: { '@id': `${abs(path)}#work` } }),
+  {
+    '@type': 'CreativeWork',
+    '@id': `${abs(path)}#work`,
+    name: data.title,
+    alternateName: data.listingTitle,
+    description: data.blurb,
+    url: abs(path),
+    creator: author,
+    // The client the work was made for.
+    sourceOrganization: { '@type': 'Organization', name: data.client },
+    ...(data.hero || data.logo ? { image: abs((data.hero ?? data.logo)!.src) } : {}),
+    ...(data.awards?.length ? { award: data.awards.map((a) => a.title) } : {}),
+    ...(data.external?.length ? { subjectOf: data.external.map((e) => ({ '@type': 'Article', name: e.name, url: e.url })) } : {})
+  },
+  breadcrumbs([
+    { name: 'Work', path: '/work/' },
+    { name: data.listingTitle, path }
+  ])
+];
+---
+
+<BaseLayout
+  title={data.title}
+  description={data.blurb}
+  image={data.hero ? { src: data.hero.src, alt: data.title } : undefined}
+  schema={schema}
+>
+  <article class="container-ad pt-12 pb-24 sm:pt-20">
+    <header class="mb-10 sm:mb-14">
+      <p class="eyebrow reveal mb-5">
+        {data.client} <span class="text-accent">·</span> {data.listingTitle}
+      </p>
+      <h1 class="headline reveal" style="--i:1; max-width: 62rem">{data.title}</h1>
+    </header>
+
+    {
+      data.hero ? (
+        <div class="photo reveal mb-14 aspect-video w-full sm:mb-20" style="--i:2">
+          <Image
+            src={data.hero}
+            alt={data.title}
+            width={1600}
+            class="vintage develop h-full w-full object-cover"
+            transition:name={`work-${entry.id}`}
+          />
+        </div>
+      ) : data.logo ? (
+        <div class="grid-ad mb-14 sm:mb-20">
+          <div class="photo reveal logo-col aspect-square" style="--i:2">
+            <Image
+              src={data.logo}
+              alt={data.title}
+              width={800}
+              class="vintage develop h-full w-full object-cover"
+              transition:name={`work-${entry.id}`}
+            />
+          </div>
+        </div>
+      ) : null
+    }
+
+    <div class="grid-ad items-start">
+      <div class="prose-ad body-col reveal">
+        <Content />
+      </div>
+
+      <aside class="spec-col reveal font-display font-medium text-xs tracking-[0.08em] uppercase" style="--i:2">
+        <dl>
+          <div class="rule py-3">
+            <dt class="eyebrow mb-1">Client</dt>
+            <dd>{data.client}</dd>
+          </div>
+          {
+            data.awards && data.awards.length > 0 && (
+              <div class="rule py-3">
+                <dt class="eyebrow mb-1">Awards</dt>
+                <dd class="flex flex-col gap-1">
+                  {data.awards.map((a) => (
+                    <a href={a.url} target="_blank" rel="noopener noreferrer" class="link">
+                      {a.title} ↗
+                    </a>
+                  ))}
+                </dd>
+              </div>
+            )
+          }
+          {
+            data.external && data.external.length > 0 && (
+              <div class="rule py-3">
+                <dt class="eyebrow mb-1">Press</dt>
+                <dd class="flex flex-col gap-1">
+                  {data.external.map((e) => (
+                    <a href={e.url} target="_blank" rel="noopener noreferrer" class="link">
+                      {e.name} ↗
+                    </a>
+                  ))}
+                </dd>
+              </div>
+            )
+          }
+          <div class="rule py-3">
+            <dt class="eyebrow mb-1">Case</dt>
+            <dd>No. {pad(index)} / {pad(count)}</dd>
+          </div>
+        </dl>
+      </aside>
+    </div>
+
+    {
+      videos.length > 0 && (
+        <section class="mt-20 flex flex-col gap-12">
+          {videos.map((v, i) => (
+            <figure class="reveal">
+              <div class="photo">
+                <video controls preload="metadata" playsinline class="block w-full">
+                  <source src={v} type="video/mp4" />
+                </video>
+              </div>
+              <figcaption class="eyebrow mt-2">Reel {pad(i + 1)}</figcaption>
+            </figure>
+          ))}
+        </section>
+      )
+    }
+
+    {
+      photos.length > 0 && (
+        <section class="mt-20">
+          <p class="eyebrow rule mb-6 pt-3">Contact sheet</p>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-8 lg:grid-cols-3">
+            {photos.map((p, i) => (
+              <figure class="reveal" style={`--i:${i % 3}`}>
+                <button
+                  type="button"
+                  class="photo block w-full cursor-zoom-in"
+                  data-lightbox-index={i}
+                  aria-label={`Open frame ${pad(i + 1)}`}
+                >
+                  <Image
+                    src={p}
+                    alt={`${data.listingTitle} frame ${pad(i + 1)}`}
+                    width={900}
+                    class="vintage develop aspect-[4/3] w-full object-cover"
+                  />
+                </button>
+                <figcaption class="eyebrow mt-2">FR. {pad(i + 1)}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <nav class="rule mt-24 pt-6">
+      <a href={`/work/${next.id}`} class="link font-display font-medium text-xs tracking-[0.08em] uppercase">
+        Next: {next.data.listingTitle} →
+      </a>
+    </nav>
+  </article>
+
+  {lightboxPhotos.length > 0 && <Lightbox photos={lightboxPhotos} />}
+</BaseLayout>
+
+<style>
+  @media (min-width: 768px) {
+    .body-col { grid-column: 1 / span 7; }
+    .spec-col { grid-column: 9 / span 4; position: sticky; top: 6rem; }
+    .logo-col { grid-column: 1 / span 5; }
+  }
+</style>

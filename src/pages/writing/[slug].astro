@@ -1,126 +1,172 @@
 ---
-import type { PrismicItem, BlogPost } from '../../data/site-config';
-import * as prismic from '@prismicio/client';
-import { getBlogPosts } from '../../prismic';
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Button from '../../components/Button.astro';
-import FormattedDate from '../../components/FormattedDate.astro';
-import PostPreview from '../../components/PostPreview.astro';
+import { abs, author, breadcrumbs, webPage } from '../../utils/schema';
 
 export async function getStaticPaths() {
-  const posts = (await getBlogPosts(false)) as PrismicItem[];
-  const postCount = posts.length;
-  return posts.map((post, index) => ({
-    params: { slug: post?.slugs ? post.slugs[0] : '404' },
-    props: {
-      post,
-      prevPost: index + 1 !== postCount ? posts[index + 1] : null,
-      nextPost: index !== 0 ? posts[index - 1] : null
-    }
+  const posts = (await getCollection('writing')).sort(
+    (a, b) => b.data.date.getTime() - a.data.date.getTime()
+  );
+  return posts.map((post, i) => ({
+    params: { slug: post.id },
+    props: { post, newer: posts[i - 1], older: posts[i + 1] }
   }));
 }
 
-type Props = { post: PrismicItem; prevPost: PrismicItem; nextPost: PrismicItem };
+const { post, newer, older } = Astro.props;
+const { data } = post;
+const { Content } = await render(post);
 
-const { href } = Astro.url;
-const { post, prevPost, nextPost } = Astro.props;
-
-const data = post.data as BlogPost;
+const body = post.body ?? '';
+const plain = body
+  .replace(/<[^>]*>/g, ' ')
+  .replace(/!?\[([^\]]*)\]\([^)]*\)/g, '$1')
+  .replace(/[#*_>`]/g, '')
+  .replace(/\s+/g, ' ')
+  .trim();
+const minutes = Math.max(1, Math.round(plain.split(' ').length / 230));
+const dateStr = data.date.toISOString().slice(0, 10).replaceAll('-', '.');
+const url = new URL(`/writing/${post.id}/`, Astro.site ?? Astro.url).toString();
+const description = data.description ?? plain.slice(0, 155);
+const schema = [
+  webPage('WebPage', `/writing/${post.id}/`, data.seoTitle ?? data.title, description),
+  {
+    '@type': 'BlogPosting',
+    '@id': `${url}#article`,
+    headline: data.title,
+    description,
+    datePublished: data.date.toISOString().slice(0, 10),
+    ...(data.image ? { image: abs(data.image.src) } : {}),
+    wordCount: plain.split(' ').length,
+    author,
+    publisher: author,
+    mainEntityOfPage: { '@id': `${url}#webpage` },
+    url
+  },
+  breadcrumbs([
+    { name: 'Writing', path: '/writing/' },
+    { name: data.title, path: `/writing/${post.id}/` }
+  ])
+];
 ---
 
 <BaseLayout
-  title={data.seo_title ?? prismic.asText(data.title)}
-  description={data.seo_description ?? prismic.asText(data.body).slice(0, 160)}
-  image={{
-    src:
-      data.seo_image?.url ??
-      `https://dynamic-og-image-generator.vercel.app/api/generate?title=${encodeURIComponent(prismic.asText(data.title))}&author=Soham%20Adwani&websiteUrl=snazzyham.com%2Fwriting&theme=dracula`,
-    alt: prismic.asText(data.title)
-  }}
+  title={data.seoTitle ?? data.title}
+  description={description}
+  image={data.image ? { src: data.image.src, alt: data.title } : undefined}
   pageType="article"
-  showHeader={false}
+  schema={schema}
 >
-  <article class="mb-16 sm:mb-24">
-    <header class="mb-8">
+  <article class="container-ad pt-12 pb-24 sm:pt-20">
+    <header class="mb-12 sm:mb-16">
+      <p class="eyebrow reveal mb-5">
+        {dateStr} <span class="text-accent">·</span>
+        {minutes} min read
+      </p>
       <h1
-        class="text-3xl leading-tight font-heading font-medium sm:text-5xl sm:leading-tight"
+        class="headline reveal"
+        style="--i:1; max-width: 62rem"
+        transition:name={`post-${post.id}`}
       >
-        {prismic.asText(data.title)}
+        {data.title}
       </h1>
-      <div class="mt-4 text-sm">
-        {data.date}
+      {
+        data.description && (
+          <p class="standfirst reveal mt-6 max-w-2xl" style="--i:2">
+            {data.description}
+          </p>
+        )
+      }
+    </header>
+
+    {
+      data.image && (
+        <div class="photo reveal mb-14 w-full sm:mb-20" style="--i:2">
+          <Image
+            src={data.image}
+            alt={data.title}
+            width={1600}
+            class="vintage develop block h-auto w-full"
+          />
+        </div>
+      )
+    }
+
+    <div class="grid-ad items-start">
+      <div class="prose-ad body-col">
+        <Content />
+      </div>
+      <aside
+        class="meta-col font-display font-medium text-xs tracking-[0.08em] uppercase"
+      >
+        <dl>
+          <div class="rule py-3">
+            <dt class="eyebrow mb-1">Date</dt>
+            <dd>{dateStr}</dd>
+          </div>
+          <div class="rule py-3">
+            <dt class="eyebrow mb-1">Read</dt>
+            <dd>{minutes} min</dd>
+          </div>
+          <div class="rule py-3">
+            <button type="button" class="copy-url-button link uppercase" data-url={url}>
+              Copy link
+            </button>
+          </div>
+        </dl>
+      </aside>
+    </div>
+
+    <nav class="rule mt-24 grid-ad pt-6 font-display font-medium text-xs tracking-[0.08em] uppercase">
+      <div class="pn-newer">
         {
-          post.first_publication_date !== post.last_publication_date && (
-            <>
-              {' '}
-              <span>
-                (Updated on <FormattedDate date={new Date(post.last_publication_date)} />)
+          newer && (
+            <a href={`/writing/${newer.id}`} class="group block">
+              <span class="eyebrow block">← Newer</span>
+              <span class="font-display mt-1 block text-lg font-medium normal-case tracking-tight group-hover:text-accent">
+                {newer.data.title}
               </span>
-            </>
+            </a>
           )
         }
       </div>
-    </header>
-    <div
-      class="max-w-none prose prose-dante sm:prose-lg"
-      set:html={prismic.asHTML(data.body)}
-    />
-
-    <div
-      class="mt-8 flex flex-wrap items-center gap-6 text-sm justify-between sm:mt-12 sm:text-base"
-    >
-      <Button
-        class="copy-url-button"
-        aria-label="Copy link"
-        data-url={href}
-        data-tooltip-default="Copy link"
-        data-tooltip-success="Copied">Share</Button
-      >
-    </div>
-  </article>
-  {
-    (prevPost || nextPost) && (
-      <div class="my-16 sm:my-24">
-        <h2 class="mb-12 text-xl font-heading  sm:mb-16 sm:text-2xl">Read Next</h2>
-        {nextPost && (
-          <PostPreview
-            post={nextPost.data as BlogPost}
-            slug={nextPost.slugs}
-            class="mb-10 sm:mb-12"
-            headingLevel="h3"
-          />
-        )}
-        {prevPost && (
-          <PostPreview
-            post={prevPost.data as BlogPost}
-            slug={prevPost.slugs}
-            class="mb-10 sm:mb-12"
-            headingLevel="h3"
-          />
-        )}
+      <div class="pn-older">
+        {
+          older && (
+            <a href={`/writing/${older.id}`} class="group block">
+              <span class="eyebrow block">Older →</span>
+              <span class="font-display mt-1 block text-lg font-medium normal-case tracking-tight group-hover:text-accent">
+                {older.data.title}
+              </span>
+            </a>
+          )
+        }
       </div>
-    )
-  }
+    </nav>
+  </article>
 </BaseLayout>
+
+<style>
+  @media (min-width: 768px) {
+    .body-col { grid-column: 1 / span 7; }
+    .meta-col { grid-column: 10 / span 3; position: sticky; top: 6rem; }
+    .pn-newer { grid-column: 1 / span 6; }
+    .pn-older { grid-column: 7 / span 6; }
+  }
+  @media (max-width: 767px) {
+    .pn-older { margin-top: 1.5rem; }
+  }
+</style>
 
 <script>
   document.addEventListener('astro:page-load', () => {
-    const copyUrlButton = document.querySelector('.copy-url-button') as HTMLButtonElement;
-    copyUrlButton?.addEventListener('click', async () => {
-      await copyUrl(copyUrlButton);
+    const btn = document.querySelector<HTMLButtonElement>('.copy-url-button');
+    btn?.addEventListener('click', async () => {
+      const label = btn.innerText;
+      await navigator.clipboard.writeText(btn.dataset.url ?? location.href);
+      btn.innerText = 'Copied';
+      setTimeout(() => (btn.innerText = label), 2500);
     });
-
-    async function copyUrl(button: HTMLButtonElement) {
-      let url = button.getAttribute('data-url') || '';
-      let label = button.innerText;
-
-      await navigator.clipboard.writeText(url);
-
-      button.innerText = 'Copied';
-
-      setTimeout(() => {
-        button.innerText = label;
-      }, 2500);
-    }
   });
 </script>

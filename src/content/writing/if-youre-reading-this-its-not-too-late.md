@@ -1,0 +1,13 @@
+---
+title: "If you’re reading this, it’s not too late"
+date: "2015-03-15"
+---
+On February 13 2015, Drake unexpectedly dropped his new mixtape, _If you’re reading this, it’s too late_. In the past, artists would never drop an album without any marketing or hype. However, after Beyoncé did it and the internet went “cray cray”, she showed artists that sometimes the best marketing tactic is the element of surprise. Don’t expect artists to start firing their marketing teams just yet though, not everyone can just drop an album like that.
+
+I would like to preface this by saying I am in no way a music reviewer, I literally know nothing about what good music is supposed to sound like. If you want a proper, scientific review of Drake’s album, read _[Micah Singleton’s review on The Verge](http://www.theverge.com/2015/2/13/8035339/drake-mixtape-if-youre-reading-this-its-too-late)_. I’m just here to give you my biased opinion on it.
+
+I’ve been a Drake fan for a while now. I’m not a die hard fanboy or anything, I just really like his music. I wasn’t that big a fan of _Nothing was the Same_, and till this day I stick with the idea that _So far Gone_ was the best music he’s ever made. When I first listened to his latest album, I didn’t like it, at all. It just sounded like too far departed from the Drizzy I’m used to, the style of music that infuses mellow rap with dulcet vocals and an unobtrusive beat. Some of the songs in this mixtape had a hint of that, but on the whole just seemed completely different.
+
+There was something about it though. So I didn’t just give up on it as I thought I would, I stuck with it and kept listening. That’s when it hit me, don’t listen to it keeping old Drake albums in mind. So I sat down, put on my ATH M50's and listened to it again, from start to finish, with an open mind. By listening to it not as a _Drake_ album but an actual _rap_ album, something along the lines of _J.Cole’s 2014 Forrest Hills Drive_, it’s a pretty fucking great album. It’s confusing really, it signifies a more lyrically progressed version of Drake, while still hinting at some of the elements from _So far Gone_ that made us fall in love with his music. What I love about this mixtape, more than the music that it contains, is that it shows people that Drake isn’t just a one trick pony. For years haters have stated that he isn’t a rapper, he just sometimes raps. _If you’re reading this it’s too late_ is proof that, as Drake puts it, “got brothers reacting without a sinus cause what I’m working with is timeless.”
+
+_This article first appeared on issue 2/2015 of Rabelais Magazine._

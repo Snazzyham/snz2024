@@ -1,0 +1,7 @@
+---
+title: "Football News 28-01-2011"
+date: "2011-01-28"
+---
+Okay so Luis Suarez has officially signed on for Liverpool!! Good for all the Liverpool fans considering they signed a striker who could play back-up goalkeeper. haha. so apparently they settled for 23 million pounds. Seeing this, Torres felt insecure and handed in a transfer request which was followed up by a 40 million pound+daniel sturridge bid from Chelsea which was turned down, sadly
+
+In other news, after Edwin Van Der Sar stated he would retire at the end of the season. Untied has already sought out for a replacement. “Reports suggest United already have three targets who can immediately become the number one at Old Trafford – those being Stekelenburg, Schalke’s Manuel Neuer and David de Gea, the Atletico Madrid stopper”. Blackpool have rejected a bid from Liverpool for skipper Charlie Adam, Ian Holloway states that he will only consider a bid for more that 10 million pounds, where as Liverpool’s bid was just over 4 million. Carlos Vela has officially joined West Brom on loan till the end of the season. Blackburn offer 8million+El Hadji Diouf for West Brom’s Graham Dorrans, Atletico reject a bid from Real for Diego Forlan, Birmingham complete signing of Curtis Davies from rivals Villa. On a sadder note, negotiations between Chelsea and Benfica have completely broken down as both sides could not reach to an agreement for Brazilian defender David luiz.
