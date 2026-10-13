@@ -61,6 +61,14 @@ The `src/content/` directory contains "collections" of related Markdown and MDX 
 
 Any static assets, like images, can be placed in the `public/` directory.
 
+## Portfolio entries
+
+Work entries live in `src/content/work/` and use `order` to control their position. The first four appear in Selected work on the homepage. `/work/` lists every entry.
+
+Set `url` to link directly to a project's website with a "Visit the site →" action. Entries with a `url` do not generate local case-study or Markdown pages. Leave it out for a case study.
+
+The pfin entry links to `https://pfin.snazzyham.com`. Its SVG reproduces the landing-page footer logo with a light background so it stays readable in both themes.
+
 ## Astro.js Commands
 
 All commands are run from the root of the project, from a terminal:

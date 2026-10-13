@@ -43,6 +43,7 @@ const work = defineCollection({
       blurb: z.string(),
       client: z.string(),
       order: z.number(),
+      url: z.string().url().optional(),
       logo: image().optional(),
       hero: image().optional(),
       awards: z.array(z.object({ title: z.string(), url: z.string() })).optional(),

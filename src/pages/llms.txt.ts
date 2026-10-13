@@ -75,9 +75,9 @@ export const GET: APIRoute = async () => {
     lines.push('Portfolio case studies showcasing client work and projects:');
     lines.push('');
     for (const item of caseStudies) {
-      const url = `${SITE_URL}/work/${item.id}/`;
-      const mdUrl = `${SITE_URL}/work/${item.id}.md`;
-      lines.push(`- [${item.data.title}](${url}) ([markdown](${mdUrl})) - ${item.data.blurb}`);
+      const url = item.data.url ?? `${SITE_URL}/work/${item.id}/`;
+      const markdown = item.data.url ? '' : ` ([markdown](${SITE_URL}/work/${item.id}.md))`;
+      lines.push(`- [${item.data.title}](${url})${markdown} - ${item.data.blurb}`);
     }
     lines.push('');
   }

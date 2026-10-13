@@ -6,7 +6,7 @@ import { abs, author, breadcrumbs, webPage } from '../../utils/schema';
 import Lightbox from '../../components/Lightbox.astro';
 
 export async function getStaticPaths() {
-  const cases = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+  const cases = (await getCollection('work', ({ data }) => !data.url)).sort((a, b) => a.data.order - b.data.order);
   return cases.map((entry, i) => ({
     params: { slug: entry.id },
     props: { entry, next: cases[(i + 1) % cases.length], index: i + 1, count: cases.length }

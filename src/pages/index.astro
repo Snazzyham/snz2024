@@ -10,7 +10,7 @@ if (!home) throw new Error('Missing site/home content');
 const h = home.data as any;
 const { Content } = await render(home);
 
-const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order).slice(0, 3);
+const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order).slice(0, 4);
 const posts = (await getCollection('writing'))
   .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf())
   .slice(0, 5);
@@ -85,7 +85,7 @@ const blurbFor = (p: (typeof posts)[number]) => {
       <p class="eyebrow mb-6 reveal">Selected work &nbsp;·&nbsp; 01 — {pad(work.length)}</p>
       {
         work.map((item, i) => (
-          <a href={`/work/${item.id}`} class="work-row rule grid-main gap-y-5 py-8 reveal block" style={`--i:${i + 1}`}>
+          <a href={item.data.url ?? `/work/${item.id}`} class="work-row rule grid-main gap-y-5 py-8 reveal block" style={`--i:${i + 1}`}>
             <p class="eyebrow [grid-column:1/3]">No. {pad(i + 1)}</p>
             <div class="[grid-column:3/9]">
               <h3 class="headline-sm mb-3">

@@ -14,7 +14,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
   description="Selected case studies and projects by Soham Adwani."
   schema={[
     webPage('CollectionPage', '/work/', portfolio.title ?? 'Work', 'Selected case studies and projects by Soham Adwani.', {
-      mainEntity: itemList(cases.map((c) => ({ name: c.data.listingTitle, path: `/work/${c.id}/` })))
+      mainEntity: itemList(cases.map((c) => ({ name: c.data.listingTitle, path: `/work/${c.id}/`, url: c.data.url })))
     }),
     breadcrumbs([{ name: 'Work', path: '/work/' }])
   ]}
@@ -31,11 +31,12 @@ const pad = (n: number) => String(n).padStart(2, '0');
       cases.map((c, i) => {
         const img = c.data.hero ?? c.data.logo;
         const odd = i % 2 === 0;
+        const href = c.data.url ?? `/work/${c.id}`;
         return (
           <section class="rule grid-main items-end py-10 sm:py-16">
             {img && (
               <a
-                href={`/work/${c.id}`}
+                href={href}
                 class={`photo reveal block aspect-[4/5] ${c.data.hero ? '' : 'logo-plate'} ${odd ? 'spread-left' : 'spread-right'}`}
                 aria-label={c.data.listingTitle}
               >
@@ -56,14 +57,14 @@ const pad = (n: number) => String(n).padStart(2, '0');
                 {c.data.client} <span class="text-accent">·</span> No. {pad(i + 1)}
               </p>
               <h2 class="headline-sm">
-                <a href={`/work/${c.id}`}>{c.data.listingTitle}</a>
+                <a href={href}>{c.data.listingTitle}</a>
               </h2>
               <p class="max-w-md">{c.data.blurb}</p>
               <a
-                href={`/work/${c.id}`}
+                href={href}
                 class="link font-display font-medium text-xs tracking-[0.08em] uppercase"
               >
-                Read the case →
+                {c.data.url ? 'Visit the site →' : 'Read the case →'}
               </a>
             </div>
           </section>
