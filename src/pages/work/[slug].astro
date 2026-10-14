@@ -130,6 +130,15 @@ const schema = [
             <dt class="eyebrow mb-1">Case</dt>
             <dd>No. {pad(index)} / {pad(count)}</dd>
           </div>
+          {
+            data.site && (
+              <div class="rule py-3">
+                <a href={data.site} target="_blank" rel="noopener noreferrer" class="link">
+                  Visit the site ↗
+                </a>
+              </div>
+            )
+          }
         </dl>
       </aside>
     </div>
