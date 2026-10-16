@@ -3,7 +3,8 @@ title: "The year-long process to change the way public transport at La Trobe Uni
 listingTitle: "Metrobe"
 blurb: "A Public Transport App for Latrobe University"
 client: "La Trobe University"
-order: 5
+featured: true
+order: 6
 logo: "./metrobe/logo.png"
 hero: "./metrobe/hero.jpg"
 ---

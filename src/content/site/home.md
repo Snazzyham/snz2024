@@ -1,7 +1,7 @@
 ---
 name: "Soham Adwani"
 subhead: "Product Consultant, Web Developer, Operations Guy"
-title: "Who is Soham?"
+title: "I build things that run businesses."
 buttonText: "Work With Me"
 buttonPath: "/contact"
 ---

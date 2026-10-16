@@ -10,16 +10,14 @@ if (!home) throw new Error('Missing site/home content');
 const h = home.data as any;
 const { Content } = await render(home);
 
-const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order).slice(0, 4);
+const allWork = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+const tooling = allWork.filter((w) => w.data.tooling).slice(0, 3);
+const cases = allWork.filter((w) => w.data.featured).slice(0, 3);
 const posts = (await getCollection('writing'))
   .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf())
   .slice(0, 5);
 
 const words: string[] = String(h.title).split(/\s+/);
-const specLines: string[] = String(h.subhead)
-  .split(',')
-  .map((s) => s.trim())
-  .filter(Boolean);
 
 const pad = (n: number) => String(n).padStart(2, '0');
 const fmtDate = (d: string | Date) => {
@@ -52,7 +50,7 @@ const blurbFor = (p: (typeof posts)[number]) => {
   <div class="container-main">
     <!-- a. Typographic spread -->
     <section class="grid-main gap-y-8 pt-16 pb-16 sm:pt-28 sm:pb-24">
-      <div class="[grid-column:1/10]">
+      <div class="[grid-column:1/13]">
         <h1 class="headline">
           {
             words.map((w, i) => (
@@ -62,11 +60,7 @@ const blurbFor = (p: (typeof posts)[number]) => {
             ))
           }
         </h1>
-        <p class="standfirst mt-8 max-w-xl reveal" style={`--i:${words.length}`}>{h.subhead}</p>
-      </div>
-      <div class="[grid-column:10/13] self-end font-display font-medium text-[11px] uppercase tracking-[0.08em] leading-relaxed reveal" style={`--i:${words.length + 1}`}>
-        <p class="text-ink">{h.name}</p>
-        {specLines.map((l) => <p class="text-ink-2">{l}</p>)}
+        <p class="subhead mt-8 max-w-xl reveal" style={`--i:${words.length}`}>{h.subhead}</p>
       </div>
     </section>
 
@@ -80,40 +74,67 @@ const blurbFor = (p: (typeof posts)[number]) => {
       </div>
     </section>
 
-    <!-- c. Selected work -->
+    <!-- c. 2026: The year of tooling -->
     <section class="pb-20 sm:pb-28">
-      <p class="eyebrow mb-6 reveal">Selected work &nbsp;·&nbsp; 01 — {pad(work.length)}</p>
-      {
-        work.map((item, i) => (
-          <a href={item.data.url ?? `/work/${item.id}`} class="work-row rule grid-main gap-y-5 py-8 reveal block" style={`--i:${i + 1}`}>
-            <p class="eyebrow [grid-column:1/3]">No. {pad(i + 1)}</p>
-            <div class="[grid-column:3/9]">
+      <p class="eyebrow mb-6 reveal">2026: The year of tooling</p>
+      <div class="rule grid grid-cols-1 gap-x-6 gap-y-10 pt-8 md:grid-cols-3">
+        {
+          tooling.map((item, i) => {
+            const site = item.data.url ?? item.data.site;
+            const ctas = [
+              site && { label: 'Visit the site ↗', href: site, external: true },
+              item.data.demo && { label: 'Try the demo ↗', href: item.data.demo, external: true },
+              !item.data.url && { label: 'Read the case study →', href: `/work/${item.id}`, external: false }
+            ].filter(Boolean) as { label: string; href: string; external: boolean }[];
+            return (
+              <div class="reveal" style={`--i:${i + 1}`}>
+                {item.data.logo && (
+                  <a href={ctas[0]?.href} target={ctas[0]?.external ? '_blank' : undefined} rel={ctas[0]?.external ? 'noopener noreferrer' : undefined} class="photo block aspect-square mb-5" transition:name={`work-${item.id}`}>
+                    <Image src={item.data.logo} alt={item.data.listingTitle} width={600} class="vintage develop h-full w-full object-cover" />
+                  </a>
+                )}
+                <h3 class="headline-sm mb-3">{item.data.listingTitle}</h3>
+                <p class="text-ink-2">{item.data.blurb}</p>
+                <div class="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+                  {ctas.map((c) => (
+                    <a class="link font-display font-medium text-[11px] uppercase tracking-[0.08em]" href={c.href} target={c.external ? '_blank' : undefined} rel={c.external ? 'noopener noreferrer' : undefined}>
+                      {c.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+    </section>
+
+    <!-- d. Case Studies from a past life -->
+    <section class="pb-20 sm:pb-28">
+      <p class="eyebrow mb-6 reveal">Case Studies from a past life</p>
+      <div class="rule grid grid-cols-1 gap-x-6 gap-y-10 pt-8 md:grid-cols-3">
+        {
+          cases.map((item, i) => (
+            <a href={item.data.url ?? `/work/${item.id}`} class="work-card reveal block" style={`--i:${i + 1}`}>
+              {item.data.logo && (
+                <div class="photo aspect-square mb-5" transition:name={`work-${item.id}`}>
+                  <Image src={item.data.logo} alt={item.data.listingTitle} width={600} class="vintage develop h-full w-full object-cover" />
+                </div>
+              )}
               <h3 class="headline-sm mb-3">
                 {item.data.listingTitle} <span class="arrow inline-block transition-transform duration-300">→</span>
               </h3>
-              <p class="text-ink-2 max-w-md">{item.data.blurb}</p>
-            </div>
-            <div class="[grid-column:9/13]">
-              {item.data.logo && (
-                <div class="photo aspect-square" transition:name={`work-${item.id}`}>
-                  <Image
-                    src={item.data.logo}
-                    alt={item.data.client}
-                    width={600}
-                    class="vintage develop !object-contain p-6"
-                  />
-                </div>
-              )}
-            </div>
-          </a>
-        ))
-      }
-      <div class="rule pt-6">
+              <p class="text-ink-2">{item.data.blurb}</p>
+            </a>
+          ))
+        }
+      </div>
+      <div class="rule mt-10 pt-6">
         <a class="link font-display font-medium text-[11px] uppercase tracking-[0.08em]" href="/work">All work →</a>
       </div>
     </section>
 
-    <!-- d. Writing -->
+    <!-- e. Writing -->
     <section class="pb-8">
       <p class="eyebrow mb-6 reveal">Writing</p>
       {
@@ -138,10 +159,18 @@ const blurbFor = (p: (typeof posts)[number]) => {
 </BaseLayout>
 
 <style>
-  .work-row:hover .arrow {
+  .subhead {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    letter-spacing: -0.01em;
+    line-height: 1.35;
+    color: var(--ink-2);
+  }
+  .work-card:hover .arrow {
     transform: translateX(6px);
   }
-  .work-row:hover h3,
+  .work-card:hover h3,
   .post-row:hover h3 {
     color: var(--accent);
   }

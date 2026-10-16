@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="492" height="234" viewBox="-36 -36 492 234">
-  <rect x="-36" y="-36" width="492" height="234" fill="#f5f3ed"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="492" height="492" viewBox="-36 -165 492 492">
+  <rect x="-36" y="-165" width="492" height="492" fill="#f5f3ed"/>
   <path fill="#225c46" d="M54 0h54a54 54 0 0 1 54 54v54a54 54 0 0 1-54 54H18a18 18 0 0 1-18-18V54A54 54 0 0 1 54 0Z"/>
   <text x="81" y="112" fill="#fff" font-family="Georgia, 'Times New Roman', serif" font-size="114" font-style="italic" text-anchor="middle">p</text>
   <text x="216" y="120" fill="#1d2925" font-family="Inter, 'Avenir Next', Avenir, 'Segoe UI', sans-serif" font-size="120" font-weight="650" letter-spacing="-6">pfin</text>

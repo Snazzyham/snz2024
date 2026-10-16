@@ -3,7 +3,7 @@ title: "A Safe Cracking Experience"
 listingTitle: "Army of the Dead"
 blurb: "-"
 client: "Netflix"
-order: 7
+order: 8
 logo: "./netflix-aotd/logo.png"
 awards:
   - title: "Citra Pariwara"

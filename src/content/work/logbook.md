@@ -3,7 +3,8 @@ title: "Logbook: A Personal Workout Tracker"
 listingTitle: "Logbook"
 blurb: "A study in modern AI capabilities"
 client: "Personal"
-order: 2
+tooling: true
+order: 3
 site: "https://logbook.snazzyham.com"
 logo: "./logbook/logo.webp"
 hero: "./logbook/hero.png"

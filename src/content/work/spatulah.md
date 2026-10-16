@@ -3,7 +3,7 @@ title: "Improving Workflows for Social Media Managers"
 listingTitle: "Spatulah"
 blurb: "-"
 client: "GOODSTUPH"
-order: 4
+order: 5
 logo: "./spatulah/logo.jpeg"
 hero: "./spatulah/hero.jpg"
 awards:

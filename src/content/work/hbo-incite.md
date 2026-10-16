@@ -3,7 +3,8 @@ title: "I Know You"
 listingTitle: "INCITE"
 blurb: "A launch campaign for Westworld Season 3"
 client: "HBO"
-order: 1
+featured: true
+order: 2
 logo: "./hbo-incite/logo.png"
 awards:
   - title: "The Webby Awards"

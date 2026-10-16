@@ -3,7 +3,7 @@ title: "Keeping Employees Safe During a Pandemic"
 listingTitle: "PATH"
 blurb: "-"
 client: "GOODSTUPH"
-order: 6
+order: 7
 logo: "./path/logo.jpeg"
 videos:
   - "https://snazzyham.cdn.prismic.io/snazzyham/9521bcc8-8491-45ac-a48d-2eaad1139cfc_path_v2_compressed.mp4"
