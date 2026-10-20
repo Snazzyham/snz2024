@@ -26,7 +26,8 @@ export type Row = {
   tokens: number;
   fail: boolean;
   path: string | null;
-  cand?: boolean;
+  /** The single recorded judge that graded this row; absent when mixed or unrecorded. */
+  judge?: string;
   details: Detail[];
 };
 
@@ -49,10 +50,19 @@ export const COLUMNS: { key: SortKey; label: string; num: boolean }[] = [
 /** Cost with the time charged at `rate` dollars per minute. */
 export const eff = (r: { cost: number; time: number }, rate: number) => r.cost + (rate * r.time) / 60;
 
-/** The value candidate with the lowest effective cost, if the track has any. */
-export function bestOf(rows: Row[], rate: number): Row | null {
+/** Rows eligible for Best value among `rows`, mirroring value_candidates() in bench.py: paid,
+ *  complete, scored by one recorded judge, 75 or above and within `tie` points of the best of them. */
+function candidates(rows: Row[], tie: number): Row[] {
+  const ok = rows.filter((r) => r.complete && r.score != null && !r.fail && r.cost > 0 && r.judge);
+  const top = topOf(ok);
+  if (!top) return [];
+  return ok.filter((r) => r.judge === top.judge && r.score! >= 75 && r.score! >= top.score! - tie);
+}
+
+/** Lowest effective cost among the candidates within `rows`, so a filtered view gets its own pick. */
+export function bestOf(rows: Row[], rate: number, tie: number): Row | null {
   let best: Row | null = null;
-  for (const r of rows) if (r.cand && (!best || eff(r, rate) < eff(best, rate))) best = r;
+  for (const r of candidates(rows, tie)) if (!best || eff(r, rate) < eff(best, rate)) best = r;
   return best;
 }
 
@@ -179,8 +189,12 @@ export function pickHtml(best: Row | null, rate: number) {
     : '<span class="muted">No pick</span>';
 }
 
+type SourceRow = Omit<Row, 'judge'> & { judges: string[] };
+
 /** Keep only the fields the page script reads. */
-export function clientTracks(tracks: { id: string; name: string; tasks: unknown[]; has_value_pick: boolean; rows: Row[] }[]): Track[] {
+export function clientTracks(
+  tracks: { id: string; name: string; tasks: unknown[]; has_value_pick: boolean; rows: SourceRow[] }[]
+): Track[] {
   return tracks.map((t) => ({
     id: t.id,
     name: t.name,
@@ -198,7 +212,7 @@ export function clientTracks(tracks: { id: string; name: string; tasks: unknown[
       tokens: r.tokens,
       fail: r.fail,
       path: r.path,
-      ...(r.cand ? { cand: true } : {}),
+      ...(r.judges.length === 1 && r.judges[0] !== 'unrecorded' ? { judge: r.judges[0] } : {}),
       details: r.details.map((d) => ({
         task: d.task,
         ...(d.date ? { date: d.date, run: d.run } : {}),

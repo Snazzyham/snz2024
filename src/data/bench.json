@@ -4,7 +4,7 @@
   "description": "Models tested against my personal workflows, rather than an arbitrary benchmark.",
   "url": "https://snazzyham.com/bench/",
   "first_run": "2026-09-22",
-  "last_run": "2026-10-19",
+  "last_run": "2026-10-20",
   "dataset_description": "Scores, cost, time and token use for AI models on tasks taken from my own work: repository search, document digests, change plans, builds, full-stack repairs, CLI development, infrastructure, code review and orchestration. Mechanical tasks are graded by running the result; the judged ones use one pinned model."
  },
  "tie_band": 8,
@@ -35,6 +35,40 @@
    ],
    "has_value_pick": true,
    "rows": [
+    {
+     "model": "opencode-go/deepseek-v4.1-flash",
+     "thinking": "low",
+     "run": "2026-10-20T09-19",
+     "date": "20 Oct 09:19",
+     "score": 95.5,
+     "complete": true,
+     "cost": 0.012242,
+     "time": 65.8,
+     "tokens": 302982,
+     "fail": false,
+     "judges": [
+      "anthropic/claude-opus-5:max"
+     ],
+     "path": null,
+     "details": [
+      {
+       "run": "2026-10-20T09-19",
+       "date": "20 Oct 09:19",
+       "task": "S1",
+       "track": "search",
+       "score": 95.5,
+       "partial": null,
+       "hard_fail": null,
+       "model": "opencode-go/deepseek-v4.1-flash",
+       "thinking": "low",
+       "cost": 0.012242,
+       "time": 65.8,
+       "tokens": 302982,
+       "judge": "anthropic/claude-opus-5:max"
+      }
+     ],
+     "cand": true
+    },
     {
      "model": "opencode-go/deepseek-v4.1-flash",
      "thinking": "high",
@@ -662,40 +696,6 @@
        "cost": 0.013317,
        "time": 80.3,
        "tokens": 659108,
-       "judge": "anthropic/claude-opus-5:max"
-      }
-     ],
-     "cand": true
-    },
-    {
-     "model": "opencode-go/deepseek-v4.1-flash",
-     "thinking": "low",
-     "run": "2026-09-26T09-33",
-     "date": "26 Sep 09:33",
-     "score": 100.0,
-     "complete": true,
-     "cost": 0.019589,
-     "time": 104.7,
-     "tokens": 518546,
-     "fail": false,
-     "judges": [
-      "anthropic/claude-opus-5:max"
-     ],
-     "path": null,
-     "details": [
-      {
-       "run": "2026-09-26T09-33",
-       "date": "26 Sep 09:33",
-       "task": "S1",
-       "track": "search",
-       "score": 100.0,
-       "partial": null,
-       "hard_fail": null,
-       "model": "opencode-go/deepseek-v4.1-flash",
-       "thinking": "low",
-       "cost": 0.019589,
-       "time": 104.7,
-       "tokens": 518546,
        "judge": "anthropic/claude-opus-5:max"
       }
      ],
@@ -1459,6 +1459,54 @@
    ],
    "has_value_pick": false,
    "rows": [
+    {
+     "model": "opencode-go/deepseek-v4.1-flash",
+     "thinking": "low",
+     "run": "2026-10-20T09-19",
+     "date": "20 Oct 09:19",
+     "score": 50.8,
+     "complete": true,
+     "cost": 0.018605999999999998,
+     "time": 167.6,
+     "tokens": 903997,
+     "fail": false,
+     "judges": [
+      "anthropic/claude-opus-5:max"
+     ],
+     "path": null,
+     "details": [
+      {
+       "run": "2026-10-20T09-19",
+       "date": "20 Oct 09:19",
+       "task": "D1",
+       "track": "digest",
+       "score": 32.86,
+       "partial": null,
+       "hard_fail": null,
+       "model": "opencode-go/deepseek-v4.1-flash",
+       "thinking": "low",
+       "cost": 0.0157,
+       "time": 151.7,
+       "tokens": 858878,
+       "judge": "anthropic/claude-opus-5:max"
+      },
+      {
+       "run": "2026-10-20T09-19",
+       "date": "20 Oct 09:19",
+       "task": "D2",
+       "track": "digest",
+       "score": 68.75,
+       "partial": null,
+       "hard_fail": null,
+       "model": "opencode-go/deepseek-v4.1-flash",
+       "thinking": "low",
+       "cost": 0.002906,
+       "time": 15.9,
+       "tokens": 45119,
+       "judge": "anthropic/claude-opus-5:max"
+      }
+     ]
+    },
     {
      "model": "opencode-go/deepseek-v4.1-flash",
      "thinking": "high",
@@ -2319,54 +2367,6 @@
        "cost": 0.003761,
        "time": 24.6,
        "tokens": 52541,
-       "judge": "anthropic/claude-opus-5:max"
-      }
-     ]
-    },
-    {
-     "model": "opencode-go/deepseek-v4.1-flash",
-     "thinking": "low",
-     "run": "2026-09-26T09-33",
-     "date": "26 Sep 09:33",
-     "score": 52.9,
-     "complete": true,
-     "cost": 0.012532999999999999,
-     "time": 65.1,
-     "tokens": 255916,
-     "fail": false,
-     "judges": [
-      "anthropic/claude-opus-5:max"
-     ],
-     "path": null,
-     "details": [
-      {
-       "run": "2026-09-26T09-33",
-       "date": "26 Sep 09:33",
-       "task": "D1",
-       "track": "digest",
-       "score": 37.14,
-       "partial": null,
-       "hard_fail": null,
-       "model": "opencode-go/deepseek-v4.1-flash",
-       "thinking": "low",
-       "cost": 0.010591,
-       "time": 46.7,
-       "tokens": 191780,
-       "judge": "anthropic/claude-opus-5:max"
-      },
-      {
-       "run": "2026-09-26T09-33",
-       "date": "26 Sep 09:33",
-       "task": "D2",
-       "track": "digest",
-       "score": 68.75,
-       "partial": null,
-       "hard_fail": null,
-       "model": "opencode-go/deepseek-v4.1-flash",
-       "thinking": "low",
-       "cost": 0.001942,
-       "time": 18.4,
-       "tokens": 64136,
        "judge": "anthropic/claude-opus-5:max"
       }
      ]
@@ -3495,6 +3495,54 @@
    "rows": [
     {
      "model": "opencode-go/deepseek-v4.1-flash",
+     "thinking": "low",
+     "run": "2026-10-20T09-19",
+     "date": "20 Oct 09:19",
+     "score": 61.2,
+     "complete": true,
+     "cost": 0.112456,
+     "time": 919.8,
+     "tokens": 7931402,
+     "fail": false,
+     "judges": [
+      "anthropic/claude-opus-5:max"
+     ],
+     "path": null,
+     "details": [
+      {
+       "run": "2026-10-20T09-19",
+       "date": "20 Oct 09:19",
+       "task": "P1",
+       "track": "plan",
+       "score": 47.03,
+       "partial": null,
+       "hard_fail": null,
+       "model": "opencode-go/deepseek-v4.1-flash",
+       "thinking": "low",
+       "cost": 0.040187,
+       "time": 382.5,
+       "tokens": 2064500,
+       "judge": "anthropic/claude-opus-5:max"
+      },
+      {
+       "run": "2026-10-20T09-19",
+       "date": "20 Oct 09:19",
+       "task": "P2",
+       "track": "plan",
+       "score": 75.28,
+       "partial": null,
+       "hard_fail": null,
+       "model": "opencode-go/deepseek-v4.1-flash",
+       "thinking": "low",
+       "cost": 0.072269,
+       "time": 537.3,
+       "tokens": 5866902,
+       "judge": "anthropic/claude-opus-5:max"
+      }
+     ]
+    },
+    {
+     "model": "opencode-go/deepseek-v4.1-flash",
      "thinking": "high",
      "run": "2026-10-19T12-43",
      "date": "19 Oct 12:43",
@@ -4354,54 +4402,6 @@
        "cost": 0.009461,
        "time": 135.4,
        "tokens": 430783,
-       "judge": "anthropic/claude-opus-5:max"
-      }
-     ]
-    },
-    {
-     "model": "opencode-go/deepseek-v4.1-flash",
-     "thinking": "low",
-     "run": "2026-09-26T09-33",
-     "date": "26 Sep 09:33",
-     "score": 62.7,
-     "complete": true,
-     "cost": 0.060274,
-     "time": 443.2,
-     "tokens": 2782406,
-     "fail": false,
-     "judges": [
-      "anthropic/claude-opus-5:max"
-     ],
-     "path": null,
-     "details": [
-      {
-       "run": "2026-09-26T09-33",
-       "date": "26 Sep 09:33",
-       "task": "P1",
-       "track": "plan",
-       "score": 48.78,
-       "partial": null,
-       "hard_fail": null,
-       "model": "opencode-go/deepseek-v4.1-flash",
-       "thinking": "low",
-       "cost": 0.027336,
-       "time": 212.6,
-       "tokens": 1012541,
-       "judge": "anthropic/claude-opus-5:max"
-      },
-      {
-       "run": "2026-09-26T09-33",
-       "date": "26 Sep 09:33",
-       "task": "P2",
-       "track": "plan",
-       "score": 76.67,
-       "partial": null,
-       "hard_fail": null,
-       "model": "opencode-go/deepseek-v4.1-flash",
-       "thinking": "low",
-       "cost": 0.032938,
-       "time": 230.6,
-       "tokens": 1769865,
        "judge": "anthropic/claude-opus-5:max"
       }
      ]
@@ -5530,6 +5530,55 @@
    "rows": [
     {
      "model": "opencode-go/deepseek-v4.1-flash",
+     "thinking": "low",
+     "run": "2026-10-20T09-19",
+     "date": "20 Oct 09:19",
+     "score": 100.0,
+     "complete": true,
+     "cost": 0.042885,
+     "time": 767.9,
+     "tokens": 2889635,
+     "fail": false,
+     "judges": [
+      "anthropic/claude-opus-5:max"
+     ],
+     "path": null,
+     "details": [
+      {
+       "run": "2026-10-20T09-19",
+       "date": "20 Oct 09:19",
+       "task": "B1",
+       "track": "frontend",
+       "score": 100.0,
+       "partial": null,
+       "hard_fail": null,
+       "model": "opencode-go/deepseek-v4.1-flash",
+       "thinking": "low",
+       "cost": 0.016555,
+       "time": 146.4,
+       "tokens": 1136874,
+       "judge": "anthropic/claude-opus-5:max"
+      },
+      {
+       "run": "2026-10-20T09-19",
+       "date": "20 Oct 09:19",
+       "task": "B2",
+       "track": "frontend",
+       "score": 100.0,
+       "partial": null,
+       "hard_fail": null,
+       "model": "opencode-go/deepseek-v4.1-flash",
+       "thinking": "low",
+       "cost": 0.02633,
+       "time": 621.5,
+       "tokens": 1752761,
+       "judge": "anthropic/claude-opus-5:max"
+      }
+     ],
+     "cand": true
+    },
+    {
+     "model": "opencode-go/deepseek-v4.1-flash",
      "thinking": "high",
      "run": "2026-10-19T12-43",
      "date": "19 Oct 12:43",
@@ -6398,55 +6447,6 @@
        "cost": 0.02351,
        "time": 249.8,
        "tokens": 1301034,
-       "judge": "anthropic/claude-opus-5:max"
-      }
-     ],
-     "cand": true
-    },
-    {
-     "model": "opencode-go/deepseek-v4.1-flash",
-     "thinking": "low",
-     "run": "2026-09-26T09-33",
-     "date": "26 Sep 09:33",
-     "score": 100.0,
-     "complete": true,
-     "cost": 0.07001199999999999,
-     "time": 640.4,
-     "tokens": 3452996,
-     "fail": false,
-     "judges": [
-      "anthropic/claude-opus-5:max"
-     ],
-     "path": null,
-     "details": [
-      {
-       "run": "2026-09-26T09-33",
-       "date": "26 Sep 09:33",
-       "task": "B1",
-       "track": "frontend",
-       "score": 100.0,
-       "partial": null,
-       "hard_fail": null,
-       "model": "opencode-go/deepseek-v4.1-flash",
-       "thinking": "low",
-       "cost": 0.016415,
-       "time": 144.1,
-       "tokens": 889143,
-       "judge": "anthropic/claude-opus-5:max"
-      },
-      {
-       "run": "2026-09-26T09-33",
-       "date": "26 Sep 09:33",
-       "task": "B2",
-       "track": "frontend",
-       "score": 100.0,
-       "partial": null,
-       "hard_fail": null,
-       "model": "opencode-go/deepseek-v4.1-flash",
-       "thinking": "low",
-       "cost": 0.053597,
-       "time": 496.3,
-       "tokens": 2563853,
        "judge": "anthropic/claude-opus-5:max"
       }
      ],
@@ -8481,6 +8481,42 @@
    "rows": [
     {
      "model": "opencode-go/deepseek-v4.1-flash",
+     "thinking": "low",
+     "run": "2026-10-20T09-19",
+     "date": "20 Oct 09:19",
+     "score": 100.0,
+     "complete": true,
+     "cost": 0.032941,
+     "time": 411.5,
+     "tokens": 1651552,
+     "fail": false,
+     "judges": [
+      "anthropic/claude-opus-5:max"
+     ],
+     "path": "First-pass complete",
+     "details": [
+      {
+       "run": "2026-10-20T09-19",
+       "date": "20 Oct 09:19",
+       "task": "CLI1",
+       "track": "cli",
+       "score": 100.0,
+       "partial": null,
+       "hard_fail": null,
+       "model": "opencode-go/deepseek-v4.1-flash",
+       "thinking": "low",
+       "cost": 0.032941,
+       "time": 411.5,
+       "tokens": 1651552,
+       "judge": "anthropic/claude-opus-5:max",
+       "path": "First-pass complete",
+       "first_pass": true
+      }
+     ],
+     "cand": true
+    },
+    {
+     "model": "opencode-go/deepseek-v4.1-flash",
      "thinking": "high",
      "run": "2026-10-19T12-43",
      "date": "19 Oct 12:43",
@@ -8833,41 +8869,6 @@
        "first_pass": false
       }
      ]
-    },
-    {
-     "model": "opencode-go/deepseek-v4.1-flash",
-     "thinking": "low",
-     "run": "2026-10-07T22-48",
-     "date": "07 Oct 22:48",
-     "score": 77.5,
-     "complete": true,
-     "cost": 0.139314,
-     "time": 1475.9,
-     "tokens": 12980168,
-     "fail": false,
-     "judges": [
-      "anthropic/claude-opus-5:max"
-     ],
-     "path": "Completed after feedback",
-     "details": [
-      {
-       "run": "2026-10-07T22-48",
-       "date": "07 Oct 22:48",
-       "task": "CLI1",
-       "track": "cli",
-       "score": 77.5,
-       "partial": null,
-       "hard_fail": null,
-       "model": "opencode-go/deepseek-v4.1-flash",
-       "thinking": "low",
-       "cost": 0.139314,
-       "time": 1475.9,
-       "tokens": 12980168,
-       "judge": "anthropic/claude-opus-5:max",
-       "path": "Completed after feedback",
-       "first_pass": false
-      }
-     ]
     }
    ]
   },
@@ -8887,6 +8888,55 @@
    ],
    "has_value_pick": true,
    "rows": [
+    {
+     "model": "opencode-go/deepseek-v4.1-flash",
+     "thinking": "low",
+     "run": "2026-10-20T09-19",
+     "date": "20 Oct 09:19",
+     "score": 97.5,
+     "complete": true,
+     "cost": 0.059722000000000004,
+     "time": 471.2,
+     "tokens": 2728732,
+     "fail": false,
+     "judges": [
+      "anthropic/claude-opus-5:max"
+     ],
+     "path": null,
+     "details": [
+      {
+       "run": "2026-10-20T09-19",
+       "date": "20 Oct 09:19",
+       "task": "O1",
+       "track": "ops",
+       "score": 95.0,
+       "partial": null,
+       "hard_fail": null,
+       "model": "opencode-go/deepseek-v4.1-flash",
+       "thinking": "low",
+       "cost": 0.006933,
+       "time": 80.7,
+       "tokens": 246622,
+       "judge": "anthropic/claude-opus-5:max"
+      },
+      {
+       "run": "2026-10-20T09-19",
+       "date": "20 Oct 09:19",
+       "task": "O2",
+       "track": "ops",
+       "score": 100.0,
+       "partial": null,
+       "hard_fail": null,
+       "model": "opencode-go/deepseek-v4.1-flash",
+       "thinking": "low",
+       "cost": 0.052789,
+       "time": 390.5,
+       "tokens": 2482110,
+       "judge": "anthropic/claude-opus-5:max"
+      }
+     ],
+     "cand": true
+    },
     {
      "model": "opencode-go/deepseek-v4.1-flash",
      "thinking": "high",
@@ -9664,55 +9714,6 @@
      "cand": true
     },
     {
-     "model": "opencode-go/deepseek-v4.1-flash",
-     "thinking": "low",
-     "run": "2026-09-30T16-30",
-     "date": "30 Sep 16:30",
-     "score": 100.0,
-     "complete": true,
-     "cost": 0.023781999999999998,
-     "time": 158.8,
-     "tokens": 594863,
-     "fail": false,
-     "judges": [
-      "anthropic/claude-opus-5:max"
-     ],
-     "path": null,
-     "details": [
-      {
-       "run": "2026-09-30T16-30",
-       "date": "30 Sep 16:30",
-       "task": "O1",
-       "track": "ops",
-       "score": 100.0,
-       "partial": null,
-       "hard_fail": null,
-       "model": "opencode-go/deepseek-v4.1-flash",
-       "thinking": "low",
-       "cost": 0.010967,
-       "time": 92.8,
-       "tokens": 271065,
-       "judge": "anthropic/claude-opus-5:max"
-      },
-      {
-       "run": "2026-09-30T16-30",
-       "date": "30 Sep 16:30",
-       "task": "O2",
-       "track": "ops",
-       "score": 100.0,
-       "partial": null,
-       "hard_fail": null,
-       "model": "opencode-go/deepseek-v4.1-flash",
-       "thinking": "low",
-       "cost": 0.012815,
-       "time": 66.0,
-       "tokens": 323798,
-       "judge": "anthropic/claude-opus-5:max"
-      }
-     ],
-     "cand": true
-    },
-    {
      "model": "opencode-go/glm-5.3-flash",
      "thinking": "low",
      "run": "2026-09-30T16-30",
@@ -9830,6 +9831,69 @@
    ],
    "has_value_pick": true,
    "rows": [
+    {
+     "model": "opencode-go/deepseek-v4.1-flash",
+     "thinking": "low",
+     "run": "2026-10-20T09-19",
+     "date": "20 Oct 09:19",
+     "score": 46.7,
+     "complete": true,
+     "cost": 0.01739,
+     "time": 208.6,
+     "tokens": 399381,
+     "fail": true,
+     "judges": [
+      "anthropic/claude-opus-5:max"
+     ],
+     "path": null,
+     "details": [
+      {
+       "run": "2026-10-20T09-19",
+       "date": "20 Oct 09:19",
+       "task": "R1",
+       "track": "review",
+       "score": 70.0,
+       "partial": null,
+       "hard_fail": null,
+       "model": "opencode-go/deepseek-v4.1-flash",
+       "thinking": "low",
+       "cost": 0.004801,
+       "time": 45.0,
+       "tokens": 107613,
+       "judge": "anthropic/claude-opus-5:max"
+      },
+      {
+       "run": "2026-10-20T09-19",
+       "date": "20 Oct 09:19",
+       "task": "R2",
+       "track": "review",
+       "score": 70.0,
+       "partial": null,
+       "hard_fail": null,
+       "model": "opencode-go/deepseek-v4.1-flash",
+       "thinking": "low",
+       "cost": 0.007026,
+       "time": 69.3,
+       "tokens": 102195,
+       "judge": "anthropic/claude-opus-5:max"
+      },
+      {
+       "run": "2026-10-20T09-19",
+       "date": "20 Oct 09:19",
+       "task": "R3",
+       "track": "review",
+       "score": 0,
+       "partial": null,
+       "hard_fail": "reached answer material in 1 tool call(s)",
+       "model": "opencode-go/deepseek-v4.1-flash",
+       "thinking": "low",
+       "cost": 0.005563,
+       "time": 94.3,
+       "tokens": 189573,
+       "judge": "anthropic/claude-opus-5:max"
+      }
+     ]
+    },
     {
      "model": "opencode-go/deepseek-v4.1-flash",
      "thinking": "high",
@@ -11030,70 +11094,6 @@
        "judge": "anthropic/claude-opus-5:max"
       }
      ]
-    },
-    {
-     "model": "opencode-go/deepseek-v4.1-flash",
-     "thinking": "low",
-     "run": "2026-09-26T09-33",
-     "date": "26 Sep 09:33",
-     "score": 96.7,
-     "complete": true,
-     "cost": 0.019177,
-     "time": 232.2,
-     "tokens": 445871,
-     "fail": false,
-     "judges": [
-      "anthropic/claude-opus-5:max"
-     ],
-     "path": null,
-     "details": [
-      {
-       "run": "2026-09-26T09-33",
-       "date": "26 Sep 09:33",
-       "task": "R1",
-       "track": "review",
-       "score": 100.0,
-       "partial": null,
-       "hard_fail": null,
-       "model": "opencode-go/deepseek-v4.1-flash",
-       "thinking": "low",
-       "cost": 0.004261,
-       "time": 44.0,
-       "tokens": 82670,
-       "judge": "anthropic/claude-opus-5:max"
-      },
-      {
-       "run": "2026-09-26T09-33",
-       "date": "26 Sep 09:33",
-       "task": "R2",
-       "track": "review",
-       "score": 100.0,
-       "partial": null,
-       "hard_fail": null,
-       "model": "opencode-go/deepseek-v4.1-flash",
-       "thinking": "low",
-       "cost": 0.008174,
-       "time": 104.9,
-       "tokens": 77764,
-       "judge": "anthropic/claude-opus-5:max"
-      },
-      {
-       "run": "2026-09-26T09-33",
-       "date": "26 Sep 09:33",
-       "task": "R3",
-       "track": "review",
-       "score": 90.0,
-       "partial": null,
-       "hard_fail": null,
-       "model": "opencode-go/deepseek-v4.1-flash",
-       "thinking": "low",
-       "cost": 0.006742,
-       "time": 83.3,
-       "tokens": 285437,
-       "judge": "anthropic/claude-opus-5:max"
-      }
-     ],
-     "cand": true
     },
     {
      "model": "opencode-go/mimo-v2.6-flash",
