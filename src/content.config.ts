@@ -1,6 +1,6 @@
 import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
-import { glob } from 'astro/loaders';
+import { glob, type Loader } from 'astro/loaders';
 
 const seoSchema = z.object({
   title: z.string().min(5).max(120).optional(),
@@ -22,15 +22,28 @@ const pages = defineCollection({
   })
 });
 
+// Drop `draft: true` posts from production builds (pages, RSS, llms.txt, .md routes); `astro dev` keeps them.
+const withoutDrafts = (loader: Loader): Loader => ({
+  ...loader,
+  load: async (context) => {
+    await loader.load(context);
+    if (import.meta.env.DEV) return;
+    for (const [id, entry] of context.store.entries()) {
+      if (entry.data.draft === true) context.store.delete(id);
+    }
+  }
+});
+
 const writing = defineCollection({
-  loader: glob({ pattern: '**/[^_]*.md', base: './src/content/writing' }),
+  loader: withoutDrafts(glob({ pattern: '**/[^_]*.md', base: './src/content/writing' })),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
       date: z.coerce.date(),
       description: z.string().optional(),
       seoTitle: z.string().optional(),
-      image: image().optional()
+      image: image().optional(),
+      draft: z.boolean().default(false)
     })
 });
 

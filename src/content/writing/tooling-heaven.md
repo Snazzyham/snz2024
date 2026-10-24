@@ -1,6 +1,7 @@
 ---
 title: "Tooling Heaven"
 date: "2026-10-16"
+draft: true
 ---
 
 So yeah, I've always been a side project guy. For as long as I started coding, side projects have been my thing. When I wanted an app like Numi but for the web, I built Tally. When I couldn't find a simple web-based markdown editor, I built SimpleDown. Hell, one of the first things I built at university was InStock, an inventory tracking tool for my dad's warehouse. 
