@@ -1,7 +1,7 @@
 ---
 title: "Subagent Decision Fatigue"
 date: "2026-10-24"
-draft: true
+draft: false
 ---
 
 If you're a reader of this blog, you'd know I've been spending a lot of time lately playing with AI, and delving into the world of agents. 
