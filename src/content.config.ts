@@ -100,6 +100,7 @@ const site = defineCollection({
                 z.object({
                   title: z.string(),
                   since: z.string().optional(),
+                  url: z.string().url().optional(),
                   image: image().optional(),
                   description: z.string().optional()
                 })

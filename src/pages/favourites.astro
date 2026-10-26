@@ -25,16 +25,67 @@ const paragraphs = (s?: string) =>
     .filter(Boolean)
     .map(inline);
 const year = (d?: string) => (d ? d.slice(0, 4) : '');
+
+// Naming conventions: a reference for me (and any LLM reading this) on what things are called and why.
+const names = [
+  {
+    group: 'Devices',
+    theme: 'HotD Dragons',
+    items: [
+      ['Caraxes', 'Desktop PC'],
+      ['Syrax', 'Laptop'],
+      ['Arrax', 'Spare M1 MacBook Air'],
+      ['Stormcloud', 'Phone']
+    ]
+  },
+  {
+    group: 'AI agents',
+    theme: 'You might recognize a few',
+    items: [
+      ['Vision', 'Lead agent: plans, decides, checks the work'],
+      ['Jarvis', 'Security review, plans, longer builds'],
+      ['Friday', 'Most builds and general purpose work'],
+      ['Edith', 'Wildcard'],
+      ['Bernie', 'Finance Assistant, peep the irony'],
+      ['Jeeves', 'Personal Assistant, email cleanup, etc'],
+      ['Roddy Ho', 'General Work Assistant']
+    ]
+  },
+  {
+    group: 'Bots',
+    theme: 'Whoever fits the job',
+    items: [
+      ['Stuart Minkus', 'Code reviews'],
+      ['The Ancient One', 'Monitoring'],
+      ['Clippy', 'Docs']
+    ]
+  },
+  {
+    group: 'Tools',
+    theme: 'Named based on what they actually do, in a way',
+    items: [['Bifrost', 'Bridge for passing files between my computer and devices']]
+  }
+];
 ---
 
 <BaseLayout
   title="Favourites"
   description="Some of the podcasts, movies and TV shows that I've adored over the years."
   schema={[
-    webPage('CollectionPage', '/favourites/', entry.data.title ?? 'Favourites', "Some of the podcasts, movies and TV shows that I've adored over the years.", {
-      author,
-      hasPart: categories.map((c) => ({ '@type': 'ItemList', name: c.title, ...itemList(c.items.map((i) => ({ name: i.title }))) }))
-    }),
+    webPage(
+      'CollectionPage',
+      '/favourites/',
+      entry.data.title ?? 'Favourites',
+      "Some of the podcasts, movies and TV shows that I've adored over the years.",
+      {
+        author,
+        hasPart: categories.map((c) => ({
+          '@type': 'ItemList',
+          name: c.title,
+          ...itemList(c.items.map((i) => ({ name: i.title })))
+        }))
+      }
+    ),
     breadcrumbs([{ name: 'Favourites', path: '/favourites/' }])
   ]}
 >
@@ -49,43 +100,93 @@ const year = (d?: string) => (d ? d.slice(0, 4) : '');
     {
       categories.map((cat) => {
         // Podcast art is square; film and TV posters are portrait. Posters get a denser grid.
-        const posters = cat.items.some((it) => it.image && it.image.height > it.image.width);
+        const posters = cat.items.some(
+          (it) => it.image && it.image.height > it.image.width
+        );
         return (
-        <section class="rule py-10">
-          <p class="eyebrow reveal mb-8">
-            {cat.title} <span class="text-accent">—</span>{' '}
-            {String(cat.items.length).padStart(2, '0')}
-          </p>
-          <ul class={`grid gap-x-6 gap-y-12 ${posters ? 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'}`}>
-            {cat.items.map((item, i) => (
-              <li class="reveal" style={`--i:${i % (posters ? 4 : 3)}`}>
-                {item.image && (
-                  <div class="photo mb-4" style={`aspect-ratio: ${item.image.width} / ${item.image.height}`}>
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      width={700}
-                      class="vintage develop h-full w-full object-cover"
-                    />
-                  </div>
-                )}
-                <h3 class="font-display text-xl font-semibold tracking-tight">{item.title}</h3>
-                {item.since && <p class="eyebrow mt-1">Since {year(item.since)}</p>}
-                {paragraphs(item.description).map((p) => (
-                  <p class="mt-3 text-[15px] text-ink-2" set:html={p} />
-                ))}
-              </li>
-            ))}
-          </ul>
-        </section>
+          <section class="rule py-10">
+            <p class="eyebrow reveal mb-8">
+              {cat.title} <span class="text-accent">—</span>{' '}
+              {String(cat.items.length).padStart(2, '0')}
+            </p>
+            <ul
+              class={`grid gap-x-6 gap-y-12 ${posters ? 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'}`}
+            >
+              {cat.items.map((item, i) => (
+                <li class="reveal" style={`--i:${i % (posters ? 4 : 3)}`}>
+                  {item.image && (
+                    <a
+                      href={item.url}
+                      target={item.url ? '_blank' : undefined}
+                      rel={item.url ? 'noopener noreferrer' : undefined}
+                      class="photo mb-4 block"
+                      style={`aspect-ratio: ${item.image.width} / ${item.image.height}`}
+                    >
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        width={700}
+                        class="vintage develop h-full w-full object-cover"
+                      />
+                    </a>
+                  )}
+                  {!(posters && item.image) && (
+                    <h3 class="font-display text-xl font-semibold tracking-tight">
+                      {item.title}
+                    </h3>
+                  )}
+                  {item.since && <p class="eyebrow mt-1">Since {year(item.since)}</p>}
+                  {paragraphs(item.description).map((p) => (
+                    <p class="mt-3 text-[15px] text-ink-2" set:html={p} />
+                  ))}
+                </li>
+              ))}
+            </ul>
+          </section>
         );
       })
     }
+
+    <section class="rule py-10" id="easter-eggs">
+      <p class="eyebrow reveal mb-3">
+        Easter eggs <span class="text-accent">—</span>{' '}
+        {String(names.reduce((n, g) => n + g.items.length, 0)).padStart(2, '0')}
+      </p>
+      <p class="reveal mb-8 max-w-prose text-[15px] text-ink-2">
+        I watch enough movies and TV that they leak into everything else. My computers,
+        phone, AI helpers and side projects nearly all borrow a name from something on
+        screen. Here's the decoder.
+      </p>
+      <div class="grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2">
+        {
+          names.map((g, i) => (
+            <div class="reveal" style={`--i:${i % 2}`}>
+              <h3 class="font-display text-xl font-semibold tracking-tight">{g.group}</h3>
+              <p class="eyebrow mt-1 mb-3">{g.theme}</p>
+              <table class="w-full text-[15px]">
+                <tbody>
+                  {g.items.map(([name, what]) => (
+                    <tr class="border-t border-current/10">
+                      <td class="py-2 pr-4 align-top font-semibold whitespace-nowrap">
+                        {name}
+                      </td>
+                      <td class="py-2 align-top text-ink-2">{what}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ))
+        }
+      </div>
+    </section>
   </div>
 </BaseLayout>
 
 <style>
   @media (min-width: 768px) {
-    .intro { grid-column: 1 / span 7; }
+    .intro {
+      grid-column: 1 / span 7;
+    }
   }
 </style>
