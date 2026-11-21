@@ -4,7 +4,7 @@
   "description": "Models tested against my personal workflows, rather than an arbitrary benchmark.",
   "url": "https://snazzyham.com/bench/",
   "first_run": "2026-09-22",
-  "last_run": "2026-10-27",
+  "last_run": "2026-11-21",
   "dataset_description": "Scores, cost, time and token use for AI models on tasks taken from my own work: repository search, document digests, change plans, builds, full-stack repairs, CLI development, infrastructure, code review and orchestration. Mechanical tasks are graded by running the result; the judged ones use one pinned model."
  },
  "tie_band": 8,
@@ -35,6 +35,39 @@
    ],
    "has_value_pick": true,
    "rows": [
+    {
+     "model": "openai-codex/gpt-6.2-sol",
+     "thinking": "medium",
+     "run": "2026-11-21T13-40",
+     "date": "21 Nov 13:40",
+     "score": 92.0,
+     "complete": true,
+     "cost": 0.12591,
+     "time": 339.9,
+     "tokens": 173932,
+     "fail": false,
+     "judges": [
+      "openai-codex/gpt-6-luna:max"
+     ],
+     "path": null,
+     "details": [
+      {
+       "run": "2026-11-21T13-40",
+       "date": "21 Nov 13:40",
+       "task": "S1",
+       "track": "search",
+       "score": 92.0,
+       "partial": null,
+       "hard_fail": null,
+       "model": "openai-codex/gpt-6.2-sol",
+       "thinking": "medium",
+       "cost": 0.12591,
+       "time": 339.9,
+       "tokens": 173932,
+       "judge": "openai-codex/gpt-6-luna:max"
+      }
+     ]
+    },
     {
      "model": "openai-codex/gpt-6.1-terra",
      "thinking": "medium",
@@ -1591,6 +1624,54 @@
    ],
    "has_value_pick": false,
    "rows": [
+    {
+     "model": "openai-codex/gpt-6.2-sol",
+     "thinking": "medium",
+     "run": "2026-11-21T13-40",
+     "date": "21 Nov 13:40",
+     "score": 42.4,
+     "complete": true,
+     "cost": 0.169995,
+     "time": 542.3,
+     "tokens": 246275,
+     "fail": false,
+     "judges": [
+      "openai-codex/gpt-6-luna:max"
+     ],
+     "path": null,
+     "details": [
+      {
+       "run": "2026-11-21T13-40",
+       "date": "21 Nov 13:40",
+       "task": "D1",
+       "track": "digest",
+       "score": 28.57,
+       "partial": null,
+       "hard_fail": null,
+       "model": "openai-codex/gpt-6.2-sol",
+       "thinking": "medium",
+       "cost": 0.126816,
+       "time": 278.5,
+       "tokens": 192912,
+       "judge": "openai-codex/gpt-6-luna:max"
+      },
+      {
+       "run": "2026-11-21T13-40",
+       "date": "21 Nov 13:40",
+       "task": "D2",
+       "track": "digest",
+       "score": 56.25,
+       "partial": null,
+       "hard_fail": null,
+       "model": "openai-codex/gpt-6.2-sol",
+       "thinking": "medium",
+       "cost": 0.043179,
+       "time": 263.8,
+       "tokens": 53363,
+       "judge": "openai-codex/gpt-6-luna:max"
+      }
+     ]
+    },
     {
      "model": "openai-codex/gpt-6.1-terra",
      "thinking": "medium",
@@ -3818,6 +3899,54 @@
    "has_value_pick": false,
    "rows": [
     {
+     "model": "openai-codex/gpt-6.2-sol",
+     "thinking": "medium",
+     "run": "2026-11-21T13-40",
+     "date": "21 Nov 13:40",
+     "score": 29.2,
+     "complete": true,
+     "cost": 0.566311,
+     "time": 819.7,
+     "tokens": 1287055,
+     "fail": false,
+     "judges": [
+      "openai-codex/gpt-6-luna:max"
+     ],
+     "path": null,
+     "details": [
+      {
+       "run": "2026-11-21T13-40",
+       "date": "21 Nov 13:40",
+       "task": "P1",
+       "track": "plan",
+       "score": 37.03,
+       "partial": null,
+       "hard_fail": null,
+       "model": "openai-codex/gpt-6.2-sol",
+       "thinking": "medium",
+       "cost": 0.283317,
+       "time": 452.7,
+       "tokens": 618677,
+       "judge": "openai-codex/gpt-6-luna:max"
+      },
+      {
+       "run": "2026-11-21T13-40",
+       "date": "21 Nov 13:40",
+       "task": "P2",
+       "track": "plan",
+       "score": 21.39,
+       "partial": null,
+       "hard_fail": null,
+       "model": "openai-codex/gpt-6.2-sol",
+       "thinking": "medium",
+       "cost": 0.282994,
+       "time": 367.0,
+       "tokens": 668378,
+       "judge": "openai-codex/gpt-6-luna:max"
+      }
+     ]
+    },
+    {
      "model": "openai-codex/gpt-6.1-terra",
      "thinking": "medium",
      "run": "2026-10-27T08-46",
@@ -6043,6 +6172,55 @@
    ],
    "has_value_pick": true,
    "rows": [
+    {
+     "model": "openai-codex/gpt-6.2-sol",
+     "thinking": "medium",
+     "run": "2026-11-21T13-40",
+     "date": "21 Nov 13:40",
+     "score": 97.5,
+     "complete": true,
+     "cost": 0.622018,
+     "time": 1181.3,
+     "tokens": 2110184,
+     "fail": false,
+     "judges": [
+      "openai-codex/gpt-6-luna:max"
+     ],
+     "path": null,
+     "details": [
+      {
+       "run": "2026-11-21T13-40",
+       "date": "21 Nov 13:40",
+       "task": "B1",
+       "track": "frontend",
+       "score": 100.0,
+       "partial": null,
+       "hard_fail": null,
+       "model": "openai-codex/gpt-6.2-sol",
+       "thinking": "medium",
+       "cost": 0.250491,
+       "time": 452.9,
+       "tokens": 877507,
+       "judge": "openai-codex/gpt-6-luna:max"
+      },
+      {
+       "run": "2026-11-21T13-40",
+       "date": "21 Nov 13:40",
+       "task": "B2",
+       "track": "frontend",
+       "score": 95.0,
+       "partial": null,
+       "hard_fail": null,
+       "model": "openai-codex/gpt-6.2-sol",
+       "thinking": "medium",
+       "cost": 0.371527,
+       "time": 728.4,
+       "tokens": 1232677,
+       "judge": "openai-codex/gpt-6-luna:max"
+      }
+     ],
+     "cand": true
+    },
     {
      "model": "openai-codex/gpt-6.1-terra",
      "thinking": "medium",
@@ -8316,6 +8494,55 @@
    "has_value_pick": true,
    "rows": [
     {
+     "model": "openai-codex/gpt-6.2-sol",
+     "thinking": "medium",
+     "run": "2026-11-21T13-40",
+     "date": "21 Nov 13:40",
+     "score": 100.0,
+     "complete": true,
+     "cost": 0.9059410000000001,
+     "time": 1257.1,
+     "tokens": 2585664,
+     "fail": false,
+     "judges": [
+      "openai-codex/gpt-6-luna:max"
+     ],
+     "path": null,
+     "details": [
+      {
+       "run": "2026-11-21T13-40",
+       "date": "21 Nov 13:40",
+       "task": "FS1",
+       "track": "fullstack",
+       "score": 100.0,
+       "partial": null,
+       "hard_fail": null,
+       "model": "openai-codex/gpt-6.2-sol",
+       "thinking": "medium",
+       "cost": 0.55317,
+       "time": 669.0,
+       "tokens": 1816529,
+       "judge": "openai-codex/gpt-6-luna:max"
+      },
+      {
+       "run": "2026-11-21T13-40",
+       "date": "21 Nov 13:40",
+       "task": "FS2",
+       "track": "fullstack",
+       "score": 100.0,
+       "partial": null,
+       "hard_fail": null,
+       "model": "openai-codex/gpt-6.2-sol",
+       "thinking": "medium",
+       "cost": 0.352771,
+       "time": 588.1,
+       "tokens": 769135,
+       "judge": "openai-codex/gpt-6-luna:max"
+      }
+     ],
+     "cand": true
+    },
+    {
      "model": "opencode-go/beam-free",
      "thinking": "high",
      "run": "2026-10-17T08-44",
@@ -8457,8 +8684,7 @@
        "tokens": 2190284,
        "judge": "anthropic/claude-opus-5:max"
       }
-     ],
-     "cand": true
+     ]
     },
     {
      "model": "openai-codex/gpt-6-luna",
@@ -8602,8 +8828,7 @@
        "tokens": 10286443,
        "judge": "anthropic/claude-opus-5:max"
       }
-     ],
-     "cand": true
+     ]
     },
     {
      "model": "opencode-go/glm-5.3-flash",
@@ -8796,8 +9021,7 @@
        "tokens": 1111761,
        "judge": "anthropic/claude-opus-5:max"
       }
-     ],
-     "cand": true
+     ]
     },
     {
      "model": "opencode-go/deepseek-v4.1-flash",
@@ -8845,8 +9069,7 @@
        "tokens": 9375447,
        "judge": "anthropic/claude-opus-5:max"
       }
-     ],
-     "cand": true
+     ]
     },
     {
      "model": "opencode-go/muse-spark-1.3-contributor",
@@ -8942,8 +9165,7 @@
        "tokens": 1128772,
        "judge": "anthropic/claude-opus-5:max"
       }
-     ],
-     "cand": true
+     ]
     },
     {
      "model": "anthropic/claude-sonnet-5-5",
@@ -8991,8 +9213,7 @@
        "tokens": 660738,
        "judge": "anthropic/claude-opus-5:max"
       }
-     ],
-     "cand": true
+     ]
     },
     {
      "model": "openai-codex/gpt-6-luna",
@@ -9040,8 +9261,7 @@
        "tokens": 3462311,
        "judge": "anthropic/claude-opus-5:max"
       }
-     ],
-     "cand": true
+     ]
     },
     {
      "model": "opencode-go/deepseek-v4.1-flash",
@@ -9202,6 +9422,41 @@
    ],
    "has_value_pick": true,
    "rows": [
+    {
+     "model": "openai-codex/gpt-6.2-sol",
+     "thinking": "medium",
+     "run": "2026-11-21T13-40",
+     "date": "21 Nov 13:40",
+     "score": 90.0,
+     "complete": true,
+     "cost": 0.730844,
+     "time": 780.9,
+     "tokens": 2272937,
+     "fail": false,
+     "judges": [
+      "openai-codex/gpt-6-luna:max"
+     ],
+     "path": "Follow-up used; requirements unmet",
+     "details": [
+      {
+       "run": "2026-11-21T13-40",
+       "date": "21 Nov 13:40",
+       "task": "CLI1",
+       "track": "cli",
+       "score": 90,
+       "partial": null,
+       "hard_fail": null,
+       "model": "openai-codex/gpt-6.2-sol",
+       "thinking": "medium",
+       "cost": 0.730844,
+       "time": 780.9,
+       "tokens": 2272937,
+       "judge": "openai-codex/gpt-6-luna:max",
+       "path": "Follow-up used; requirements unmet",
+       "first_pass": false
+      }
+     ]
+    },
     {
      "model": "openai-codex/gpt-6.1-terra",
      "thinking": "medium",
@@ -9752,6 +10007,55 @@
    "has_value_pick": true,
    "rows": [
     {
+     "model": "openai-codex/gpt-6.2-sol",
+     "thinking": "medium",
+     "run": "2026-11-21T13-40",
+     "date": "21 Nov 13:40",
+     "score": 100.0,
+     "complete": true,
+     "cost": 0.242964,
+     "time": 684.0,
+     "tokens": 449205,
+     "fail": false,
+     "judges": [
+      "openai-codex/gpt-6-luna:max"
+     ],
+     "path": null,
+     "details": [
+      {
+       "run": "2026-11-21T13-40",
+       "date": "21 Nov 13:40",
+       "task": "O1",
+       "track": "ops",
+       "score": 100.0,
+       "partial": null,
+       "hard_fail": null,
+       "model": "openai-codex/gpt-6.2-sol",
+       "thinking": "medium",
+       "cost": 0.097282,
+       "time": 341.1,
+       "tokens": 180997,
+       "judge": "openai-codex/gpt-6-luna:max"
+      },
+      {
+       "run": "2026-11-21T13-40",
+       "date": "21 Nov 13:40",
+       "task": "O2",
+       "track": "ops",
+       "score": 100.0,
+       "partial": null,
+       "hard_fail": null,
+       "model": "openai-codex/gpt-6.2-sol",
+       "thinking": "medium",
+       "cost": 0.145682,
+       "time": 342.9,
+       "tokens": 268208,
+       "judge": "openai-codex/gpt-6-luna:max"
+      }
+     ],
+     "cand": true
+    },
+    {
      "model": "openai-codex/gpt-6.1-terra",
      "thinking": "medium",
      "run": "2026-10-27T08-46",
@@ -9797,7 +10101,8 @@
        "tokens": 262984,
        "judge": "openai-codex/gpt-6-luna:max"
       }
-     ]
+     ],
+     "cand": true
     },
     {
      "model": "opencode-go/deepseek-v4.1-flash",
@@ -9845,8 +10150,7 @@
        "tokens": 2482110,
        "judge": "anthropic/claude-opus-5:max"
       }
-     ],
-     "cand": true
+     ]
     },
     {
      "model": "opencode-go/minimax-m3.1-flash-free",
@@ -10182,8 +10486,7 @@
        "tokens": 325931,
        "judge": "anthropic/claude-opus-5:max"
       }
-     ],
-     "cand": true
+     ]
     },
     {
      "model": "openai-codex/gpt-6-luna",
@@ -10231,8 +10534,7 @@
        "tokens": 658085,
        "judge": "anthropic/claude-opus-5:max"
       }
-     ],
-     "cand": true
+     ]
     },
     {
      "model": "anthropic/claude-haiku-5-5",
@@ -10328,8 +10630,7 @@
        "tokens": 3849903,
        "judge": "anthropic/claude-opus-5:max"
       }
-     ],
-     "cand": true
+     ]
     },
     {
      "model": "openai-codex/gpt-6-sol",
@@ -10425,8 +10726,7 @@
        "tokens": 781451,
        "judge": "anthropic/claude-opus-5:max"
       }
-     ],
-     "cand": true
+     ]
     },
     {
      "model": "opencode-go/glm-5.3-flash",
@@ -10570,8 +10870,7 @@
        "tokens": 300167,
        "judge": "anthropic/claude-opus-5:max"
       }
-     ],
-     "cand": true
+     ]
     },
     {
      "model": "anthropic/claude-sonnet-5-5",
@@ -10619,8 +10918,7 @@
        "tokens": 545108,
        "judge": "anthropic/claude-opus-5:max"
       }
-     ],
-     "cand": true
+     ]
     },
     {
      "model": "openai-codex/gpt-6-luna",
@@ -10668,8 +10966,7 @@
        "tokens": 654137,
        "judge": "anthropic/claude-opus-5:max"
       }
-     ],
-     "cand": true
+     ]
     },
     {
      "model": "opencode-go/space-bunny-free",
@@ -10765,8 +11062,7 @@
        "tokens": 477682,
        "judge": "anthropic/claude-opus-5:max"
       }
-     ],
-     "cand": true
+     ]
     },
     {
      "model": "opencode-go/glm-5.3-flash",
@@ -10886,6 +11182,69 @@
    ],
    "has_value_pick": true,
    "rows": [
+    {
+     "model": "openai-codex/gpt-6.2-sol",
+     "thinking": "medium",
+     "run": "2026-11-21T13-40",
+     "date": "21 Nov 13:40",
+     "score": 86.7,
+     "complete": true,
+     "cost": 0.11652299999999999,
+     "time": 800.6,
+     "tokens": 158829,
+     "fail": false,
+     "judges": [
+      "openai-codex/gpt-6-luna:max"
+     ],
+     "path": null,
+     "details": [
+      {
+       "run": "2026-11-21T13-40",
+       "date": "21 Nov 13:40",
+       "task": "R1",
+       "track": "review",
+       "score": 100.0,
+       "partial": null,
+       "hard_fail": null,
+       "model": "openai-codex/gpt-6.2-sol",
+       "thinking": "medium",
+       "cost": 0.022341,
+       "time": 266.3,
+       "tokens": 49389,
+       "judge": "openai-codex/gpt-6-luna:max"
+      },
+      {
+       "run": "2026-11-21T13-40",
+       "date": "21 Nov 13:40",
+       "task": "R2",
+       "track": "review",
+       "score": 70.0,
+       "partial": null,
+       "hard_fail": null,
+       "model": "openai-codex/gpt-6.2-sol",
+       "thinking": "medium",
+       "cost": 0.042731,
+       "time": 270.0,
+       "tokens": 50392,
+       "judge": "openai-codex/gpt-6-luna:max"
+      },
+      {
+       "run": "2026-11-21T13-40",
+       "date": "21 Nov 13:40",
+       "task": "R3",
+       "track": "review",
+       "score": 90.0,
+       "partial": null,
+       "hard_fail": null,
+       "model": "openai-codex/gpt-6.2-sol",
+       "thinking": "medium",
+       "cost": 0.051451,
+       "time": 264.3,
+       "tokens": 59048,
+       "judge": "openai-codex/gpt-6-luna:max"
+      }
+     ]
+    },
     {
      "model": "openai-codex/gpt-6.1-terra",
      "thinking": "medium",
@@ -14736,6 +15095,9 @@
    "xhigh"
   ],
   "openai-codex/gpt-6.1-terra": [
+   "medium"
+  ],
+  "openai-codex/gpt-6.2-sol": [
    "medium"
   ],
   "opencode-go/beam-free": [
