@@ -36,6 +36,39 @@
    "has_value_pick": true,
    "rows": [
     {
+     "model": "opencode-go/deepseek-v4.1-flash",
+     "thinking": "low",
+     "run": "2026-11-21T14-19",
+     "date": "21 Nov 14:19",
+     "score": 82.7,
+     "complete": true,
+     "cost": 0.008755,
+     "time": 437.6,
+     "tokens": 255455,
+     "fail": false,
+     "judges": [
+      "openai-codex/gpt-6-luna:max"
+     ],
+     "path": null,
+     "details": [
+      {
+       "run": "2026-11-21T14-19",
+       "date": "21 Nov 14:19",
+       "task": "S1",
+       "track": "search",
+       "score": 82.67,
+       "partial": null,
+       "hard_fail": null,
+       "model": "opencode-go/deepseek-v4.1-flash",
+       "thinking": "low",
+       "cost": 0.008755,
+       "time": 437.6,
+       "tokens": 255455,
+       "judge": "openai-codex/gpt-6-luna:max"
+      }
+     ]
+    },
+    {
      "model": "openai-codex/gpt-6.2-sol",
      "thinking": "medium",
      "run": "2026-11-21T13-40",
@@ -100,40 +133,6 @@
        "judge": "openai-codex/gpt-6-luna:max"
       }
      ]
-    },
-    {
-     "model": "opencode-go/deepseek-v4.1-flash",
-     "thinking": "low",
-     "run": "2026-10-20T09-19",
-     "date": "20 Oct 09:19",
-     "score": 95.5,
-     "complete": true,
-     "cost": 0.012242,
-     "time": 65.8,
-     "tokens": 302982,
-     "fail": false,
-     "judges": [
-      "anthropic/claude-opus-5:max"
-     ],
-     "path": null,
-     "details": [
-      {
-       "run": "2026-10-20T09-19",
-       "date": "20 Oct 09:19",
-       "task": "S1",
-       "track": "search",
-       "score": 95.5,
-       "partial": null,
-       "hard_fail": null,
-       "model": "opencode-go/deepseek-v4.1-flash",
-       "thinking": "low",
-       "cost": 0.012242,
-       "time": 65.8,
-       "tokens": 302982,
-       "judge": "anthropic/claude-opus-5:max"
-      }
-     ],
-     "cand": true
     },
     {
      "model": "opencode-go/minimax-m3.1-flash-free",
@@ -1625,6 +1624,54 @@
    "has_value_pick": false,
    "rows": [
     {
+     "model": "opencode-go/deepseek-v4.1-flash",
+     "thinking": "low",
+     "run": "2026-11-21T14-19",
+     "date": "21 Nov 14:19",
+     "score": 50.8,
+     "complete": true,
+     "cost": 0.013353,
+     "time": 585.7,
+     "tokens": 305596,
+     "fail": false,
+     "judges": [
+      "openai-codex/gpt-6-luna:max"
+     ],
+     "path": null,
+     "details": [
+      {
+       "run": "2026-11-21T14-19",
+       "date": "21 Nov 14:19",
+       "task": "D1",
+       "track": "digest",
+       "score": 32.86,
+       "partial": null,
+       "hard_fail": null,
+       "model": "opencode-go/deepseek-v4.1-flash",
+       "thinking": "low",
+       "cost": 0.010638,
+       "time": 324.3,
+       "tokens": 242831,
+       "judge": "openai-codex/gpt-6-luna:max"
+      },
+      {
+       "run": "2026-11-21T14-19",
+       "date": "21 Nov 14:19",
+       "task": "D2",
+       "track": "digest",
+       "score": 68.75,
+       "partial": null,
+       "hard_fail": null,
+       "model": "opencode-go/deepseek-v4.1-flash",
+       "thinking": "low",
+       "cost": 0.002715,
+       "time": 261.4,
+       "tokens": 62765,
+       "judge": "openai-codex/gpt-6-luna:max"
+      }
+     ]
+    },
+    {
      "model": "openai-codex/gpt-6.2-sol",
      "thinking": "medium",
      "run": "2026-11-21T13-40",
@@ -1716,54 +1763,6 @@
        "cost": 0.019707,
        "time": 11.2,
        "tokens": 38933,
-       "judge": "openai-codex/gpt-6-luna:max"
-      }
-     ]
-    },
-    {
-     "model": "opencode-go/deepseek-v4.1-flash",
-     "thinking": "low",
-     "run": "2026-10-20T09-19",
-     "date": "20 Oct 09:19",
-     "score": 47.6,
-     "complete": true,
-     "cost": 0.018605999999999998,
-     "time": 167.6,
-     "tokens": 903997,
-     "fail": false,
-     "judges": [
-      "openai-codex/gpt-6-luna:max"
-     ],
-     "path": null,
-     "details": [
-      {
-       "run": "2026-10-20T09-19",
-       "date": "20 Oct 09:19",
-       "task": "D1",
-       "track": "digest",
-       "score": 26.43,
-       "partial": null,
-       "hard_fail": null,
-       "model": "opencode-go/deepseek-v4.1-flash",
-       "thinking": "low",
-       "cost": 0.0157,
-       "time": 151.7,
-       "tokens": 858878,
-       "judge": "openai-codex/gpt-6-luna:max"
-      },
-      {
-       "run": "2026-10-20T09-19",
-       "date": "20 Oct 09:19",
-       "task": "D2",
-       "track": "digest",
-       "score": 68.75,
-       "partial": null,
-       "hard_fail": null,
-       "model": "opencode-go/deepseek-v4.1-flash",
-       "thinking": "low",
-       "cost": 0.002906,
-       "time": 15.9,
-       "tokens": 45119,
        "judge": "openai-codex/gpt-6-luna:max"
       }
      ]
@@ -3899,6 +3898,54 @@
    "has_value_pick": false,
    "rows": [
     {
+     "model": "opencode-go/deepseek-v4.1-flash",
+     "thinking": "low",
+     "run": "2026-11-21T14-19",
+     "date": "21 Nov 14:19",
+     "score": 42.6,
+     "complete": true,
+     "cost": 0.067563,
+     "time": 1035.8000000000002,
+     "tokens": 4115266,
+     "fail": false,
+     "judges": [
+      "openai-codex/gpt-6-luna:max"
+     ],
+     "path": null,
+     "details": [
+      {
+       "run": "2026-11-21T14-19",
+       "date": "21 Nov 14:19",
+       "task": "P1",
+       "track": "plan",
+       "score": 15.0,
+       "partial": null,
+       "hard_fail": null,
+       "model": "opencode-go/deepseek-v4.1-flash",
+       "thinking": "low",
+       "cost": 0.021428,
+       "time": 526.2,
+       "tokens": 592649,
+       "judge": "openai-codex/gpt-6-luna:max"
+      },
+      {
+       "run": "2026-11-21T14-19",
+       "date": "21 Nov 14:19",
+       "task": "P2",
+       "track": "plan",
+       "score": 70.28,
+       "partial": null,
+       "hard_fail": null,
+       "model": "opencode-go/deepseek-v4.1-flash",
+       "thinking": "low",
+       "cost": 0.046135,
+       "time": 509.6,
+       "tokens": 3522617,
+       "judge": "openai-codex/gpt-6-luna:max"
+      }
+     ]
+    },
+    {
      "model": "openai-codex/gpt-6.2-sol",
      "thinking": "medium",
      "run": "2026-11-21T13-40",
@@ -3990,54 +4037,6 @@
        "cost": 0.100342,
        "time": 87.2,
        "tokens": 441591,
-       "judge": "openai-codex/gpt-6-luna:max"
-      }
-     ]
-    },
-    {
-     "model": "opencode-go/deepseek-v4.1-flash",
-     "thinking": "low",
-     "run": "2026-10-20T09-19",
-     "date": "20 Oct 09:19",
-     "score": 48.7,
-     "complete": true,
-     "cost": 0.112456,
-     "time": 919.8,
-     "tokens": 7931402,
-     "fail": false,
-     "judges": [
-      "openai-codex/gpt-6-luna:max"
-     ],
-     "path": null,
-     "details": [
-      {
-       "run": "2026-10-20T09-19",
-       "date": "20 Oct 09:19",
-       "task": "P1",
-       "track": "plan",
-       "score": 42.03,
-       "partial": null,
-       "hard_fail": null,
-       "model": "opencode-go/deepseek-v4.1-flash",
-       "thinking": "low",
-       "cost": 0.040187,
-       "time": 382.5,
-       "tokens": 2064500,
-       "judge": "openai-codex/gpt-6-luna:max"
-      },
-      {
-       "run": "2026-10-20T09-19",
-       "date": "20 Oct 09:19",
-       "task": "P2",
-       "track": "plan",
-       "score": 55.28,
-       "partial": null,
-       "hard_fail": null,
-       "model": "opencode-go/deepseek-v4.1-flash",
-       "thinking": "low",
-       "cost": 0.072269,
-       "time": 537.3,
-       "tokens": 5866902,
        "judge": "openai-codex/gpt-6-luna:max"
       }
      ]
@@ -6173,6 +6172,55 @@
    "has_value_pick": true,
    "rows": [
     {
+     "model": "opencode-go/deepseek-v4.1-flash",
+     "thinking": "low",
+     "run": "2026-11-21T14-19",
+     "date": "21 Nov 14:19",
+     "score": 100.0,
+     "complete": true,
+     "cost": 0.050364000000000006,
+     "time": 1207.5,
+     "tokens": 3263938,
+     "fail": false,
+     "judges": [
+      "openai-codex/gpt-6-luna:max"
+     ],
+     "path": null,
+     "details": [
+      {
+       "run": "2026-11-21T14-19",
+       "date": "21 Nov 14:19",
+       "task": "B1",
+       "track": "frontend",
+       "score": 100.0,
+       "partial": null,
+       "hard_fail": null,
+       "model": "opencode-go/deepseek-v4.1-flash",
+       "thinking": "low",
+       "cost": 0.017723,
+       "time": 520.6,
+       "tokens": 1554894,
+       "judge": "openai-codex/gpt-6-luna:max"
+      },
+      {
+       "run": "2026-11-21T14-19",
+       "date": "21 Nov 14:19",
+       "task": "B2",
+       "track": "frontend",
+       "score": 100.0,
+       "partial": null,
+       "hard_fail": null,
+       "model": "opencode-go/deepseek-v4.1-flash",
+       "thinking": "low",
+       "cost": 0.032641,
+       "time": 686.9,
+       "tokens": 1709044,
+       "judge": "openai-codex/gpt-6-luna:max"
+      }
+     ],
+     "cand": true
+    },
+    {
      "model": "openai-codex/gpt-6.2-sol",
      "thinking": "medium",
      "run": "2026-11-21T13-40",
@@ -6269,55 +6317,6 @@
       }
      ],
      "cand": true
-    },
-    {
-     "model": "opencode-go/deepseek-v4.1-flash",
-     "thinking": "low",
-     "run": "2026-10-20T09-19",
-     "date": "20 Oct 09:19",
-     "score": 100.0,
-     "complete": true,
-     "cost": 0.042885,
-     "time": 767.9,
-     "tokens": 2889635,
-     "fail": false,
-     "judges": [
-      "anthropic/claude-opus-5:max",
-      "openai-codex/gpt-6-luna:max"
-     ],
-     "path": null,
-     "details": [
-      {
-       "run": "2026-10-20T09-19",
-       "date": "20 Oct 09:19",
-       "task": "B1",
-       "track": "frontend",
-       "score": 100.0,
-       "partial": null,
-       "hard_fail": null,
-       "model": "opencode-go/deepseek-v4.1-flash",
-       "thinking": "low",
-       "cost": 0.016555,
-       "time": 146.4,
-       "tokens": 1136874,
-       "judge": "anthropic/claude-opus-5:max"
-      },
-      {
-       "run": "2026-10-20T09-19",
-       "date": "20 Oct 09:19",
-       "task": "B2",
-       "track": "frontend",
-       "score": 100.0,
-       "partial": null,
-       "hard_fail": null,
-       "model": "opencode-go/deepseek-v4.1-flash",
-       "thinking": "low",
-       "cost": 0.02633,
-       "time": 621.5,
-       "tokens": 1752761,
-       "judge": "openai-codex/gpt-6-luna:max"
-      }
-     ]
     },
     {
      "model": "opencode-go/minimax-m3.1-flash-free",
@@ -8494,6 +8493,55 @@
    "has_value_pick": true,
    "rows": [
     {
+     "model": "opencode-go/deepseek-v4.1-flash",
+     "thinking": "low",
+     "run": "2026-11-21T14-19",
+     "date": "21 Nov 14:19",
+     "score": 97.3,
+     "complete": true,
+     "cost": 0.107284,
+     "time": 1211.0,
+     "tokens": 7888484,
+     "fail": false,
+     "judges": [
+      "openai-codex/gpt-6-luna:max"
+     ],
+     "path": null,
+     "details": [
+      {
+       "run": "2026-11-21T14-19",
+       "date": "21 Nov 14:19",
+       "task": "FS1",
+       "track": "fullstack",
+       "score": 94.55,
+       "partial": null,
+       "hard_fail": null,
+       "model": "opencode-go/deepseek-v4.1-flash",
+       "thinking": "low",
+       "cost": 0.059492,
+       "time": 645.5,
+       "tokens": 4010267,
+       "judge": "openai-codex/gpt-6-luna:max"
+      },
+      {
+       "run": "2026-11-21T14-19",
+       "date": "21 Nov 14:19",
+       "task": "FS2",
+       "track": "fullstack",
+       "score": 100.0,
+       "partial": null,
+       "hard_fail": null,
+       "model": "opencode-go/deepseek-v4.1-flash",
+       "thinking": "low",
+       "cost": 0.047792,
+       "time": 565.5,
+       "tokens": 3878217,
+       "judge": "openai-codex/gpt-6-luna:max"
+      }
+     ],
+     "cand": true
+    },
+    {
      "model": "openai-codex/gpt-6.2-sol",
      "thinking": "medium",
      "run": "2026-11-21T13-40",
@@ -9264,55 +9312,6 @@
      ]
     },
     {
-     "model": "opencode-go/deepseek-v4.1-flash",
-     "thinking": "low",
-     "run": "2026-09-30T20-00",
-     "date": "30 Sep 20:00",
-     "score": 93.1,
-     "complete": true,
-     "cost": 0.133546,
-     "time": 1437.5,
-     "tokens": 12373769,
-     "fail": false,
-     "judges": [
-      "anthropic/claude-opus-5:max",
-      "unrecorded"
-     ],
-     "path": null,
-     "details": [
-      {
-       "run": "2026-09-30T20-00",
-       "date": "30 Sep 20:00",
-       "task": "FS1",
-       "track": "fullstack",
-       "score": 97.27,
-       "partial": null,
-       "hard_fail": null,
-       "model": "opencode-go/deepseek-v4.1-flash",
-       "thinking": "low",
-       "cost": 0.066583,
-       "time": 838.3,
-       "tokens": 7369943,
-       "judge": null
-      },
-      {
-       "run": "2026-09-30T15-56",
-       "date": "30 Sep 15:56",
-       "task": "FS2",
-       "track": "fullstack",
-       "score": 89.0,
-       "partial": null,
-       "hard_fail": null,
-       "model": "opencode-go/deepseek-v4.1-flash",
-       "thinking": "low",
-       "cost": 0.066963,
-       "time": 599.2,
-       "tokens": 5003826,
-       "judge": "anthropic/claude-opus-5:max"
-      }
-     ]
-    },
-    {
      "model": "opencode-go/glm-5.3-flash",
      "thinking": "low",
      "run": "2026-09-30T20-00",
@@ -9423,6 +9422,41 @@
    "has_value_pick": true,
    "rows": [
     {
+     "model": "opencode-go/deepseek-v4.1-flash",
+     "thinking": "low",
+     "run": "2026-11-21T14-19",
+     "date": "21 Nov 14:19",
+     "score": 82.5,
+     "complete": true,
+     "cost": 0.030779,
+     "time": 689.5,
+     "tokens": 1584472,
+     "fail": false,
+     "judges": [
+      "openai-codex/gpt-6-luna:max"
+     ],
+     "path": "Follow-up used; requirements unmet",
+     "details": [
+      {
+       "run": "2026-11-21T14-19",
+       "date": "21 Nov 14:19",
+       "task": "CLI1",
+       "track": "cli",
+       "score": 82.5,
+       "partial": null,
+       "hard_fail": null,
+       "model": "opencode-go/deepseek-v4.1-flash",
+       "thinking": "low",
+       "cost": 0.030779,
+       "time": 689.5,
+       "tokens": 1584472,
+       "judge": "openai-codex/gpt-6-luna:max",
+       "path": "Follow-up used; requirements unmet",
+       "first_pass": false
+      }
+     ]
+    },
+    {
      "model": "openai-codex/gpt-6.2-sol",
      "thinking": "medium",
      "run": "2026-11-21T13-40",
@@ -9491,42 +9525,6 @@
        "first_pass": true
       }
      ]
-    },
-    {
-     "model": "opencode-go/deepseek-v4.1-flash",
-     "thinking": "low",
-     "run": "2026-10-20T09-19",
-     "date": "20 Oct 09:19",
-     "score": 100.0,
-     "complete": true,
-     "cost": 0.032941,
-     "time": 411.5,
-     "tokens": 1651552,
-     "fail": false,
-     "judges": [
-      "anthropic/claude-opus-5:max"
-     ],
-     "path": "First-pass complete",
-     "details": [
-      {
-       "run": "2026-10-20T09-19",
-       "date": "20 Oct 09:19",
-       "task": "CLI1",
-       "track": "cli",
-       "score": 100.0,
-       "partial": null,
-       "hard_fail": null,
-       "model": "opencode-go/deepseek-v4.1-flash",
-       "thinking": "low",
-       "cost": 0.032941,
-       "time": 411.5,
-       "tokens": 1651552,
-       "judge": "anthropic/claude-opus-5:max",
-       "path": "First-pass complete",
-       "first_pass": true
-      }
-     ],
-     "cand": true
     },
     {
      "model": "opencode-go/minimax-m3.1-flash-free",
@@ -10007,6 +10005,55 @@
    "has_value_pick": true,
    "rows": [
     {
+     "model": "opencode-go/deepseek-v4.1-flash",
+     "thinking": "low",
+     "run": "2026-11-21T14-19",
+     "date": "21 Nov 14:19",
+     "score": 92.5,
+     "complete": true,
+     "cost": 0.017251000000000002,
+     "time": 852.7,
+     "tokens": 593833,
+     "fail": false,
+     "judges": [
+      "openai-codex/gpt-6-luna:max"
+     ],
+     "path": null,
+     "details": [
+      {
+       "run": "2026-11-21T14-19",
+       "date": "21 Nov 14:19",
+       "task": "O1",
+       "track": "ops",
+       "score": 85.0,
+       "partial": null,
+       "hard_fail": null,
+       "model": "opencode-go/deepseek-v4.1-flash",
+       "thinking": "low",
+       "cost": 0.009412,
+       "time": 482.3,
+       "tokens": 334748,
+       "judge": "openai-codex/gpt-6-luna:max"
+      },
+      {
+       "run": "2026-11-21T14-19",
+       "date": "21 Nov 14:19",
+       "task": "O2",
+       "track": "ops",
+       "score": 100.0,
+       "partial": null,
+       "hard_fail": null,
+       "model": "opencode-go/deepseek-v4.1-flash",
+       "thinking": "low",
+       "cost": 0.007839,
+       "time": 370.4,
+       "tokens": 259085,
+       "judge": "openai-codex/gpt-6-luna:max"
+      }
+     ],
+     "cand": true
+    },
+    {
      "model": "openai-codex/gpt-6.2-sol",
      "thinking": "medium",
      "run": "2026-11-21T13-40",
@@ -10103,54 +10150,6 @@
       }
      ],
      "cand": true
-    },
-    {
-     "model": "opencode-go/deepseek-v4.1-flash",
-     "thinking": "low",
-     "run": "2026-10-20T09-19",
-     "date": "20 Oct 09:19",
-     "score": 97.5,
-     "complete": true,
-     "cost": 0.059722000000000004,
-     "time": 471.2,
-     "tokens": 2728732,
-     "fail": false,
-     "judges": [
-      "anthropic/claude-opus-5:max"
-     ],
-     "path": null,
-     "details": [
-      {
-       "run": "2026-10-20T09-19",
-       "date": "20 Oct 09:19",
-       "task": "O1",
-       "track": "ops",
-       "score": 95.0,
-       "partial": null,
-       "hard_fail": null,
-       "model": "opencode-go/deepseek-v4.1-flash",
-       "thinking": "low",
-       "cost": 0.006933,
-       "time": 80.7,
-       "tokens": 246622,
-       "judge": "anthropic/claude-opus-5:max"
-      },
-      {
-       "run": "2026-10-20T09-19",
-       "date": "20 Oct 09:19",
-       "task": "O2",
-       "track": "ops",
-       "score": 100.0,
-       "partial": null,
-       "hard_fail": null,
-       "model": "opencode-go/deepseek-v4.1-flash",
-       "thinking": "low",
-       "cost": 0.052789,
-       "time": 390.5,
-       "tokens": 2482110,
-       "judge": "anthropic/claude-opus-5:max"
-      }
-     ]
     },
     {
      "model": "opencode-go/minimax-m3.1-flash-free",
@@ -11183,6 +11182,69 @@
    "has_value_pick": true,
    "rows": [
     {
+     "model": "opencode-go/deepseek-v4.1-flash",
+     "thinking": "low",
+     "run": "2026-11-21T14-19",
+     "date": "21 Nov 14:19",
+     "score": 83.3,
+     "complete": true,
+     "cost": 0.018564999999999998,
+     "time": 1167.8,
+     "tokens": 432899,
+     "fail": false,
+     "judges": [
+      "openai-codex/gpt-6-luna:max"
+     ],
+     "path": null,
+     "details": [
+      {
+       "run": "2026-11-21T14-19",
+       "date": "21 Nov 14:19",
+       "task": "R1",
+       "track": "review",
+       "score": 80.0,
+       "partial": null,
+       "hard_fail": null,
+       "model": "opencode-go/deepseek-v4.1-flash",
+       "thinking": "low",
+       "cost": 0.006476,
+       "time": 421.2,
+       "tokens": 135708,
+       "judge": "openai-codex/gpt-6-luna:max"
+      },
+      {
+       "run": "2026-11-21T14-19",
+       "date": "21 Nov 14:19",
+       "task": "R2",
+       "track": "review",
+       "score": 90.0,
+       "partial": null,
+       "hard_fail": null,
+       "model": "opencode-go/deepseek-v4.1-flash",
+       "thinking": "low",
+       "cost": 0.004445,
+       "time": 315.2,
+       "tokens": 54926,
+       "judge": "openai-codex/gpt-6-luna:max"
+      },
+      {
+       "run": "2026-11-21T14-19",
+       "date": "21 Nov 14:19",
+       "task": "R3",
+       "track": "review",
+       "score": 80.0,
+       "partial": null,
+       "hard_fail": null,
+       "model": "opencode-go/deepseek-v4.1-flash",
+       "thinking": "low",
+       "cost": 0.007644,
+       "time": 431.4,
+       "tokens": 242265,
+       "judge": "openai-codex/gpt-6-luna:max"
+      }
+     ]
+    },
+    {
      "model": "openai-codex/gpt-6.2-sol",
      "thinking": "medium",
      "run": "2026-11-21T13-40",
@@ -11304,69 +11366,6 @@
        "cost": 0.012489,
        "time": 27.2,
        "tokens": 72028,
-       "judge": "openai-codex/gpt-6-luna:max"
-      }
-     ]
-    },
-    {
-     "model": "opencode-go/deepseek-v4.1-flash",
-     "thinking": "low",
-     "run": "2026-10-20T09-19",
-     "date": "20 Oct 09:19",
-     "score": 46.7,
-     "complete": true,
-     "cost": 0.01739,
-     "time": 208.6,
-     "tokens": 399381,
-     "fail": true,
-     "judges": [
-      "openai-codex/gpt-6-luna:max"
-     ],
-     "path": null,
-     "details": [
-      {
-       "run": "2026-10-20T09-19",
-       "date": "20 Oct 09:19",
-       "task": "R1",
-       "track": "review",
-       "score": 70.0,
-       "partial": null,
-       "hard_fail": null,
-       "model": "opencode-go/deepseek-v4.1-flash",
-       "thinking": "low",
-       "cost": 0.004801,
-       "time": 45.0,
-       "tokens": 107613,
-       "judge": "openai-codex/gpt-6-luna:max"
-      },
-      {
-       "run": "2026-10-20T09-19",
-       "date": "20 Oct 09:19",
-       "task": "R2",
-       "track": "review",
-       "score": 70.0,
-       "partial": null,
-       "hard_fail": null,
-       "model": "opencode-go/deepseek-v4.1-flash",
-       "thinking": "low",
-       "cost": 0.007026,
-       "time": 69.3,
-       "tokens": 102195,
-       "judge": "openai-codex/gpt-6-luna:max"
-      },
-      {
-       "run": "2026-10-20T09-19",
-       "date": "20 Oct 09:19",
-       "task": "R3",
-       "track": "review",
-       "score": 0.0,
-       "partial": null,
-       "hard_fail": "reached answer material in 1 tool call(s)",
-       "model": "opencode-go/deepseek-v4.1-flash",
-       "thinking": "low",
-       "cost": 0.005563,
-       "time": 94.3,
-       "tokens": 189573,
        "judge": "openai-codex/gpt-6-luna:max"
       }
      ]
